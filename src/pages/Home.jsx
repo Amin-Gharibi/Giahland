@@ -3,7 +3,11 @@ import CustomButton from "../components/CustomButton.jsx";
 import arrowLeftPrimary from "../assets/svg/arrowLeft-primary.svg"
 import landingBg from "../assets/svg/landingBg.svg"
 import landingBgSm from "../assets/svg/landingBgSm.svg"
+import cardPrimary from "../assets/svg/card-primary.svg"
+import checkBoxPrimary from "../assets/svg/checkbox-primary.svg"
+import truckPrimary from "../assets/svg/truck-primary.svg"
 import CountUp from "react-countup";
+import FeatureOption from "../components/FeatureOption.jsx";
 
 function Home() {
     return (
@@ -13,11 +17,11 @@ function Home() {
             <section
                 className={'mt-4 lg:mt-[77px] flex flex-col lg:flex-row items-center justify-between gap-x-6 xl:gap-x-28'}>
                 <div className={'max-lg:order-2'}>
-                    <h2 className={'font-bold text-black text-3xl lg:text-[40px] max-sm:mt-10 max-lg:mt-4 max-lg:text-center'}>
+                    <h2 className={'font-bold text-black text-xl xs:text-2xl sm:text-3xl lg:text-[40px] max-sm:mt-10 max-lg:mt-4 max-lg:text-center'}>
                         خرید راحت گیاه، با
                         <span className={'text-primary'}> گیاه لند!</span>
                     </h2>
-                    <p className={'text-lg lg:text-xl leading-9 mt-3 md:mt-8 max-lg:text-center'}>
+                    <p className={'text-sm xs:text-base sm:text-lg lg:text-xl leading-7 md:leading-9 mt-3 md:mt-8 max-lg:text-center'}>
                         با گیاه لند،آنلاین گیاه خودت رو سفارش بده و از تخفیف های ویژه استفاده کن.علاوه بر اینها میتونی
                         به صورت رایگان از گیاه پزشک سایت مشاوره بگیری.
                     </p>
@@ -28,7 +32,7 @@ function Home() {
                                       isSquared={true} isDashed={true} icon={arrowLeftPrimary} leftIcon={true}/>
                     </div>
                     <div
-                        className={'flex flex-wrap justify-center sm:justify-between items-start mt-12 gap-6 max-lg:max-w-[80%] mx-auto'}>
+                        className={'flex flex-wrap justify-center sm:justify-between items-start mt-12 gap-6 max-w-[80%] mx-auto'}>
                         <div
                             className={'flex flex-col justify-center items-center text-xl md:text-2xl xl:text-[32px] text-shade3'}>
                             <CountUp
@@ -37,7 +41,7 @@ function Home() {
                                 duration={4}
                                 formattingFn={num => num.toLocaleString('fa-IR') + '+'}
                             />
-                            <span>گیاه خانگی</span>
+                            <span className={'text-base sm:text-lg md:text-xl'}>گیاه خانگی</span>
                         </div>
                         <div
                             className={'flex flex-col justify-center items-center text-xl md:text-2xl xl:text-[32px] text-shade3'}>
@@ -47,7 +51,7 @@ function Home() {
                                 duration={4}
                                 formattingFn={num => num.toLocaleString('fa-IR') + '+'}
                             />
-                            <span>گیاه تزئینی</span>
+                            <span className={'text-base sm:text-lg md:text-xl'}>گیاه تزئینی</span>
                         </div>
                         <div
                             className={'flex flex-col justify-center items-center text-xl md:text-2xl xl:text-[32px] text-shade3'}>
@@ -57,7 +61,7 @@ function Home() {
                                 duration={4}
                                 formattingFn={num => num.toLocaleString('fa-IR') + '+'}
                             />
-                            <span>گیاه کادویی</span>
+                            <span className={'text-base sm:text-lg md:text-xl'}>گیاه کادویی</span>
                         </div>
                     </div>
                 </div>
@@ -66,6 +70,12 @@ function Home() {
                          className={'hidden md:block w-full h-full'}/>
                     <img src={landingBgSm} alt={'خرید راحت گیاه با گیاه لند!'} className={'md:hidden w-full h-full'}/>
                 </div>
+            </section>
+            {/*features section*/}
+            <section className={'mt-20 flex max-md:flex-col justify-center items-center lg:justify-between lg:items-start gap-6 md:gap-20'}>
+                <FeatureOption icon={cardPrimary} title={'پرداخت آسان و آنی'} description={'برای ایجاد اطمینان خاطر مشتریان،علاوه بر پرداخت آنلاین امکان پرداخت درب منزل وجود دارد'}/>
+                <FeatureOption icon={checkBoxPrimary} title={'ضمانت محصول'} description={'به مدت دو هفته پس از دریافت محصول در صورت وجود مشکل میتوانید مرجوع کنید'}/>
+                <FeatureOption icon={truckPrimary} title={'تحویل درب منزل'} description={'با ایجاد آدرس منزل خود در پروفایل کاربری،محصول خود را درب منزل تحویل بگیرید'}/>
             </section>
         </div>
     );
