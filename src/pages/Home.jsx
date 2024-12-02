@@ -6,6 +6,8 @@ import landingBgSm from "../assets/svg/landingBgSm.svg"
 import cardPrimary from "../assets/svg/card-primary.svg"
 import checkBoxPrimary from "../assets/svg/checkbox-primary.svg"
 import truckPrimary from "../assets/svg/truck-primary.svg"
+import bannerBg1 from "../assets/svg/bannerBg1.svg"
+import bannerBg2 from "../assets/svg/bannerBg2.svg"
 import CountUp from "react-countup";
 import FeatureOption from "../components/FeatureOption.jsx";
 
@@ -76,6 +78,15 @@ function Home() {
                 <FeatureOption icon={cardPrimary} title={'پرداخت آسان و آنی'} description={'برای ایجاد اطمینان خاطر مشتریان،علاوه بر پرداخت آنلاین امکان پرداخت درب منزل وجود دارد'}/>
                 <FeatureOption icon={checkBoxPrimary} title={'ضمانت محصول'} description={'به مدت دو هفته پس از دریافت محصول در صورت وجود مشکل میتوانید مرجوع کنید'}/>
                 <FeatureOption icon={truckPrimary} title={'تحویل درب منزل'} description={'با ایجاد آدرس منزل خود در پروفایل کاربری،محصول خود را درب منزل تحویل بگیرید'}/>
+            </section>
+            {/*banners section*/}
+            <section className={'mt-20 flex flex-col lg:flex-row items-center gap-6 *:w-full *:h-[150px] xs:*:h-[180px] sm:*:h-60'}>
+                <div className={'grow rounded-2xl overflow-hidden'}>
+                    <img src={bannerBg1} alt={'بنر اول'} className={'w-full h-full object-cover'}/>
+                </div>
+                <div className={'grow rounded-2xl overflow-hidden'}>
+                    <img src={bannerBg2} alt={'بنر دوم'} className={'w-full h-full object-cover'}/>
+                </div>
             </section>
         </div>
     );

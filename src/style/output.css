@@ -804,6 +804,10 @@ body::-webkit-scrollbar {
   max-width: 80%;
 }
 
+.grow {
+  flex-grow: 1;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -860,12 +864,20 @@ body::-webkit-scrollbar {
        column-gap: 1.5rem;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }
 
 .rounded-lg {
   border-radius: 0.5rem;
+}
+
+.rounded-2xl {
+  border-radius: 1rem;
 }
 
 .border {
@@ -898,6 +910,16 @@ body::-webkit-scrollbar {
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(65 127 86 / var(--tw-bg-opacity, 1));
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.object-fill {
+  -o-object-fit: fill;
+     object-fit: fill;
 }
 
 .p-1 {
@@ -995,8 +1017,28 @@ body::-webkit-scrollbar {
   transition-duration: 150ms;
 }
 
+.\*\:h-\[240px\] > * {
+  height: 240px;
+}
+
+.\*\:h-60 > * {
+  height: 15rem;
+}
+
+.\*\:h-\[120px\] > * {
+  height: 120px;
+}
+
+.\*\:h-\[150px\] > * {
+  height: 150px;
+}
+
 .\*\:w-1\/2 > * {
   width: 50%;
+}
+
+.\*\:w-full > * {
+  width: 100%;
 }
 
 .\*\:text-lg > * {
@@ -1048,11 +1090,23 @@ body::-webkit-scrollbar {
     font-size: 1rem;
     line-height: 1.5rem;
   }
+
+  .xs\:\*\:h-60 > * {
+    height: 15rem;
+  }
+
+  .xs\:\*\:h-\[180px\] > * {
+    height: 180px;
+  }
 }
 
 @media (min-width: 640px) {
   .sm\:hidden {
     display: none;
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
   }
 
   .sm\:justify-between {
@@ -1079,8 +1133,21 @@ body::-webkit-scrollbar {
     line-height: 2.25rem;
   }
 
+  .sm\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
   .sm\:font-bold {
     font-weight: 700;
+  }
+
+  .sm\:font-semibold {
+    font-weight: 600;
+  }
+
+  .sm\:\*\:h-60 > * {
+    height: 15rem;
   }
 
   .sm\:hover\:bg-neutral2:hover {
@@ -1118,6 +1185,10 @@ body::-webkit-scrollbar {
     width: 1.5rem;
   }
 
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
   .md\:gap-20 {
     gap: 5rem;
   }
@@ -1148,6 +1219,10 @@ body::-webkit-scrollbar {
 
   .md\:leading-9 {
     line-height: 2.25rem;
+  }
+
+  .md\:\*\:h-60 > * {
+    height: 15rem;
   }
 }
 
