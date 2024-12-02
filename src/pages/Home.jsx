@@ -1,7 +1,9 @@
+import Header from "../components/Header.jsx";
+
 function Home() {
     return (
-        <div>
-            <h1>hello world</h1>
+        <div className={'container'}>
+            <Header/>
         </div>
     );
 }
