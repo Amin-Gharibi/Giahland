@@ -42,7 +42,24 @@ export default {
 
         error: '#ED2E2E',
         bgError: '#FFF2F2'
-      }
+      },
+
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: "1rem",
+          md: "3.5rem"
+        }
+      },
+
+      screens: {
+        'xs': "470px",
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        'xxl': '1928px'
+      },
     },
   },
   plugins: [],

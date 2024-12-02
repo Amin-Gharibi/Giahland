@@ -7,6 +7,7 @@
         font-family: 'Modam';
         font-weight: 200;
         font-style: normal;
+        font-display: swap;
         src: url("/src/assets/fonts/modam/Modam-ExtraLight.ttf") format('truetype');
     }
 
@@ -14,6 +15,7 @@
         font-family: 'Modam';
         font-weight: 300;
         font-style: normal;
+        font-display: swap;
         src: url("/src/assets/fonts/modam/Modam-Light.ttf") format('truetype');
     }
 
@@ -21,6 +23,7 @@
         font-family: 'Modam';
         font-weight: 400;
         font-style: normal;
+        font-display: swap;
         src: url("/src/assets/fonts/modam/Modam-Regular.ttf") format('truetype');
     }
 
@@ -28,6 +31,7 @@
         font-family: 'Modam';
         font-weight: 500;
         font-style: normal;
+        font-display: swap;
         src: url("/src/assets/fonts/modam/Modam-Medium.ttf") format('truetype');
     }
 
@@ -35,6 +39,7 @@
         font-family: 'Modam';
         font-weight: 600;
         font-style: normal;
+        font-display: swap;
         src: url("/src/assets/fonts/modam/Modam-SemiBold.ttf") format('truetype');
     }
 
@@ -42,6 +47,7 @@
         font-family: 'Modam';
         font-weight: 700;
         font-style: normal;
+        font-display: swap;
         src: url("/src/assets/fonts/modam/Modam-Bold.ttf") format('truetype');
     }
 
@@ -49,6 +55,7 @@
         font-family: 'Modam';
         font-weight: 800;
         font-style: normal;
+        font-display: swap;
         src: url("/src/assets/fonts/modam/Modam-ExtraBold.ttf") format('truetype');
     }
 
@@ -56,6 +63,16 @@
         font-family: 'Modam';
         font-weight: 900;
         font-style: normal;
+        font-display: swap;
         src: url("/src/assets/fonts/modam/Modam-Black.ttf") format('truetype');
+    }
+
+    body {
+        scroll-behavior: smooth;
+    }
+
+    /* hide the scrollbar */
+    body::-webkit-scrollbar {
+        display: none;
     }
 }

@@ -561,6 +561,8 @@ video {
 
   font-style: normal;
 
+  font-display: swap;
+
   src: url("/src/assets/fonts/modam/Modam-ExtraLight.ttf") format('truetype');
 }
 
@@ -570,6 +572,8 @@ video {
   font-weight: 300;
 
   font-style: normal;
+
+  font-display: swap;
 
   src: url("/src/assets/fonts/modam/Modam-Light.ttf") format('truetype');
 }
@@ -581,6 +585,8 @@ video {
 
   font-style: normal;
 
+  font-display: swap;
+
   src: url("/src/assets/fonts/modam/Modam-Regular.ttf") format('truetype');
 }
 
@@ -590,6 +596,8 @@ video {
   font-weight: 500;
 
   font-style: normal;
+
+  font-display: swap;
 
   src: url("/src/assets/fonts/modam/Modam-Medium.ttf") format('truetype');
 }
@@ -601,6 +609,8 @@ video {
 
   font-style: normal;
 
+  font-display: swap;
+
   src: url("/src/assets/fonts/modam/Modam-SemiBold.ttf") format('truetype');
 }
 
@@ -610,6 +620,8 @@ video {
   font-weight: 700;
 
   font-style: normal;
+
+  font-display: swap;
 
   src: url("/src/assets/fonts/modam/Modam-Bold.ttf") format('truetype');
 }
@@ -621,6 +633,8 @@ video {
 
   font-style: normal;
 
+  font-display: swap;
+
   src: url("/src/assets/fonts/modam/Modam-ExtraBold.ttf") format('truetype');
 }
 
@@ -631,7 +645,19 @@ video {
 
   font-style: normal;
 
+  font-display: swap;
+
   src: url("/src/assets/fonts/modam/Modam-Black.ttf") format('truetype');
+}
+
+body {
+  scroll-behavior: smooth;
+}
+
+/* hide the scrollbar */
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .text-center {
