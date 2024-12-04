@@ -37,7 +37,11 @@ import eighthFlower from "../assets/temp/eighthFlower.png";
 import ninthFlower from "../assets/temp/ninthFlower.png";
 import tenthFlower from "../assets/temp/tenthFlower.png";
 import eleventhFlower from "../assets/temp/eleventhFlower.png";
-import twelvethFlower from "../assets/temp/twelvethFlower.png";
+import twelfthFlower from "../assets/temp/twelfthFlower.png";
+import thirteenthFlower from "../assets/temp/thirteenthFlower.png";
+import fourteenthFlower from "../assets/temp/fourteenthFlower.png";
+import fifteenthFlower from "../assets/temp/fifteenthFlower.png";
+import sixteenthFlower from "../assets/temp/sixteenthFlower.png";
 
 function Home() {
     return (
@@ -188,8 +192,22 @@ function Home() {
                     {image: ninthFlower, title: 'گیاه رزماری', href: '/'},
                     {image: tenthFlower, title: 'گیاه آدنیوم', href: '/'},
                     {image: eleventhFlower, title: 'گیاه آشیانتوس', href: '/'},
-                    {image: twelvethFlower, title: 'گیاه آناناسی', href: '/'},
+                    {image: twelfthFlower, title: 'گیاه آناناسی', href: '/'},
                 ]}/>
+            </section>
+            {/*cardamom flowers section*/}
+            <section className={'mt-10 sm:mt-16 flex flex-col gap-y-6'}>
+                <SectionTitle title={'گیاهان کادوئی'}/>
+                <SwipingSlider items={[
+                    {identifier: '1', image: thirteenthFlower, title: 'گیاه طبیعی بنت قنسول گلیتال', price: 176000},
+                    {identifier: '2', image: fourteenthFlower, title: 'گیاه طبیعی آنتوریوم', price: 459000},
+                    {identifier: '3', image: fifteenthFlower, title: 'گیاه طبیعی بونسای پاچیرا', price: 880000},
+                    {identifier: '4', image: sixteenthFlower, title: 'گیاه طبیعی آنتوریوم', price: 498000},
+                    {identifier: '5', image: thirteenthFlower, title: 'گیاه طبیعی بنت قنسول گلیتال', price: 176000},
+                    {identifier: '6', image: fourteenthFlower, title: 'گیاه طبیعی آنتوریوم', price: 459000},
+                    {identifier: '7', image: fifteenthFlower, title: 'گیاه طبیعی بونسای پاچیرا', price: 880000},
+                    {identifier: '8', image: sixteenthFlower, title: 'گیاه طبیعی آنتوریوم', price: 498000},
+                ]} spaceBetween={24}/>
             </section>
         </div>
     );
