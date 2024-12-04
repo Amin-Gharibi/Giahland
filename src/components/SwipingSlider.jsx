@@ -4,7 +4,7 @@ import 'swiper/css';
 import ItemBox from "./ItemBox.jsx";
 import CustomIconButton from "./CustomIconButton.jsx";
 import arrowLeftPrimary from "../assets/svg/arrowLeft-primary.svg";
-import {useRef, useState} from "react";
+import {useLayoutEffect, useRef, useState} from "react";
 
 SwipingSlider.propTypes = {
     items: PropTypes.arrayOf(
@@ -22,7 +22,7 @@ SwipingSlider.propTypes = {
 function SwipingSlider({items, ...swiperProps}) {
     const swiperRef = useRef(null);
 
-    const [isNextSlideButtonShown, setIsNextSlideButtonShown] = useState(true);
+    const [isNextSlideButtonShown, setIsNextSlideButtonShown] = useState(false);
     const [isPrevSlideButtonShown, setIsPrevSlideButtonShown] = useState(false);
 
     const slideChangeHandler = () => {
@@ -38,6 +38,12 @@ function SwipingSlider({items, ...swiperProps}) {
             setIsPrevSlideButtonShown(false);
         }
     }
+
+    useLayoutEffect(() => {
+        if (items.length > 5) {
+            setIsNextSlideButtonShown(true)
+        }
+    }, [items.length]);
 
     return (
         <div className={'relative'}>
