@@ -67,7 +67,7 @@ function SwipingSlider({items, ...swiperProps}) {
                 }}
             >
                 {items.map((item, index) => (
-                    <SwiperSlide key={index}>
+                    <SwiperSlide key={index} style={{height: 'auto'}}>
                         <ItemBox image={item.image} title={item.title} price={item.price} identifier={item.identifier}/>
                     </SwiperSlide>
                 ))}
