@@ -13,6 +13,9 @@ import FeatureOption from "../components/FeatureOption.jsx";
 import SectionTitle from "../components/SectionTitle.jsx";
 import SwipingSlider from "../components/SwipingSlider.jsx";
 import firstFlower from "../assets/temp/firstFlower.png";
+import secondFlower from "../assets/temp/secondFlower.png";
+import thirdFlower from "../assets/temp/thirdFlower.png";
+import fourthFlower from "../assets/temp/firstFlower.png";
 
 function Home() {
     return (
@@ -102,13 +105,13 @@ function Home() {
                 <div className={'mt-6'}>
                     <SwipingSlider items={[
                         {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '1'},
-                        {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '2'},
-                        {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '3'},
-                        {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '4'},
+                        {image: secondFlower, title: 'گیاه طبیعی یوکا', price: 560000, identifier: '2'},
+                        {image: thirdFlower, title: 'گیاه طبیعی سانسوریا سبز', price: 250000, identifier: '3'},
+                        {image: fourthFlower, title: 'گیاه طبیعی ساکولنت', price: 57000, identifier: '4'},
                         {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '5'},
-                        {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '6'},
-                        {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '7'},
-                        {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '8'},
+                        {image: secondFlower, title: 'گیاه طبیعی یوکا', price: 560000, identifier: '6'},
+                        {image: thirdFlower, title: 'گیاه طبیعی سانسوریا سبز', price: 250000, identifier: '7'},
+                        {image: fourthFlower, title: 'گیاه طبیعی ساکولنت', price: 57000, identifier: '8'},
                     ]} slidesPerView={4} spaceBetween={24}/>
                 </div>
             </section>
