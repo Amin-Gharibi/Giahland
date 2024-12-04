@@ -1063,6 +1063,10 @@ body::-webkit-scrollbar {
   row-gap: 3rem;
 }
 
+.gap-y-6 {
+  row-gap: 1.5rem;
+}
+
 .self-center {
   align-self: center;
 }

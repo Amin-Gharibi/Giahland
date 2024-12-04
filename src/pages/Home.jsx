@@ -30,6 +30,10 @@ import flower6Primary from "../assets/svg/flower6-primary.svg";
 import flower7Primary from "../assets/svg/flower7-primary.svg";
 import flower8Primary from "../assets/svg/flower8-primary.svg";
 import ServiceItem from "../components/ServiceItem.jsx";
+import fifthFlower from "../assets/temp/fifthFlower.png";
+import sixthFlower from "../assets/temp/sixthFlower.png";
+import seventhFlower from "../assets/temp/seventhFlower.png";
+import eighthFlower from "../assets/temp/eighthFlower.png";
 
 function Home() {
     return (
@@ -151,6 +155,20 @@ function Home() {
                     <ServiceItem icon={flower7Primary} title={'اندازه گیری EC'} description={'این اندازه گیری نشانی از مقدار کل مواد مغذی موجود برای گیاهان می‌دهد'}/>
                     <ServiceItem icon={flower8Primary} title={'ارائه مکمل'} description={'برای رشد بهتر گیاهان و رفع آفات از مکمل ها میتوان استفاده کرد'}/>
                 </div>
+            </section>
+            {/*decorative plants*/}
+            <section className={'mt-10 sm:mt-16 flex flex-col gap-y-6'}>
+                <SectionTitle title={'گیاهان تزئینی'}/>
+                <SwipingSlider items={[
+                    {identifier: '1', image: fifthFlower, title: 'گیاه طبیعی کراسولا', price: 90000},
+                    {identifier: '2', image: sixthFlower, title: 'گیاه طبیعی یشم', price: 1500000},
+                    {identifier: '3', image: seventhFlower, title: 'گیاه طبیعی بونسای پاچیرا', price: 880000},
+                    {identifier: '4', image: eighthFlower, title: 'گیاه طبیعی کراسولا خرفه ای', price: 169000},
+                    {identifier: '5', image: fifthFlower, title: 'گیاه طبیعی کراسولا', price: 90000},
+                    {identifier: '6', image: sixthFlower, title: 'گیاه طبیعی یشم', price: 1500000},
+                    {identifier: '7', image: seventhFlower, title: 'گیاه طبیعی بونسای پاچیرا', price: 880000},
+                    {identifier: '8', image: eighthFlower, title: 'گیاه طبیعی کراسولا خرفه ای', price: 169000},
+                ]} spaceBetween={24}/>
             </section>
         </div>
     );
