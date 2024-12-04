@@ -15,7 +15,6 @@ SwipingSlider.propTypes = {
                 title: PropTypes.string.isRequired,
                 price: PropTypes.number.isRequired
             })).isRequired,
-    slidesPerView: PropTypes.number,
     spaceBetween: PropTypes.number,
     loop: PropTypes.bool
 };
@@ -42,7 +41,25 @@ function SwipingSlider({items, ...swiperProps}) {
 
     return (
         <div className={'relative'}>
-            <Swiper {...swiperProps} scrollbar={{draggable: true}} ref={swiperRef} onSlideChange={slideChangeHandler}>
+            <Swiper {...swiperProps} slidesPerView={1.5} scrollbar={{draggable: true}} ref={swiperRef} onSlideChange={slideChangeHandler}
+                breakpoints={{
+                    '470': {
+                        slidesPerView: 1.5,
+                    },
+                    '640': {
+                        slidesPerView: 2
+                    },
+                    '768': {
+                        slidesPerView: 2
+                    },
+                    '1024': {
+                        slidesPerView: 3
+                    },
+                    '1280': {
+                        slidesPerView: 4
+                    }
+                }}
+            >
                 {items.map((item, index) => (
                     <SwiperSlide key={index}>
                         <ItemBox image={item.image} title={item.title} price={item.price} identifier={item.identifier}/>
@@ -51,7 +68,7 @@ function SwipingSlider({items, ...swiperProps}) {
             </Swiper>
             {
                 isNextSlideButtonShown &&
-                <div className={'w-max h-max absolute -left-6 top-0 bottom-0 my-auto z-10'}>
+                <div className={'max-sm:hidden w-max h-max absolute -left-6 top-0 bottom-0 my-auto z-10'}>
                     <CustomIconButton onClick={() => swiperRef.current?.swiper.slideNext()} size={48}
                                       icon={arrowLeftPrimary}
                                       isOutline={true} isCurved={true}/>
@@ -59,7 +76,7 @@ function SwipingSlider({items, ...swiperProps}) {
             }
             {
                 isPrevSlideButtonShown &&
-                <div className={'w-max h-max absolute -right-6 top-0 bottom-0 my-auto z-10 rotate-180'}>
+                <div className={'max-sm:hidden w-max h-max absolute -right-6 top-0 bottom-0 my-auto z-10 rotate-180'}>
                     <CustomIconButton onClick={() => swiperRef.current?.swiper.slidePrev()} size={48}
                                       icon={arrowLeftPrimary}
                                       isOutline={true} isCurved={true}/>
