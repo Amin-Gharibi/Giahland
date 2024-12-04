@@ -56,7 +56,7 @@ function SwipingSlider({items, ...swiperProps}) {
                         slidesPerView: 3
                     },
                     '1280': {
-                        slidesPerView: 4
+                        slidesPerView: 4.5
                     }
                 }}
             >
