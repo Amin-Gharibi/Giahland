@@ -866,6 +866,10 @@ body::-webkit-scrollbar {
   height: 3.5rem;
 }
 
+.h-\[72px\] {
+  height: 72px;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -921,6 +925,10 @@ body::-webkit-scrollbar {
 
 .w-14 {
   width: 3.5rem;
+}
+
+.w-\[72px\] {
+  width: 72px;
 }
 
 .min-w-max {
@@ -1544,8 +1552,24 @@ body::-webkit-scrollbar {
     display: none !important;
   }
 
+  .sm\:h-20 {
+    height: 5rem;
+  }
+
+  .sm\:h-10 {
+    height: 2.5rem;
+  }
+
   .sm\:w-full {
     width: 100%;
+  }
+
+  .sm\:w-20 {
+    width: 5rem;
+  }
+
+  .sm\:w-10 {
+    width: 2.5rem;
   }
 
   .sm\:grid-cols-2 {
