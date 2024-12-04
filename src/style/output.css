@@ -855,6 +855,15 @@ body::-webkit-scrollbar {
   width: max-content;
 }
 
+.w-52 {
+  width: 13rem;
+}
+
+.min-w-max {
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
 .max-w-\[80\%\] {
   max-width: 80%;
 }
@@ -926,6 +935,10 @@ body::-webkit-scrollbar {
 .gap-x-6 {
   -moz-column-gap: 1.5rem;
        column-gap: 1.5rem;
+}
+
+.self-center {
+  align-self: center;
 }
 
 .overflow-hidden {
@@ -1162,12 +1175,50 @@ body::-webkit-scrollbar {
     margin-top: 2.5rem;
   }
 
+  .max-sm\:mb-4 {
+    margin-bottom: 1rem;
+  }
+
+  .max-sm\:mt-2 {
+    margin-top: 0.5rem;
+  }
+
+  .max-sm\:mt-4 {
+    margin-top: 1rem;
+  }
+
   .max-sm\:hidden {
     display: none;
   }
 }
 
+@media not all and (min-width: 470px) {
+  .max-xs\:mt-2 {
+    margin-top: 0.5rem;
+  }
+
+  .max-xs\:mt-4 {
+    margin-top: 1rem;
+  }
+
+  .max-xs\:mb-4 {
+    margin-bottom: 1rem;
+  }
+
+  .max-xs\:hidden {
+    display: none;
+  }
+}
+
 @media (min-width: 470px) {
+  .xs\:w-full {
+    width: 100%;
+  }
+
+  .xs\:gap-6 {
+    gap: 1.5rem;
+  }
+
   .xs\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -1176,6 +1227,11 @@ body::-webkit-scrollbar {
   .xs\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .xs\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .xs\:font-bold {
@@ -1192,8 +1248,16 @@ body::-webkit-scrollbar {
     display: none;
   }
 
+  .sm\:w-full {
+    width: 100%;
+  }
+
   .sm\:justify-between {
     justify-content: space-between;
+  }
+
+  .sm\:gap-6 {
+    gap: 1.5rem;
   }
 
   .sm\:gap-x-4 {

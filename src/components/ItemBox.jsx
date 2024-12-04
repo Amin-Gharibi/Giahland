@@ -10,12 +10,12 @@ ItemBox.propTypes = {
 
 function ItemBox({identifier, image, title, price}) {
     return (
-        <div className={'flex flex-col gap-6 border border-neutral5 rounded-xl p-4'}>
-            <img className={'w-full h-64 object-contain'} src={image} alt={title}/>
-            <span className={'text-lg leading-8 text-start text-black'}>{title}</span>
-            <div className={'flex items-center justify-between'}>
+        <div className={'flex flex-col sm:gap-6 border border-neutral5 rounded-xl p-4'}>
+            <img className={'w-52 self-center sm:w-full h-64 object-contain max-sm:mt-4'} src={image} alt={title}/>
+            <span className={'text-base sm:text-lg leading-8 text-start text-black'}>{title}</span>
+            <div className={'flex items-center justify-between max-sm:mt-2 max-sm:mb-4'}>
                 <span className={'text-sm leading-6 text-black'}>قیمت:</span>
-                <span className={'text-lg leading-8 text-black'}>{price.toLocaleString('fa-IR')} تومان</span>
+                <span className={'text-base sm:text-lg leading-8 text-black'}>{price.toLocaleString('fa-IR')} تومان</span>
             </div>
             <CustomButton title={'مشاهده بیشتر'} onClick={() => identifier} size={40} isFilled={true} isSquared={true}/>
         </div>
