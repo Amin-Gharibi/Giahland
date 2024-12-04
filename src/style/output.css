@@ -881,6 +881,10 @@ body::-webkit-scrollbar {
   cursor: pointer;
 }
 
+.cursor-default {
+  cursor: default;
+}
+
 .flex-col {
   flex-direction: column;
 }
