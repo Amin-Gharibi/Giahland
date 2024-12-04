@@ -16,6 +16,11 @@ import firstFlower from "../assets/temp/firstFlower.png";
 import secondFlower from "../assets/temp/secondFlower.png";
 import thirdFlower from "../assets/temp/thirdFlower.png";
 import fourthFlower from "../assets/temp/firstFlower.png";
+import firstBgImage from "../assets/images/firstBgImage.png";
+import secondBgImage from "../assets/images/secondBgImage.png";
+import thirdBgImage from "../assets/images/thirdBgImage.png";
+import fourthBgImage from "../assets/images/fourthBgImage.png";
+import LinkingBannersGroup from "../components/LinkingBannersGroup.jsx";
 
 function Home() {
     return (
@@ -114,6 +119,15 @@ function Home() {
                         {image: fourthFlower, title: 'گیاه طبیعی ساکولنت', price: 57000, identifier: '8'},
                     ]} slidesPerView={4} spaceBetween={24}/>
                 </div>
+            </section>
+            {/*linking banners section*/}
+            <section className={'mt-16'}>
+                <LinkingBannersGroup items={[
+                    {image: firstBgImage, title: 'گیاه بونسای', href: '/'},
+                    {image: secondBgImage, title: 'گیاه سانسوریا', href: '/'},
+                    {image: thirdBgImage, title: 'گیاه پتوس', href: '/'},
+                    {image: fourthBgImage, title: 'گیاه پاچیرا', href: '/'},
+                ]}/>
             </section>
         </div>
     );
