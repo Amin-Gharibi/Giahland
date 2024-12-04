@@ -95,7 +95,7 @@ function Home() {
             </section>
             {/*features section*/}
             <section
-                className={'mt-20 flex max-md:flex-col justify-center items-center lg:justify-between lg:items-start gap-6 md:gap-20'}>
+                className={'mt-10 sm:mt-20 flex max-md:flex-col justify-center items-center lg:justify-between lg:items-start gap-6 md:gap-20'}>
                 <FeatureOption icon={cardPrimary} title={'پرداخت آسان و آنی'}
                                description={'برای ایجاد اطمینان خاطر مشتریان،علاوه بر پرداخت آنلاین امکان پرداخت درب منزل وجود دارد'}/>
                 <FeatureOption icon={checkBoxPrimary} title={'ضمانت محصول'}
@@ -105,7 +105,7 @@ function Home() {
             </section>
             {/*banners section*/}
             <section
-                className={'mt-20 flex flex-col lg:flex-row items-center gap-6 *:w-full *:h-[150px] xs:*:h-[180px] sm:*:h-60'}>
+                className={'mt-10 sm:mt-20 flex flex-col lg:flex-row items-center gap-6 *:w-full *:h-[150px] xs:*:h-[180px] sm:*:h-60'}>
                 <div className={'grow rounded-2xl overflow-hidden'}>
                     <img src={bannerBg1} alt={'بنر اول'} className={'w-full h-full object-cover'}/>
                 </div>
@@ -114,7 +114,7 @@ function Home() {
                 </div>
             </section>
             {/*apartment flowers section*/}
-            <section className={'mt-16'}>
+            <section className={'mt-14 sm:mt-16'}>
                 <SectionTitle title={'گیاهان آپارتمانی'}/>
                 <div className={'mt-6'}>
                     <SwipingSlider items={[
@@ -130,7 +130,7 @@ function Home() {
                 </div>
             </section>
             {/*linking banners section*/}
-            <section className={'mt-16'}>
+            <section className={'mt-11 sm:mt-16'}>
                 <LinkingBannersGroup items={[
                     {image: firstBgImage, title: 'گیاه بونسای', href: '/'},
                     {image: secondBgImage, title: 'گیاه سانسوریا', href: '/'},
@@ -139,7 +139,7 @@ function Home() {
                 ]}/>
             </section>
             {/*plant medicine services*/}
-            <section className={'mt-16'}>
+            <section className={'mt-10 sm:mt-16'}>
                 <SectionTitle title={'خدمات گیاه‌پزشکی'}/>
                 <div className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-y-12 mt-8'}>
                     <ServiceItem icon={flower1Primary} title={'چک کردن اسید خاک'} description={'با استفاده از ابزار مخصوص اسید خاک گیاه چک میشود'}/>
