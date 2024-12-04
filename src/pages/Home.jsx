@@ -21,6 +21,15 @@ import secondBgImage from "../assets/images/secondBgImage.png";
 import thirdBgImage from "../assets/images/thirdBgImage.png";
 import fourthBgImage from "../assets/images/fourthBgImage.png";
 import LinkingBannersGroup from "../components/LinkingBannersGroup.jsx";
+import flower1Primary from "../assets/svg/flower1-primary.svg";
+import flower2Primary from "../assets/svg/flower2-primary.svg";
+import flower3Primary from "../assets/svg/flower3-primary.svg";
+import flower4Primary from "../assets/svg/flower4-primary.svg";
+import flower5Primary from "../assets/svg/flower5-primary.svg";
+import flower6Primary from "../assets/svg/flower6-primary.svg";
+import flower7Primary from "../assets/svg/flower7-primary.svg";
+import flower8Primary from "../assets/svg/flower8-primary.svg";
+import ServiceItem from "../components/ServiceItem.jsx";
 
 function Home() {
     return (
@@ -128,6 +137,20 @@ function Home() {
                     {image: thirdBgImage, title: 'گیاه پتوس', href: '/'},
                     {image: fourthBgImage, title: 'گیاه پاچیرا', href: '/'},
                 ]}/>
+            </section>
+            {/*plant medicine services*/}
+            <section className={'mt-16'}>
+                <SectionTitle title={'خدمات گیاه‌پزشکی'}/>
+                <div className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-y-12 mt-8'}>
+                    <ServiceItem icon={flower1Primary} title={'چک کردن اسید خاک'} description={'با استفاده از ابزار مخصوص اسید خاک گیاه چک میشود'}/>
+                    <ServiceItem icon={flower2Primary} title={'برسی مواد معدنی خاک'} description={'یکی از موارد مهم خاک، مقدار مواد معدنی آن است که با دقت برسی میشود'}/>
+                    <ServiceItem icon={flower3Primary} title={'مشاهده بهترین دما'} description={'از موارد مهم برای گیاه مقدار دمای محیط است که باید اندازه گیری شود'}/>
+                    <ServiceItem icon={flower4Primary} title={'برسی آسیب های احتمالی'} description={'تمامی آسیب های احتمالی برسی میگردد تا از وقوع مشکلات آینده جلوگیری شود'}/>
+                    <ServiceItem icon={flower5Primary} title={'از بین بردن عناصر آلوده خاک'} description={'با استفاده از روش های نوین،عناصر آلوده از خاک گیاهان شما جمع آوری میشوند'}/>
+                    <ServiceItem icon={flower6Primary} title={'برسی ظاهر'} description={'ظاهر گیاه بیانگر مسائل مهمی هست.میتوان با مشاهده ظاهر گیاه آفات و ... را متوجه شد'}/>
+                    <ServiceItem icon={flower7Primary} title={'اندازه گیری EC'} description={'این اندازه گیری نشانی از مقدار کل مواد مغذی موجود برای گیاهان می‌دهد'}/>
+                    <ServiceItem icon={flower8Primary} title={'ارائه مکمل'} description={'برای رشد بهتر گیاهان و رفع آفات از مکمل ها میتوان استفاده کرد'}/>
+                </div>
             </section>
         </div>
     );
