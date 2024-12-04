@@ -34,6 +34,10 @@ import fifthFlower from "../assets/temp/fifthFlower.png";
 import sixthFlower from "../assets/temp/sixthFlower.png";
 import seventhFlower from "../assets/temp/seventhFlower.png";
 import eighthFlower from "../assets/temp/eighthFlower.png";
+import ninthFlower from "../assets/temp/ninthFlower.png";
+import tenthFlower from "../assets/temp/tenthFlower.png";
+import eleventhFlower from "../assets/temp/eleventhFlower.png";
+import twelvethFlower from "../assets/temp/twelvethFlower.png";
 
 function Home() {
     return (
@@ -146,14 +150,22 @@ function Home() {
             <section className={'mt-10 sm:mt-16'}>
                 <SectionTitle title={'خدمات گیاه‌پزشکی'}/>
                 <div className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-y-12 mt-8'}>
-                    <ServiceItem icon={flower1Primary} title={'چک کردن اسید خاک'} description={'با استفاده از ابزار مخصوص اسید خاک گیاه چک میشود'}/>
-                    <ServiceItem icon={flower2Primary} title={'برسی مواد معدنی خاک'} description={'یکی از موارد مهم خاک، مقدار مواد معدنی آن است که با دقت برسی میشود'}/>
-                    <ServiceItem icon={flower3Primary} title={'مشاهده بهترین دما'} description={'از موارد مهم برای گیاه مقدار دمای محیط است که باید اندازه گیری شود'}/>
-                    <ServiceItem icon={flower4Primary} title={'برسی آسیب های احتمالی'} description={'تمامی آسیب های احتمالی برسی میگردد تا از وقوع مشکلات آینده جلوگیری شود'}/>
-                    <ServiceItem icon={flower5Primary} title={'از بین بردن عناصر آلوده خاک'} description={'با استفاده از روش های نوین،عناصر آلوده از خاک گیاهان شما جمع آوری میشوند'}/>
-                    <ServiceItem icon={flower6Primary} title={'برسی ظاهر'} description={'ظاهر گیاه بیانگر مسائل مهمی هست.میتوان با مشاهده ظاهر گیاه آفات و ... را متوجه شد'}/>
-                    <ServiceItem icon={flower7Primary} title={'اندازه گیری EC'} description={'این اندازه گیری نشانی از مقدار کل مواد مغذی موجود برای گیاهان می‌دهد'}/>
-                    <ServiceItem icon={flower8Primary} title={'ارائه مکمل'} description={'برای رشد بهتر گیاهان و رفع آفات از مکمل ها میتوان استفاده کرد'}/>
+                    <ServiceItem icon={flower1Primary} title={'چک کردن اسید خاک'}
+                                 description={'با استفاده از ابزار مخصوص اسید خاک گیاه چک میشود'}/>
+                    <ServiceItem icon={flower2Primary} title={'برسی مواد معدنی خاک'}
+                                 description={'یکی از موارد مهم خاک، مقدار مواد معدنی آن است که با دقت برسی میشود'}/>
+                    <ServiceItem icon={flower3Primary} title={'مشاهده بهترین دما'}
+                                 description={'از موارد مهم برای گیاه مقدار دمای محیط است که باید اندازه گیری شود'}/>
+                    <ServiceItem icon={flower4Primary} title={'برسی آسیب های احتمالی'}
+                                 description={'تمامی آسیب های احتمالی برسی میگردد تا از وقوع مشکلات آینده جلوگیری شود'}/>
+                    <ServiceItem icon={flower5Primary} title={'از بین بردن عناصر آلوده خاک'}
+                                 description={'با استفاده از روش های نوین،عناصر آلوده از خاک گیاهان شما جمع آوری میشوند'}/>
+                    <ServiceItem icon={flower6Primary} title={'برسی ظاهر'}
+                                 description={'ظاهر گیاه بیانگر مسائل مهمی هست.میتوان با مشاهده ظاهر گیاه آفات و ... را متوجه شد'}/>
+                    <ServiceItem icon={flower7Primary} title={'اندازه گیری EC'}
+                                 description={'این اندازه گیری نشانی از مقدار کل مواد مغذی موجود برای گیاهان می‌دهد'}/>
+                    <ServiceItem icon={flower8Primary} title={'ارائه مکمل'}
+                                 description={'برای رشد بهتر گیاهان و رفع آفات از مکمل ها میتوان استفاده کرد'}/>
                 </div>
             </section>
             {/*decorative plants*/}
@@ -169,6 +181,15 @@ function Home() {
                     {identifier: '7', image: seventhFlower, title: 'گیاه طبیعی بونسای پاچیرا', price: 880000},
                     {identifier: '8', image: eighthFlower, title: 'گیاه طبیعی کراسولا خرفه ای', price: 169000},
                 ]} spaceBetween={24}/>
+            </section>
+            {/*linking banners section*/}
+            <section className={'mt-11 sm:mt-16'}>
+                <LinkingBannersGroup items={[
+                    {image: ninthFlower, title: 'گیاه رزماری', href: '/'},
+                    {image: tenthFlower, title: 'گیاه آدنیوم', href: '/'},
+                    {image: eleventhFlower, title: 'گیاه آشیانتوس', href: '/'},
+                    {image: twelvethFlower, title: 'گیاه آناناسی', href: '/'},
+                ]}/>
             </section>
         </div>
     );
