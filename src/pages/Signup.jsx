@@ -1,12 +1,12 @@
-import loginBgImage from "../assets/images/loginBgImage.png";
-import CustomInput from "../components/CustomInput.jsx";
-import CustomButton from "../components/CustomButton.jsx";
 import {useForm} from "react-hook-form";
 import useResponsiveSize from "../hooks/useResponsiveSize.js";
 import Header from "../components/Header.jsx";
+import CustomInput from "../components/CustomInput.jsx";
+import CustomButton from "../components/CustomButton.jsx";
+import loginBgImage from "../assets/images/loginBgImage.png";
 import {Link} from "react-router-dom";
 
-function Login() {
+function Signup() {
     const {register, handleSubmit, getValues, formState: {errors}} = useForm();
     const onSubmit = async (data) => {
         console.log(data)
@@ -23,7 +23,8 @@ function Login() {
                 <div
                     className={'container max-xs:-mt-3 bg-white max-md:order-2 lg:px-24 xl:px-40 flex justify-center items-center max-md:rounded-t-xl overflow-hidden'}>
                     <form onSubmit={handleSubmit(onSubmit)} className={'w-full'}>
-                        <h1 className={'xs:font-semibold text-xl leading-7 text-black mb-8 max-md:text-center max-md:mt-4'}>ورود</h1>
+                        <h1 className={'xs:font-semibold text-xl leading-7 text-black mb-8 max-md:text-center max-md:mt-4'}>ثبت
+                            نام</h1>
                         <CustomInput
                             size={inputSize}
                             {...register('phoneNumber', {
@@ -44,6 +45,29 @@ function Login() {
                             )}
                             errors={errors.phoneNumber ? [errors.phoneNumber] : []}
                         />
+                        <div className={'mt-6'}>
+                            <CustomInput
+                                type={"email"}
+                                size={inputSize}
+                                {...register('email', {
+                                    required: 'وارد کردن ایمیل الزامی است',
+                                    pattern: {
+                                        value: /^[a-zA-Z\d]{3,}@[a-zA-Z]{4,}\.[a-zA-Z]{3,}$/,
+                                        message: 'ایمیل وارد شده معتبر نیست!'
+                                    }
+                                })}
+                                getValues={getValues}
+                                placeholder="ایمیل"
+                                RightIcon={(props) => (
+                                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg" {...props}>
+                                        <path
+                                            d="M18.4895 4.16669H3.82284C2.8145 4.16669 1.99867 4.99169 1.99867 6.00002L1.9895 17C1.9895 18.0084 2.8145 18.8334 3.82284 18.8334H18.4895C19.4978 18.8334 20.3228 18.0084 20.3228 17V6.00002C20.3228 4.99169 19.4978 4.16669 18.4895 4.16669ZM18.4895 17H3.82284V7.83335L11.1562 12.4167L18.4895 7.83335V17ZM11.1562 10.5834L3.82284 6.00002H18.4895L11.1562 10.5834Z"/>
+                                    </svg>
+                                )}
+                                errors={errors.email ? [errors.email] : []}
+                            />
+                        </div>
                         <div className={'mt-6'}>
                             <CustomInput
                                 type={"password"}
@@ -67,16 +91,38 @@ function Login() {
                                 errors={errors.password ? [errors.password] : []}
                             />
                         </div>
-                        <button className={'text-sm text-primary border-none outline-none mt-4'}>بازیابی رمز عبور
-                        </button>
+                        <div className={'mt-6'}>
+                            <CustomInput
+                                type={"password"}
+                                size={inputSize}
+                                {...register('confirmPassword', {
+                                    required: 'تکرار رمز عبور الزامی است',
+                                    validate: (value) => {
+                                        if (value !== getValues("password")) {
+                                            return 'رمز عبور وارد شده همخوانی ندارد!'
+                                        }
+                                    }
+                                })}
+                                getValues={getValues}
+                                placeholder="تکرار رمز عبور"
+                                RightIcon={(props) => (
+                                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg" {...props}>
+                                        <path
+                                            d="M19.4061 9.66667H11.7519C11.0003 7.53083 8.96525 6 6.57275 6C3.53859 6 1.07275 8.46583 1.07275 11.5C1.07275 14.5342 3.53859 17 6.57275 17C8.96525 17 11.0003 15.4692 11.7519 13.3333H12.0728L13.9061 15.1667L15.7394 13.3333L17.5728 15.1667L21.2394 11.4633L19.4061 9.66667ZM6.57275 14.25C5.06025 14.25 3.82275 13.0125 3.82275 11.5C3.82275 9.9875 5.06025 8.75 6.57275 8.75C8.08525 8.75 9.32275 9.9875 9.32275 11.5C9.32275 13.0125 8.08525 14.25 6.57275 14.25Z"/>
+                                    </svg>
+                                )}
+                                errors={errors.confirmPassword ? [errors.confirmPassword] : []}
+                            />
+                        </div>
                         <div className={'w-full *:w-full mt-8'}>
-                            <CustomButton type={'submit'} title={'ورود'} onClick={() => true} size={inputSize}
+                            <CustomButton type={'submit'} title={'ثبت نام'} onClick={() => true} size={inputSize}
                                           isFilled={true}
                                           isSquared={true}/>
                         </div>
                         <div className={'mt-3 text-center leading-7 text-sm xs:text-base'}>
-                            <span>حساب کاربری ندارید؟ </span>
-                            <Link to={'/signup'} className={'text-primary'}>ثبت نام</Link>
+                            <span>حساب کاربری دارید؟ </span>
+                            <Link to={'/login'} className={'text-primary'}>ورود</Link>
                             <span> کنید</span>
                         </div>
                     </form>
@@ -90,4 +136,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Signup;
