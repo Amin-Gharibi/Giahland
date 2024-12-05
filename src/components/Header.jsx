@@ -6,12 +6,17 @@ import login2Primary from '../assets/svg/login2-primary.svg'
 import {Link, useLocation} from "react-router-dom";
 import CustomIconButton from "./CustomIconButton.jsx";
 import CustomButton from "./CustomButton.jsx";
+import PropTypes from "prop-types";
 
-function Header() {
+Header.propTypes = {
+    onlyMobileSize: PropTypes.bool,
+}
+
+function Header({onlyMobileSize = false}) {
     const location = useLocation()
 
     return (
-        <div className={'flex justify-between items-center mt-6 pb-6 border-b border-b-neutral5'}>
+        <div className={`flex justify-between items-center mt-6 pb-6 border-b border-b-neutral5 ${onlyMobileSize ? 'md:hidden' : ''}`}>
             <div className={'flex justify-between items-center gap-x-3 sm:gap-x-6'}>
                 <button
                     className={'w-8 h-8 md:w-10 md:h-10 p-1 flex justify-center items-center rounded-lg bg-neutral3 lg:hidden'}>
