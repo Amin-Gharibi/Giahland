@@ -25,7 +25,7 @@ const CustomInput = forwardRef(({
                 setIsInputFilled(getValues(otherProps.name))
             }}>
             <span
-                className={`hidden group-focus-within:block group-[.active]:block absolute right-3.5 bg-white px-1 ${size === 48 ? '-top-3 text-xs leading-5' : '-top-4 text-base leading-7 text-neutral9 group-focus-within:text-primary'}`}>
+                className={`hidden group-focus-within:block group-[.active]:block absolute right-3.5 bg-white px-1 ${size === 48 ? '-top-3 text-xs leading-5' : '-top-4 text-base leading-7'} text-neutral9 group-focus-within:text-primary`}>
                 {placeholder}
             </span>
                 {RightIcon && (
