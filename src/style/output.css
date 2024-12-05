@@ -841,6 +841,10 @@ body::-webkit-scrollbar {
   margin-top: 2rem;
 }
 
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
 .block {
   display: block;
 }
@@ -910,6 +914,10 @@ body::-webkit-scrollbar {
   height: 250px;
 }
 
+.h-\[500px\] {
+  height: 500px;
+}
+
 .max-h-screen {
   max-height: 100vh;
 }
@@ -945,6 +953,10 @@ body::-webkit-scrollbar {
 .w-max {
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-\[500px\] {
+  width: 500px;
 }
 
 .min-w-14 {
@@ -1321,6 +1333,11 @@ body::-webkit-scrollbar {
   line-height: 1rem;
 }
 
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -1347,6 +1364,10 @@ body::-webkit-scrollbar {
 
 .leading-8 {
   line-height: 2rem;
+}
+
+.leading-9 {
+  line-height: 2.25rem;
 }
 
 .text-black {
@@ -1503,6 +1524,10 @@ body::-webkit-scrollbar {
     margin-top: 1rem;
   }
 
+  .max-md\:hidden {
+    display: none;
+  }
+
   .max-md\:h-1\/3 {
     height: 33.333333%;
   }
@@ -1627,6 +1652,11 @@ body::-webkit-scrollbar {
   .xs\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .xs\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 
   .xs\:font-bold {
