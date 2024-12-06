@@ -55,7 +55,7 @@ function UserDashboard({DynamicParts}) {
         <div className={'container h-screen flex flex-col'}>
             <Header/>
             <div className={'grid grid-cols-12 grid-rows-1 flex-grow overflow-hidden'}>
-                <div className={`${showSideMenu ? '' : 'hidden'} col-span-12 md:col-span-3 h-full flex flex-col md:border-l border-l-neutral3 p-6 pr-0`}>
+                <div className={`${showSideMenu ? '' : 'hidden'} col-span-12 md:col-span-5 lg:col-span-4 xl:col-span-3 h-full flex flex-col md:border-l border-l-neutral3 p-6 pr-0`}>
                     <div className={'flex justify-start items-center gap-x-2'}>
                         <img src={userData?.prof} alt={userData?.firstName + " " + userData?.lastName}
                              className={'object-cover w-[60px] h-[60px] rounded-full'}/>
@@ -104,7 +104,7 @@ function UserDashboard({DynamicParts}) {
                         </button>
                     </div>
                 </div>
-                <div className={`${showSideMenu ? 'col-span-9' : 'col-span-12'} overflow-y-scroll h-full hide-scrollbar`}>
+                <div className={`${showSideMenu ? 'col-span-7 lg:col-span-8 xl:col-span-9' : 'col-span-12'} overflow-y-scroll h-full hide-scrollbar`}>
                     {DynamicParts && <DynamicParts userData={userData}/>}
                 </div>
             </div>

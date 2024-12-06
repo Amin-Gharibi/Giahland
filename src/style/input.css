@@ -90,3 +90,9 @@
         @apply absolute top-0 bottom-0 right-0 h-full w-0.5 bg-primary rounded-sm;
     }
 }
+
+@layer utilities {
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+}
