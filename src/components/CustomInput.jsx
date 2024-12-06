@@ -10,14 +10,15 @@ const CustomInput = forwardRef(({
                                     LeftIcon = null,
                                     onLeftIconClick = null,
                                     getValues,
+                                    hasDefaultValue = false,
                                     ...otherProps
                                 }, ref) => {
     const [customPlaceholder, setCustomPlaceholder] = useState(placeholder);
     const [customType, setCustomType] = useState(type);
-    const [isInputFilled, setIsInputFilled] = useState(false);
+    const [isInputFilled, setIsInputFilled] = useState(hasDefaultValue);
 
     return (
-        <>
+        <div>
             <div
                 className={`group relative flex gap-x-2 items-center bg-white border border-neutral6 focus-within:border-primary px-3.5 rounded-xl transition-colors ${size === 48 ? 'h-12' : 'h-14'} ${isInputFilled ? 'active' : ''}`}
                 onFocus={() => setCustomPlaceholder('')} onBlur={() => {
@@ -64,11 +65,11 @@ const CustomInput = forwardRef(({
                 )}
             </div>
             {errors?.map((error, index) => (
-                <div key={index}>
+                <div key={index} className={'cursor-default'}>
                     <span className={'text-error text-xs'}>{error.message}</span>
                 </div>
             ))}
-        </>
+        </div>
     );
 })
 
@@ -81,6 +82,7 @@ CustomInput.propTypes = {
     onLeftIconClick: PropTypes.func,
     errors: PropTypes.array,
     getValues: PropTypes.func,
+    hasDefaultValue: PropTypes.bool
 };
 
 CustomInput.displayName = 'CustomInput';
