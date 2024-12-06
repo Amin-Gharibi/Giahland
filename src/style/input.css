@@ -79,3 +79,14 @@
         display: none;
     }
 }
+
+@layer components {
+    .dashboard__section-title {
+        @apply relative pr-2.5 font-medium leading-6 text-black w-max text-base;
+    }
+
+    .dashboard__section-title:before {
+        content: '';
+        @apply absolute top-0 bottom-0 right-0 h-full w-0.5 bg-primary rounded-sm;
+    }
+}
