@@ -1235,6 +1235,10 @@ body::-webkit-scrollbar {
   border-bottom-width: 1px;
 }
 
+.border-solid {
+  border-style: solid;
+}
+
 .border-dashed {
   border-style: dashed;
 }
@@ -2014,6 +2018,10 @@ body::-webkit-scrollbar {
 
   .md\:border {
     border-width: 1px;
+  }
+
+  .md\:border-0 {
+    border-width: 0px;
   }
 
   .md\:border-l {

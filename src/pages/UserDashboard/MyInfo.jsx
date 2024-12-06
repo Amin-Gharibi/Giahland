@@ -38,7 +38,7 @@ function MyInfo({userData}) {
         <div className={'pt-6 md:pt-10 md:pr-6'}>
             <form onSubmit={handleSubmit1(onSubmit)} className={'w-full'}>
                 <DashboardSectionTitle title={'مشخصات حساب کاربری'}/>
-                <div className={'flex flex-col sm:p-6 md:p-0 lg:p-6 sm:border md:border-none lg:border border-neutral3 w-full rounded-2xl mt-4'}>
+                <div className={'flex flex-col sm:p-6 md:p-0 lg:p-6 sm:border md:border-0 lg:border border-neutral3 w-full rounded-2xl mt-4'}>
                     <div className={'flex flex-col sm:flex-row md:flex-col w-full lg:flex-row items-center gap-4'}>
                         <img src={userData?.prof} alt={userData?.firstName + " " + userData?.lastName}
                              className={'object-cover w-20 h-20 rounded-full'}/>
@@ -171,7 +171,7 @@ function MyInfo({userData}) {
             </form>
             <form onSubmit={handleSubmit2(onPasswordFormSubmit)} className={'w-full mt-6'}>
                 <DashboardSectionTitle title={'تغییر رمز عبور'}/>
-                <div className={'flex flex-col sm:p-6 md:p-0 lg:p-6 sm:border md:border-none lg:border border-neutral3 w-full rounded-2xl mt-4'}>
+                <div className={'flex flex-col sm:p-6 md:p-0 lg:p-6 sm:border md:border-0 lg:border border-neutral3 w-full rounded-2xl mt-4'}>
                     <div className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6'}>
                         <CustomInput
                             size={inputSize}
