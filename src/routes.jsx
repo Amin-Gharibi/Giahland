@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound.jsx";
 import MyInfo from "./pages/UserDashboard/MyInfo.jsx";
 import ConsultationWithPlantPathologist from "./pages/UserDashboard/ConsultationWithPlantPathologist.jsx";
 import Messages from "./pages/UserDashboard/Messages.jsx";
+import ProductPage from "./pages/ProductPage.jsx";
 
 const routes = [
     {path: '/', element: <Home/>},
@@ -26,6 +27,7 @@ const routes = [
             {path: '*', element: <NotFound/>}
         ]
     },
+    {path: '/product/*', element: <ProductPage/>},
     {path: '*', element: <NotFound/>}
 ]
 

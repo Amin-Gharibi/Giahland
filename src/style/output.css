@@ -906,6 +906,10 @@ body::-webkit-scrollbar {
   height: 2rem;
 }
 
+.h-\[120px\] {
+  height: 120px;
+}
+
 .h-\[250px\] {
   height: 250px;
 }
@@ -931,8 +935,8 @@ body::-webkit-scrollbar {
   height: 100vh;
 }
 
-.h-\[120px\] {
-  height: 120px;
+.w-12 {
+  width: 3rem;
 }
 
 .w-14 {
@@ -959,6 +963,10 @@ body::-webkit-scrollbar {
   width: 2rem;
 }
 
+.w-\[120px\] {
+  width: 120px;
+}
+
 .w-\[500px\] {
   width: 500px;
 }
@@ -978,18 +986,6 @@ body::-webkit-scrollbar {
 .w-max {
   width: -moz-max-content;
   width: max-content;
-}
-
-.w-64 {
-  width: 16rem;
-}
-
-.w-\[120px\] {
-  width: 120px;
-}
-
-.w-12 {
-  width: 3rem;
 }
 
 .min-w-14 {
@@ -1113,6 +1109,11 @@ body::-webkit-scrollbar {
        column-gap: 0.5rem;
 }
 
+.gap-x-2\.5 {
+  -moz-column-gap: 0.625rem;
+       column-gap: 0.625rem;
+}
+
 .gap-x-3 {
   -moz-column-gap: 0.75rem;
        column-gap: 0.75rem;
@@ -1141,33 +1142,20 @@ body::-webkit-scrollbar {
   row-gap: 0.375rem;
 }
 
-.gap-y-2\.5 {
-  row-gap: 0.625rem;
-}
-
-.gap-y-6 {
-  row-gap: 1.5rem;
-}
-
 .gap-y-2 {
   row-gap: 0.5rem;
 }
 
-.gap-x-2\.5 {
-  -moz-column-gap: 0.625rem;
-       column-gap: 0.625rem;
-}
-
-.gap-y-3 {
-  row-gap: 0.75rem;
-}
-
-.gap-y-4 {
-  row-gap: 1rem;
+.gap-y-2\.5 {
+  row-gap: 0.625rem;
 }
 
 .gap-y-5 {
   row-gap: 1.25rem;
+}
+
+.gap-y-6 {
+  row-gap: 1.5rem;
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
@@ -1192,6 +1180,10 @@ body::-webkit-scrollbar {
   overflow-y: scroll;
 }
 
+.rounded {
+  border-radius: 0.25rem;
+}
+
 .rounded-2xl {
   border-radius: 1rem;
 }
@@ -1208,16 +1200,8 @@ body::-webkit-scrollbar {
   border-radius: 0.75rem;
 }
 
-.rounded {
-  border-radius: 0.25rem;
-}
-
 .border {
   border-width: 1px;
-}
-
-.border-2 {
-  border-width: 2px;
 }
 
 .border-b {
@@ -1260,11 +1244,6 @@ body::-webkit-scrollbar {
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
-}
-
-.border-gray-200 {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
 }
 
 .border-b-neutral5 {
@@ -1314,11 +1293,6 @@ body::-webkit-scrollbar {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
-.bg-gray-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }
 
 .bg-gradient-to-b {
@@ -1384,6 +1358,11 @@ body::-webkit-scrollbar {
   padding-right: 0.5rem;
 }
 
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
 .px-3\.5 {
   padding-left: 0.875rem;
   padding-right: 0.875rem;
@@ -1409,19 +1388,9 @@ body::-webkit-scrollbar {
   padding-bottom: 0.75rem;
 }
 
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 
 .pb-10 {
@@ -1440,16 +1409,12 @@ body::-webkit-scrollbar {
   padding-right: 0px;
 }
 
-.pt-6 {
-  padding-top: 1.5rem;
-}
-
-.pr-1 {
-  padding-right: 0.25rem;
-}
-
 .pr-2 {
   padding-right: 0.5rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
 }
 
 .text-center {
@@ -1850,12 +1815,12 @@ body::-webkit-scrollbar {
     width: 10rem;
   }
 
-  .sm\:w-full {
-    width: 100%;
-  }
-
   .sm\:w-\[60px\] {
     width: 60px;
+  }
+
+  .sm\:w-full {
+    width: 100%;
   }
 
   .sm\:grid-cols-2 {
