@@ -3,7 +3,7 @@ import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import BreadCrumb from "../components/Breadcrumb.jsx";
 
-function ProductPage() {
+function Product() {
     const productId = window.location.pathname.split('/')[2]
     const [productDetails, setProductDetails] = useState(null)
     const [breadcrumbs, setBreadcrumbs] = useState(null)
@@ -29,4 +29,4 @@ function ProductPage() {
     );
 }
 
-export default ProductPage;
+export default Product;
