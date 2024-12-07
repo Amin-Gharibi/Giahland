@@ -17,7 +17,12 @@ const routes = [
             {path: '', element: <UserDashboard/>},
             {path: 'my-info', element: <UserDashboard DynamicParts={(props) => <MyInfo {...props}/>}/>},
             {path: 'consultation-with-plant-pathologist', element: <UserDashboard DynamicParts={(props) => <ConsultationWithPlantPathologist {...props}/>}/>},
-            {path: 'messages', element: <UserDashboard DynamicParts={(props) => <Messages {...props}/>}/>},
+            {
+                path: 'messages', children: [
+                    {path: '', element: <UserDashboard DynamicParts={(props) => <Messages {...props}/>}/>},
+                    {path: ':chatId', element: <UserDashboard/>}
+                ]
+            },
             {path: '*', element: <NotFound/>}
         ]
     },

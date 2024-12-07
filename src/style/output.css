@@ -988,6 +988,10 @@ body::-webkit-scrollbar {
   width: 120px;
 }
 
+.w-12 {
+  width: 3rem;
+}
+
 .min-w-14 {
   min-width: 3.5rem;
 }
@@ -1149,6 +1153,23 @@ body::-webkit-scrollbar {
   row-gap: 0.5rem;
 }
 
+.gap-x-2\.5 {
+  -moz-column-gap: 0.625rem;
+       column-gap: 0.625rem;
+}
+
+.gap-y-3 {
+  row-gap: 0.75rem;
+}
+
+.gap-y-4 {
+  row-gap: 1rem;
+}
+
+.gap-y-5 {
+  row-gap: 1.25rem;
+}
+
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1241,6 +1262,11 @@ body::-webkit-scrollbar {
   border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
 }
 
+.border-gray-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
+}
+
 .border-b-neutral5 {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(217 217 217 / var(--tw-border-opacity, 1));
@@ -1307,6 +1333,10 @@ body::-webkit-scrollbar {
 
 .to-\[rgba\(0\2c 0\2c 0\2c 0\.5\)\] {
   --tw-gradient-to: rgba(0,0,0,0.5) var(--tw-gradient-to-position);
+}
+
+.bg-center {
+  background-position: center;
 }
 
 .fill-neutral10 {
@@ -1387,6 +1417,11 @@ body::-webkit-scrollbar {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .pb-10 {
@@ -1799,6 +1834,10 @@ body::-webkit-scrollbar {
     height: 5rem;
   }
 
+  .sm\:h-\[60px\] {
+    height: 60px;
+  }
+
   .sm\:w-10 {
     width: 2.5rem;
   }
@@ -1813,6 +1852,10 @@ body::-webkit-scrollbar {
 
   .sm\:w-full {
     width: 100%;
+  }
+
+  .sm\:w-\[60px\] {
+    width: 60px;
   }
 
   .sm\:grid-cols-2 {
@@ -1855,6 +1898,11 @@ body::-webkit-scrollbar {
 
   .sm\:p-\[22px\] {
     padding: 22px;
+  }
+
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .sm\:text-2xl {
