@@ -21,11 +21,15 @@ import fourthFlower from "../assets/temp/firstFlower.png";
 import SwipingSlider from "../components/SwipingSlider.jsx";
 import ProductSectionTitle from "../components/ProductSectionTitle.jsx";
 import {useForm} from "react-hook-form";
+import CommentItem from "../components/CommentItem.jsx";
+import useResponsiveSize from "../hooks/useResponsiveSize.js";
 
 function Product() {
     const productId = window.location.pathname.split('/')[2]
     const [productDetails, setProductDetails] = useState(null)
     const [breadcrumbs, setBreadcrumbs] = useState(null)
+
+    const showMoreCommentsButtonSize = useResponsiveSize(48, 40, 1024)
 
     const {register, handleSubmit, formState: {errors}} = useForm()
     const submitCommentHandler = (data) => {
@@ -183,6 +187,16 @@ function Product() {
                                     </div>
                                 </div>
                             </form>
+                            <div className={'mt-10 divide-y divide-neutral3'}>
+                                <CommentItem user={{prof: tempImage3, firstName: 'یاسر', lastName: 'منصوری'}} rate={4} comment={'گیاه یوکا یکی از گیاهان مورد علاقه من هست و از خریدم راضی هستم. گیاه یوکا یکی از گیاهان مورد علاقه من هست و از خریدم راضی هستم. گیاه یوکا یکی از گیاهان مورد علاقه من هست و از خریدم راضی هستم. گیاه یوکا یکی از گیاهان مورد علاقه من هست و از خریدم راضی هستم. گیاه یوکا یکی از گیاهان مورد علاقه من هست و از خریدم راضی هستم'} likesCount={3} disLikesCount={0} isLiked={true} isDisLiked={false} date={'Sun Dec 08 2024 16:13:51 GMT+0330 (Iran Standard Time)'}/>
+                                <CommentItem user={{prof: tempImage3, firstName: 'یاسر', lastName: 'منصوری'}} rate={4} comment={'گیاه یوکا یکی از گیاهان مورد علاقه'} likesCount={3} disLikesCount={0} isLiked={true} isDisLiked={false} date={'Sun Dec 08 2024 16:13:51 GMT+0330 (Iran Standard Time)'}/>
+                                <CommentItem user={{prof: tempImage3, firstName: 'یاسر', lastName: 'منصوری'}} rate={4} comment={'گیاه یوکا یکی از گیاهان مورد علاقه من هست و از خریدم راضی هستم. گیاه یوکا یکی از گیاهان مورد علاقه من هست و از خریدم راضی هستم. گیاه یوکا یکی از گیاهان مورد علاقه من هست و از خریدم '} likesCount={6} disLikesCount={2} isLiked={false} isDisLiked={true} date={'Sun Dec 08 2024 16:13:51 GMT+0330 (Iran Standard Time)'}/>
+                                <CommentItem user={{prof: tempImage3, firstName: 'یاسر', lastName: 'منصوری'}} rate={4} comment={'گیاه یوکا یکی از گیاهان مورد علاقه من هست و از خریدم راضی هستم. گیاه یوکا'} likesCount={6} disLikesCount={3} isLiked={true} isDisLiked={false} date={'Sun Dec 08 2024 16:13:51 GMT+0330 (Iran Standard Time)'}/>
+                                <CommentItem user={{prof: tempImage3, firstName: 'یاسر', lastName: 'منصوری'}} rate={4} comment={'گیاه یوکا یکی از گیاهان مورد علاقه من هست و از خریدم راضی هستم. گیاه یوکا یکی از گیاهان مورد علاقه من هست و از خریدم راضی هستم. گیاه یوکا یکی از گیاهان مورد '} likesCount={3} disLikesCount={4} isLiked={false} isDisLiked={true} date={'Sun Dec 08 2024 16:13:51 GMT+0330 (Iran Standard Time)'}/>
+                            </div>
+                            <div className={'mx-auto mt-6 w-40 *:w-full'}>
+                                <CustomButton title={'مشاهده بیشتر'} onClick={() => true} size={showMoreCommentsButtonSize} isOutline isSquared/>
+                            </div>
                         </div>
                     </div>
                 </div>

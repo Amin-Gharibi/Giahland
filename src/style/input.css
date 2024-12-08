@@ -78,6 +78,10 @@
     body::-webkit-scrollbar {
         display: none;
     }
+
+    button {
+        @apply outline-0;
+    }
 }
 
 @layer components {
