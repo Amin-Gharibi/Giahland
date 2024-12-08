@@ -7,6 +7,7 @@ import MyInfo from "./pages/UserDashboard/MyInfo.jsx";
 import ConsultationWithPlantPathologist from "./pages/UserDashboard/ConsultationWithPlantPathologist.jsx";
 import Messages from "./pages/UserDashboard/Messages.jsx";
 import Product from "./pages/Product.jsx";
+import Cart from "./pages/Cart.jsx";
 
 const routes = [
     {path: '/', element: <Home/>},
@@ -28,6 +29,7 @@ const routes = [
         ]
     },
     {path: '/product/*', element: <Product/>},
+    {path: '/cart', element: <Cart/>},
     {path: '*', element: <NotFound/>}
 ]
 
