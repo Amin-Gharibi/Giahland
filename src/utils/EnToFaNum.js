@@ -5,7 +5,7 @@ const EnToFaNum = (number, useGrouping = false) => {
     if (useGrouping) {
         formattedNumber = new Intl.NumberFormat('en-US', {useGrouping: true}).format(number);
     } else {
-        formattedNumber = number.toString();
+        formattedNumber = number?.toString() || '';
     }
 
     return formattedNumber.replace(/\d/g, (digit) => persianDigits[digit]);
