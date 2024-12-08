@@ -142,7 +142,7 @@ function Home() {
                             {image: secondFlower, title: 'گیاه طبیعی یوکا', price: 560000, identifier: '6'},
                             {image: thirdFlower, title: 'گیاه طبیعی سانسوریا سبز', price: 250000, identifier: '7'},
                             {image: fourthFlower, title: 'گیاه طبیعی ساکولنت', price: 57000, identifier: '8'},
-                        ]} slidesPerView={4} spaceBetween={24}/>
+                        ]} slidesPerView={4.5} spaceBetween={24}/>
                     </div>
                 </section>
                 {/*linking banners section*/}

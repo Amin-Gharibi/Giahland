@@ -26,6 +26,12 @@ function SwipingSlider({items, ...swiperProps}) {
     const [isPrevSlideButtonShown, setIsPrevSlideButtonShown] = useState(false);
 
     const slideChangeHandler = () => {
+        if (items.length <= swiperProps.slidesPerView && window.matchMedia("(min-width: 1280px)").matches) {
+            setIsNextSlideButtonShown(false);
+            setIsPrevSlideButtonShown(false);
+            return
+        }
+
         const activeIndex = swiperRef.current?.swiper.activeIndex;
         if (activeIndex < Math.floor(items.length / 2)) {
             setIsNextSlideButtonShown(true);
@@ -40,10 +46,12 @@ function SwipingSlider({items, ...swiperProps}) {
     }
 
     useLayoutEffect(() => {
-        if (items.length > 5) {
-            setIsNextSlideButtonShown(true)
+        slideChangeHandler();
+        window.addEventListener('resize', slideChangeHandler);
+        return () => {
+            window.removeEventListener('resize', slideChangeHandler);
         }
-    }, [items.length]);
+    }, []);
 
     return (
         <div className={'relative'}>
@@ -62,7 +70,7 @@ function SwipingSlider({items, ...swiperProps}) {
                         slidesPerView: 3
                     },
                     '1280': {
-                        slidesPerView: 4.5
+                        slidesPerView: swiperProps.slidesPerView ?? 4.5
                     }
                 }}
             >
