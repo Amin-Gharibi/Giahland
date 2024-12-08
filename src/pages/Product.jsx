@@ -14,6 +14,13 @@ import ProductFeatureBox from "../components/ProductFeatureBox.jsx";
 import CustomButton from "../components/CustomButton.jsx";
 import shopIcon from "../assets/svg/shopIcon-gray.svg";
 import EnToFaNum from "../utils/EnToFaNum.js";
+import SectionTitle from "../components/SectionTitle.jsx";
+import firstFlower from "../assets/temp/firstFlower.png";
+import secondFlower from "../assets/temp/secondFlower.png";
+import thirdFlower from "../assets/temp/thirdFlower.png";
+import fourthFlower from "../assets/temp/firstFlower.png";
+import SwipingSlider from "../components/SwipingSlider.jsx";
+import ProductSectionTitle from "../components/ProductSectionTitle.jsx";
 
 function Product() {
     const productId = window.location.pathname.split('/')[2]
@@ -49,8 +56,8 @@ function Product() {
                 <Header/>
                 <div className={'mt-2 sm:mt-4 md:mt-6'}>
                     <BreadCrumb breadcrumbs={breadcrumbs ?? []}/>
-                    <div className={'sm:mt-10 md:mt-16 lg:mt-[90px] flex items-start max-w-full'}>
-                        <div className={'max-w-full flex flex-col lg:flex-row items-start gap-x-7 flex-grow'}>
+                    <div className={'sm:mt-10 md:mt-16 lg:mt-[90px] max-w-full'}>
+                        <div className={'max-sm:border-b max-sm:pb-6 border-b-neutral6 max-w-full flex flex-col lg:flex-row items-start gap-x-7 flex-grow'}>
                             <div className={'max-w-full lg:w-1/2 xl:w-[350px] h-max'}>
                                 <ProductImagesSlider images={[
                                     tempImage1, tempImage2, tempImage3, tempImage4, tempImage5, tempImage6
@@ -106,6 +113,19 @@ function Product() {
                                                       isFilled isSquared/>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        {/*similar plants section*/}
+                        <div className={'max-w-full mt-14 sm:mt-[72px]'}>
+                            <ProductSectionTitle title={'گیاه‌های مشابه'}/>
+                            <div className={'mt-8'}>
+                                <SwipingSlider items={[
+                                    {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '1'},
+                                    {image: secondFlower, title: 'گیاه طبیعی یوکا', price: 560000, identifier: '2'},
+                                    {image: thirdFlower, title: 'گیاه طبیعی سانسوریا سبز', price: 250000, identifier: '3'},
+                                    {image: fourthFlower, title: 'گیاه طبیعی ساکولنت', price: 57000, identifier: '4'},
+                                    {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '5'},
+                                ]} slidesPerView={5} spaceBetween={24}/>
                             </div>
                         </div>
                     </div>
