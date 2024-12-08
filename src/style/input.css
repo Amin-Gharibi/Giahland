@@ -95,4 +95,14 @@
     .hide-scrollbar::-webkit-scrollbar {
         display: none;
     }
+
+    .hide-arrows::-webkit-outer-spin-button,
+    .hide-arrows::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .hide-arrows[type=number] {
+        -moz-appearance: textfield;
+    }
 }

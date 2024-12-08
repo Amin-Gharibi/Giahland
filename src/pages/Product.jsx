@@ -14,18 +14,23 @@ import ProductFeatureBox from "../components/ProductFeatureBox.jsx";
 import CustomButton from "../components/CustomButton.jsx";
 import shopIcon from "../assets/svg/shopIcon-gray.svg";
 import EnToFaNum from "../utils/EnToFaNum.js";
-import SectionTitle from "../components/SectionTitle.jsx";
 import firstFlower from "../assets/temp/firstFlower.png";
 import secondFlower from "../assets/temp/secondFlower.png";
 import thirdFlower from "../assets/temp/thirdFlower.png";
 import fourthFlower from "../assets/temp/firstFlower.png";
 import SwipingSlider from "../components/SwipingSlider.jsx";
 import ProductSectionTitle from "../components/ProductSectionTitle.jsx";
+import {useForm} from "react-hook-form";
 
 function Product() {
     const productId = window.location.pathname.split('/')[2]
     const [productDetails, setProductDetails] = useState(null)
     const [breadcrumbs, setBreadcrumbs] = useState(null)
+
+    const {register, handleSubmit, formState: {errors}} = useForm()
+    const submitCommentHandler = (data) => {
+        console.log(data)
+    }
 
     useEffect(() => {
         setProductDetails({
@@ -144,6 +149,40 @@ function Product() {
                                     {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '5'},
                                 ]} slidesPerView={5} spaceBetween={24}/>
                             </div>
+                        </div>
+                        {/*comments section*/}
+                        <div className={'max-w-full mt-14 sm:mt-[72px]'}>
+                            <ProductSectionTitle title={'دیدگاه‌ها و امتیاز'}/>
+                            <form onSubmit={handleSubmit(submitCommentHandler)}>
+                                <textarea
+                                    className={'w-full bg-neutral2 border border-neutral6 rounded outline-0 resize-y py-4 px-3 mt-10'}
+                                    rows={8}
+                                    placeholder={'نظر خود را وارد کنید...'} {...register("comment", {required: 'وارد کردن متنی به عنوان نظر الزامی است'})}></textarea>
+                                {(errors.comment ? [errors.comment] : []).map((error, index) => (
+                                    <div key={index} className={'cursor-default'}>
+                                        <span className={'text-error text-xs'}>{error.message}</span>
+                                    </div>
+                                ))}
+                                <div className={'flex justify-between items-start mt-2'}>
+                                    <div>
+                                        <div className={'group flex items-center gap-x-1 w-max bg-neutral2 border border-neutral6 rounded py-1 px-2'}>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className={'fill-neutral9 '}>
+                                                <path
+                                                    d="M19.6486 9.29464L14.8086 8.87464L12.9186 4.42464C12.5786 3.61464 11.4186 3.61464 11.0786 4.42464L9.18861 8.88464L4.35861 9.29464C3.47861 9.36464 3.11861 10.4646 3.78861 11.0446L7.45861 14.2246L6.35861 18.9446C6.15861 19.8046 7.08861 20.4846 7.84861 20.0246L11.9986 17.5246L16.1486 20.0346C16.9086 20.4946 17.8386 19.8146 17.6386 18.9546L16.5386 14.2246L20.2086 11.0446C20.8786 10.4646 20.5286 9.36464 19.6486 9.29464ZM11.9986 15.6546L8.23861 17.9246L9.23861 13.6446L5.91861 10.7646L10.2986 10.3846L11.9986 6.35464L13.7086 10.3946L18.0886 10.7746L14.7686 13.6546L15.7686 17.9346L11.9986 15.6546Z"/>
+                                            </svg>
+                                            <input type={'number'} className={'w-6 text-center bg-transparent h-full outline-0 border-0 hide-arrows'} {...register("rate", {required: "باید امتیاز این محصول را وارد کنید", min: {value: 0, message: 'امتیاز نمیتواند کمتر از ۰ باشد'}, max: {value: 5, message: 'امتیاز نمیتواند بیشتر از ۵ باشد'}, valueAsNumber: true, value: 5})}/>
+                                        </div>
+                                        {(errors.rate ? [errors.rate] : []).map((error, index) => (
+                                            <div key={index} className={'cursor-default'}>
+                                                <span className={'text-error text-xs'}>{error.message}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className={'w-36 *:w-full'}>
+                                        <CustomButton type={'submit'} title={'ثبت نظر'} onClick={() => true} size={40} isFilled isSquared/>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
