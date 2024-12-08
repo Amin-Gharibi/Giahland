@@ -26,6 +26,9 @@ function ProductImagesSlider({images}) {
                         },
                         1024: {
                             slidesPerView: 4
+                        },
+                        1280: {
+                            slidesPerView: 3.2
                         }
                     }}
                 >
