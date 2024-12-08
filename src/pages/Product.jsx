@@ -42,6 +42,7 @@ function Product() {
                 {title: 'وضعیت نسبت به آفتاب', value: 'آفتاب دوست'}
             ],
             price: 560000,
+            rate: 4.6,
             seller: {name: 'فلاور گاردن'}
         })
         setBreadcrumbs([
@@ -57,16 +58,22 @@ function Product() {
                 <div className={'mt-2 sm:mt-4 md:mt-6'}>
                     <BreadCrumb breadcrumbs={breadcrumbs ?? []}/>
                     <div className={'sm:mt-10 md:mt-16 lg:mt-[90px] max-w-full'}>
-                        <div className={'max-sm:border-b max-sm:pb-6 border-b-neutral6 max-w-full flex flex-col lg:flex-row items-start gap-x-7 flex-grow'}>
+                        <div
+                            className={'max-sm:border-b max-sm:pb-6 border-b-neutral6 max-w-full flex flex-col lg:flex-row items-start gap-x-7 flex-grow'}>
                             <div className={'max-w-full lg:w-1/2 xl:w-[350px] h-max'}>
                                 <ProductImagesSlider images={[
                                     tempImage1, tempImage2, tempImage3, tempImage4, tempImage5, tempImage6
                                 ]}/>
-                                <div className={'max-lg:hidden lg:block xl:hidden mt-10 flex-grow border border-neutral7 rounded-2xl py-8 px-6'}>
+                                <div
+                                    className={'max-lg:hidden lg:block xl:hidden mt-10 flex-grow border border-neutral7 rounded-2xl py-8 px-6'}>
                                     <span className={'font-medium text-neutral12'}>فروشنده</span>
-                                    <div className={'flex items-center gap-x-2 border-b border-b-neutral7 pb-8 mt-3'}>
-                                        <img src={shopIcon} className={'w-6 h-6'}/>
-                                        <span>{productDetails?.seller?.name}</span>
+                                    <div className={'border-b border-b-neutral7 mt-3'}>
+                                        <div className={'flex items-center gap-x-2'}>
+                                            <img src={shopIcon} className={'w-6 h-6'}/>
+                                            <span>{productDetails?.seller?.name}</span>
+                                        </div>
+                                        <span
+                                            className={'text-sm text-neutral12 my-6 mr-4 block'}>{EnToFaNum(productDetails?.rate)}</span>
                                     </div>
                                     <div className={'flex justify-between items-center my-6'}>
                                         <span className={'leading-7 text-neutral12'}>قیمت</span>
@@ -97,11 +104,16 @@ function Product() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className={'lg:hidden xl:block max-lg:mt-10 max-lg:w-full flex-grow sm:border border-neutral7 rounded-2xl sm:py-8 sm:px-6'}>
+                                <div
+                                    className={'lg:hidden xl:block max-lg:mt-10 max-lg:w-full flex-grow sm:border border-neutral7 rounded-2xl sm:py-8 sm:px-6'}>
                                     <span className={'font-medium text-neutral12'}>فروشنده</span>
-                                    <div className={'flex items-center gap-x-2 border-b border-b-neutral7 pb-8 mt-3'}>
-                                        <img src={shopIcon} className={'w-6 h-6'}/>
-                                        <span>{productDetails?.seller?.name}</span>
+                                    <div className={'border-b border-b-neutral7 mt-3'}>
+                                        <div className={'flex items-center gap-x-2'}>
+                                            <img src={shopIcon} className={'w-6 h-6'}/>
+                                            <span>{productDetails?.seller?.name}</span>
+                                        </div>
+                                        <span
+                                            className={'text-sm text-neutral12 my-6 mr-4 block'}>{EnToFaNum(productDetails?.rate)}</span>
                                     </div>
                                     <div className={'flex justify-between items-center my-6'}>
                                         <span className={'text-sm sm:text-base leading-7 text-neutral12'}>قیمت</span>
@@ -122,7 +134,12 @@ function Product() {
                                 <SwipingSlider items={[
                                     {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '1'},
                                     {image: secondFlower, title: 'گیاه طبیعی یوکا', price: 560000, identifier: '2'},
-                                    {image: thirdFlower, title: 'گیاه طبیعی سانسوریا سبز', price: 250000, identifier: '3'},
+                                    {
+                                        image: thirdFlower,
+                                        title: 'گیاه طبیعی سانسوریا سبز',
+                                        price: 250000,
+                                        identifier: '3'
+                                    },
                                     {image: fourthFlower, title: 'گیاه طبیعی ساکولنت', price: 57000, identifier: '4'},
                                     {image: firstFlower, title: 'گیاه طبیعی بابا آدم', price: 857000, identifier: '5'},
                                 ]} slidesPerView={5} spaceBetween={24}/>
