@@ -43,8 +43,15 @@ import fourteenthFlower from "../assets/temp/fourteenthFlower.png";
 import fifteenthFlower from "../assets/temp/fifteenthFlower.png";
 import sixteenthFlower from "../assets/temp/sixteenthFlower.png";
 import Footer from "../components/Footer.jsx";
+import useResponsiveSize from "../hooks/useResponsiveSize.js";
 
 function Home() {
+    const heroSectionButtonsSize = useResponsiveSize([
+        {breakpoint: 0, value: 40},
+        {breakpoint: 470, value: 48},
+        {breakpoint: 1024, value: 56}
+    ])
+
     return (
         <>
             <div className={'container'}>
@@ -63,9 +70,9 @@ function Home() {
                             به صورت رایگان از گیاه پزشک سایت مشاوره بگیری.
                         </p>
                         <div className={'flex items-center mt-6 md:mt-8 *:w-1/2 gap-4 xl:gap-6'}>
-                            <CustomButton title={'گیاهان تخفیف دار'} onClick={() => true} size={56} isFilled={true}
+                            <CustomButton title={'گیاهان تخفیف دار'} onClick={() => true} size={heroSectionButtonsSize} isFilled={true}
                                           isSquared={true}/>
-                            <CustomButton title={'مشاوره با گیاه پزشک'} onClick={() => true} size={56} isOutline={true}
+                            <CustomButton title={'مشاوره با گیاه پزشک'} onClick={() => true} size={heroSectionButtonsSize} isOutline={true}
                                           isSquared={true} isDashed={true} icon={arrowLeftPrimary} leftIcon={true}/>
                         </div>
                         <div
