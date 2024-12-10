@@ -12,7 +12,10 @@ function Signup() {
         console.log(data)
     };
 
-    const inputSize = useResponsiveSize(56, 48, 470)
+    const inputSize = useResponsiveSize([
+        {breakpoint: 0, value: 48},
+        {breakpoint: 470, value: 56},
+    ])
 
     return (
         <>

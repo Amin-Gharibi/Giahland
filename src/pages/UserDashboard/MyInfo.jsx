@@ -21,7 +21,10 @@ function MyInfo({userData}) {
         console.log(data)
     }
 
-    const inputSize = useResponsiveSize(56, 48, 640)
+    const inputSize = useResponsiveSize([
+        {breakpoint: 0, value: 48},
+        {breakpoint: 640, value: 56},
+    ])
 
     useEffect(() => {
         if (userData) {

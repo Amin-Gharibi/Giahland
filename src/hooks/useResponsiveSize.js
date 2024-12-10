@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 
-const useResponsiveSize = (defaultSize, smallSize, breakpoint) => {
-    const [size, setSize] = useState(defaultSize);
+const useResponsiveSize = (responsiveTemplate) => {
+    const [size, setSize] = useState(responsiveTemplate[0].value);
 
     useEffect(() => {
         const updateSize = () => {
-            if (window.matchMedia(`(max-width: ${breakpoint}px)`).matches) {
-                setSize(smallSize);
-            } else {
-                setSize(defaultSize);
-            }
+            responsiveTemplate.map(item => {
+                if (window.matchMedia(`(min-width: ${item.breakpoint}px)`).matches) {
+                    setSize(item.value);
+                }
+            })
         };
 
         updateSize(); // Set initial size
@@ -18,7 +18,7 @@ const useResponsiveSize = (defaultSize, smallSize, breakpoint) => {
         return () => {
             window.removeEventListener('resize', updateSize);
         };
-    }, [defaultSize, smallSize, breakpoint]);
+    }, [responsiveTemplate]);
 
     return size;
 };

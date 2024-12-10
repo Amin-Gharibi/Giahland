@@ -29,7 +29,10 @@ function Product() {
     const [productDetails, setProductDetails] = useState(null)
     const [breadcrumbs, setBreadcrumbs] = useState(null)
 
-    const showMoreCommentsButtonSize = useResponsiveSize(48, 40, 1024)
+    const showMoreCommentsButtonSize = useResponsiveSize([
+        {breakpoint: 0, value: 40},
+        {breakpoint: 1024, value: 48},
+    ])
 
     const {register, handleSubmit, formState: {errors}} = useForm()
     const submitCommentHandler = (data) => {

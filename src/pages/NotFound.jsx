@@ -5,7 +5,11 @@ import {Link} from "react-router-dom";
 import useResponsiveSize from "../hooks/useResponsiveSize.js";
 
 function NotFound() {
-    const buttonSize = useResponsiveSize(56, 48, 470)
+    const buttonSize = useResponsiveSize([
+        {breakpoint: 0, value: 48},
+        {breakpoint: 470, value: 56},
+    ])
+    
     return (
         <div className={'container'}>
             <Header/>
