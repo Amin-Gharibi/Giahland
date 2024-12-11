@@ -2010,6 +2010,26 @@ input[type="range"]::-moz-range-thumb {
   width: 100%;
 }
 
+.\*\:w-10 > * {
+  width: 2.5rem;
+}
+
+.\*\:w-36 > * {
+  width: 9rem;
+}
+
+.\*\:w-40 > * {
+  width: 10rem;
+}
+
+.\*\:w-56 > * {
+  width: 14rem;
+}
+
+.\*\:max-w-56 > * {
+  max-width: 14rem;
+}
+
 .\*\:text-sm > * {
   font-size: 0.875rem;
   line-height: 1.25rem;

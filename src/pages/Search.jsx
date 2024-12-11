@@ -32,6 +32,11 @@ export default function Search() {
 		{ title: "گل مصنوعی", enTitle: "artificial-plants", isActive: false },
 	]);
 
+	const showMoreButtonSize = useResponsiveSize([
+		{ breakpoint: 0, value: 48 },
+		{ breakpoint: 1024, value: 56 },
+	]);
+
 	return (
 		<div>
 			<div className={"container"}>
@@ -54,6 +59,9 @@ export default function Search() {
 							{searchedItems.map((item, index) => (
 								<ItemBox key={index} {...item} />
 							))}
+						</div>
+						<div className="flex items-center justify-center mt-8 *:w-56">
+							<CustomButton size={showMoreButtonSize} title="مشاهده بیشتر" onClick={() => true} isOutline isDashed isSquared/>
 						</div>
 					</div>
 				</div>
