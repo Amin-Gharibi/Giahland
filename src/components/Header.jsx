@@ -35,7 +35,7 @@ function Header({ onlyMobileSize = false }) {
     };
 
     const handleSearching = (data) => {
-        console.log(data);
+        navigate(`/search?q=${data.searchText}`)
     };
 
 	return (
