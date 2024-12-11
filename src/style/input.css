@@ -3,110 +3,141 @@
 @tailwind utilities;
 
 @layer base {
-    @font-face {
-        font-family: 'Modam';
-        font-weight: 200;
-        font-style: normal;
-        font-display: swap;
-        src: url("/src/assets/fonts/modam/Modam-ExtraLight.ttf") format('truetype');
-    }
+	@font-face {
+		font-family: "Modam";
+		font-weight: 200;
+		font-style: normal;
+		font-display: swap;
+		src: url("/src/assets/fonts/modam/Modam-ExtraLight.ttf") format("truetype");
+	}
 
-    @font-face {
-        font-family: 'Modam';
-        font-weight: 300;
-        font-style: normal;
-        font-display: swap;
-        src: url("/src/assets/fonts/modam/Modam-Light.ttf") format('truetype');
-    }
+	@font-face {
+		font-family: "Modam";
+		font-weight: 300;
+		font-style: normal;
+		font-display: swap;
+		src: url("/src/assets/fonts/modam/Modam-Light.ttf") format("truetype");
+	}
 
-    @font-face {
-        font-family: 'Modam';
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-        src: url("/src/assets/fonts/modam/Modam-Regular.ttf") format('truetype');
-    }
+	@font-face {
+		font-family: "Modam";
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+		src: url("/src/assets/fonts/modam/Modam-Regular.ttf") format("truetype");
+	}
 
-    @font-face {
-        font-family: 'Modam';
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-        src: url("/src/assets/fonts/modam/Modam-Medium.ttf") format('truetype');
-    }
+	@font-face {
+		font-family: "Modam";
+		font-weight: 500;
+		font-style: normal;
+		font-display: swap;
+		src: url("/src/assets/fonts/modam/Modam-Medium.ttf") format("truetype");
+	}
 
-    @font-face {
-        font-family: 'Modam';
-        font-weight: 600;
-        font-style: normal;
-        font-display: swap;
-        src: url("/src/assets/fonts/modam/Modam-SemiBold.ttf") format('truetype');
-    }
+	@font-face {
+		font-family: "Modam";
+		font-weight: 600;
+		font-style: normal;
+		font-display: swap;
+		src: url("/src/assets/fonts/modam/Modam-SemiBold.ttf") format("truetype");
+	}
 
-    @font-face {
-        font-family: 'Modam';
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-        src: url("/src/assets/fonts/modam/Modam-Bold.ttf") format('truetype');
-    }
+	@font-face {
+		font-family: "Modam";
+		font-weight: 700;
+		font-style: normal;
+		font-display: swap;
+		src: url("/src/assets/fonts/modam/Modam-Bold.ttf") format("truetype");
+	}
 
-    @font-face {
-        font-family: 'Modam';
-        font-weight: 800;
-        font-style: normal;
-        font-display: swap;
-        src: url("/src/assets/fonts/modam/Modam-ExtraBold.ttf") format('truetype');
-    }
+	@font-face {
+		font-family: "Modam";
+		font-weight: 800;
+		font-style: normal;
+		font-display: swap;
+		src: url("/src/assets/fonts/modam/Modam-ExtraBold.ttf") format("truetype");
+	}
 
-    @font-face {
-        font-family: 'Modam';
-        font-weight: 900;
-        font-style: normal;
-        font-display: swap;
-        src: url("/src/assets/fonts/modam/Modam-Black.ttf") format('truetype');
-    }
+	@font-face {
+		font-family: "Modam";
+		font-weight: 900;
+		font-style: normal;
+		font-display: swap;
+		src: url("/src/assets/fonts/modam/Modam-Black.ttf") format("truetype");
+	}
 
-    body {
-        scroll-behavior: smooth;
-        background-color: #ffffff;
-        font-family: 'Modam';
-        font-weight: 400;
-    }
+	body {
+		scroll-behavior: smooth;
+		background-color: #ffffff;
+		font-family: "Modam";
+		font-weight: 400;
+	}
 
-    /* hide the scrollbar */
-    body::-webkit-scrollbar {
-        display: none;
-    }
+	/* hide the scrollbar */
+	body::-webkit-scrollbar {
+		display: none;
+	}
 
-    button {
-        @apply outline-0;
-    }
+	button {
+		@apply outline-0;
+	}
 }
 
 @layer components {
-    .dashboard__section-title {
-        @apply relative pr-2.5 font-medium leading-6 text-black w-max text-base;
-    }
+	.dashboard__section-title {
+		@apply relative pr-2.5 font-medium leading-6 text-black w-max text-base;
+	}
 
-    .dashboard__section-title:before {
-        content: '';
-        @apply absolute top-0 bottom-0 right-0 h-full w-0.5 bg-primary rounded-sm;
-    }
+	.dashboard__section-title:before {
+		content: "";
+		@apply absolute top-0 bottom-0 right-0 h-full w-0.5 bg-primary rounded-sm;
+	}
+
+	.range-slider {
+        @apply relative w-full h-2 mt-5 rounded bg-neutral5;
+	}
+
+	.slider-track {
+        @apply h-full absolute bg-shade1 right-0 left-full rounded;
+	}
+
+	.range-slider input[type="range"] {
+        @apply absolute w-full top-0 bg-transparent pointer-events-none appearance-none h-[5px];
+	}
+
+	input[type="range"]::-webkit-slider-thumb {
+		box-shadow: 0 0.125rem 0.5625rem -0.125rem rgba(0, 0, 0, 0.25);
+        @apply relative z-[2] w-5 h-5 rounded-full border border-white bg-primary pointer-events-auto appearance-none cursor-pointer;
+	}
+
+    input[type="range"]::-moz-range-thumb {
+		box-shadow: 0 0.125rem 0.5625rem -0.125rem rgba(0, 0, 0, 0.25);
+        @apply relative z-[2] w-5 h-5 rounded-full border border-white bg-primary pointer-events-auto appearance-none cursor-pointer;
+
+	}
 }
 
 @layer utilities {
-    .hide-scrollbar::-webkit-scrollbar {
-        display: none;
+	.hide-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	.hide-arrows::-webkit-outer-spin-button,
+	.hide-arrows::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	.hide-arrows[type="number"] {
+		-moz-appearance: textfield;
+	}
+
+    .ltr {
+        direction: ltr;
     }
 
-    .hide-arrows::-webkit-outer-spin-button,
-    .hide-arrows::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    .hide-arrows[type=number] {
-        -moz-appearance: textfield;
+    .rtl {
+        direction: rtl;
     }
 }
