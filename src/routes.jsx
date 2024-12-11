@@ -9,6 +9,7 @@ import Messages from "./pages/UserDashboard/Messages.jsx";
 import Product from "./pages/Product.jsx";
 import Cart from "./pages/Cart.jsx";
 import Search from "./pages/Search.jsx";
+import SearchBlogs from "./pages/SearchBlogs.jsx";
 
 const routes = [
 	{ path: "/", element: <Home /> },
@@ -33,6 +34,7 @@ const routes = [
 	{ path: "/product/*", element: <Product /> },
 	{ path: "/cart", element: <Cart /> },
 	{ path: "/search", element: <Search /> },
+	{ path: "/blogs", element: <SearchBlogs /> },
 	{ path: "*", element: <NotFound /> },
 ];
 
