@@ -58,15 +58,15 @@ function DualRangeSlider({ initialMinPrice, initialMaxPrice, minValue, maxValue,
 
 	return (
 		<div className="relative flex flex-col items-stretch border border-neutral6 px-3.5 py-5 rounded-xl ltr">
-			<h6 className="absolute -top-3 right-3 text-neutral9 bg-white px-1">بازه قیمت</h6>
-			<div className="flex items-center justify-between">
+			<h6 className="absolute right-3 text-neutral9 bg-white px-1 -top-3 lg:-top-4 text-xs leading-5 lg:text-base lg:leading-7">بازه قیمت</h6>
+			<div className="flex items-center justify-between text-sm lg:text-base">
 				<span className="rtl">{EnToFaNum(minInput, true)} تومان</span>
 				<span className="rtl">{EnToFaNum(maxInput, true)} تومان</span>
 			</div>
 			<div className="range-slider">
 				<div className="slider-track"></div>
-				<input type="range" min={sliderMinValue} max={sliderMaxValue} step={100_000} {...register("minPrice", {valueAsNumber: true})} value={minVal} onChange={slideMin} className="min-val" />
-				<input type="range" min={sliderMinValue} max={sliderMaxValue} step={100_000} {...register("maxPrice", {valueAsNumber: true})} value={maxVal} onChange={slideMax} className="max-val" />
+				<input type="range" min={sliderMinValue} max={sliderMaxValue} step={100_000} {...register("minPrice", { valueAsNumber: true })} value={minVal} onChange={slideMin} className="min-val" />
+				<input type="range" min={sliderMinValue} max={sliderMaxValue} step={100_000} {...register("maxPrice", { valueAsNumber: true })} value={maxVal} onChange={slideMax} className="max-val" />
 			</div>
 		</div>
 	);

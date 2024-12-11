@@ -7,7 +7,7 @@ function CategoryItem({ title, onClick, isActive }) {
 			<label className={`w-4 h-4 rounded ${isActive ? "bg-primary" : "bg-neutral5"}`}>
 				<input type="checkbox" className={"opacity-0 invisible absolute"} />
 			</label>
-			<span className={"text-neutral12"}>{title}</span>
+			<span className={"text-neutral12 text-sm lg:text-base"}>{title}</span>
 		</button>
 	);
 }

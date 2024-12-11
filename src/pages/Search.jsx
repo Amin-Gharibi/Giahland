@@ -12,6 +12,8 @@ import firstFlower from "../assets/temp/firstFlower.png";
 import secondFlower from "../assets/temp/secondFlower.png";
 import thirdFlower from "../assets/temp/thirdFlower.png";
 import fourthFlower from "../assets/temp/firstFlower.png";
+import CustomButton from "../components/CustomButton.jsx";
+import useResponsiveSize from "../hooks/useResponsiveSize.js";
 
 export default function Search() {
 	const [searchedItems, setSearchedItems] = useState([
@@ -25,19 +27,30 @@ export default function Search() {
 		{ image: fourthFlower, title: "گیاه طبیعی ساکولنت", price: 57000, identifier: "8" },
 	]);
 
+	const [categories, setCategories] = useState([
+		{ title: "گل طبیعی", enTitle: "natural-plants", isActive: false },
+		{ title: "گل مصنوعی", enTitle: "artificial-plants", isActive: false },
+	]);
+
 	return (
 		<div>
 			<div className={"container"}>
 				<Header />
 				<div className={"grid grid-cols-12 gap-x-6 mt-20"}>
-					<aside className={"col-span-3 sticky top-5 h-max"}>
+					<aside className={"col-span-12 lg:col-span-4 xl:col-span-3 lg:sticky top-5 h-max"}>
 						<SearchContextProvider>
-							<SearchForm />
+							<SearchForm categories={categories} setCategories={setCategories}/>
 						</SearchContextProvider>
 					</aside>
-					<div className={"col-span-9 flex flex-col items-stretch"}>
-						<SortingSection />
-						<div className={"grid grid-cols-3 gap-6 mt-6"}>
+					<div className={"col-span-12 lg:col-span-8 xl:col-span-9 mt-6 lg:mt-0 flex flex-col items-stretch"}>
+						<div>
+							<SortingSectionLg/>
+							<div className={'grid md:hidden grid-cols-2 gap-x-4 xs:gap-x-6'}>
+								<CustomButton size={40} title="فیلتر" onClick={() => true} isFilled isSquared/>
+								<CustomButton size={40} title="مرتب‌سازی" onClick={() => true} isOutline isSquared/>
+							</div>
+						</div>
+						<div className={"grid grid-cols-2 xl:grid-cols-3 gap-4 xs:gap-6 mt-6"}>
 							{searchedItems.map((item, index) => (
 								<ItemBox key={index} {...item} />
 							))}
@@ -50,13 +63,9 @@ export default function Search() {
 	);
 }
 
-const SearchForm = () => {
+const SearchForm = ({categories, setCategories}) => {
 	const { register, handleSubmit, errors, getValues, searchHandler } = useContext(SearchContext);
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [categories, setCategories] = useState([
-		{ title: "گل طبیعی", enTitle: "natural-plants", isActive: false },
-		{ title: "گل مصنوعی", enTitle: "artificial-plants", isActive: false },
-	]);
 
 	useEffect(() => {
 		const updatedCategories = categories.map((cat) => ({
@@ -81,10 +90,15 @@ const SearchForm = () => {
 		setCategories(updatedCategories);
 	};
 
+	const searchInputSize = useResponsiveSize([
+		{ breakpoint: 0, value: 48 },
+		{ breakpoint: 1024, value: 56 },
+	]);
+
 	return (
 		<form onSubmit={handleSubmit(searchHandler)} className="flex flex-col items-stretch gap-y-6">
 			<CustomInput
-				size={56}
+				size={searchInputSize}
 				placeholder="جستجو"
 				LeftIcon={(props) => (
 					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -98,9 +112,11 @@ const SearchForm = () => {
 				getValues={getValues}
 				hasDefaultValue={!!searchParams.get("q")}
 			/>
-			<DualRangeSlider initialMinPrice={0} initialMaxPrice={10_000_000} minValue={+searchParams.get("min") || 0} maxValue={+searchParams.get("max") || 10_000_000} minimumGap={100_000} />
-			<div className={"relative flex flex-col items-stretch border border-neutral6 px-3.5 py-5 rounded-xl"}>
-				<h6 className={"absolute -top-3 right-3 text-neutral9 bg-white px-1"}>دسته‌بندی</h6>
+			<div className="max-md:hidden">
+				<DualRangeSlider initialMinPrice={0} initialMaxPrice={10_000_000} minValue={+searchParams.get("min") || 0} maxValue={+searchParams.get("max") || 10_000_000} minimumGap={100_000} />
+			</div>
+			<div className={"max-md:hidden relative flex flex-col items-stretch border border-neutral6 px-3.5 py-5 rounded-xl"}>
+				<h6 className={"absolute right-3 text-neutral9 bg-white px-1 -top-3 lg:-top-4 text-xs leading-5 lg:text-base lg:leading-7"}>دسته‌بندی</h6>
 				<div className={"flex flex-col items-stretch gap-y-2 mt-2"}>
 					{categories.map((cat, index) => (
 						<CategoryItem key={index} title={cat.title} onClick={() => onCategoryItemClick(cat.enTitle)} isActive={cat.isActive} />
@@ -111,7 +127,7 @@ const SearchForm = () => {
 	);
 };
 
-const SortingSection = () => {
+const SortingSectionLg = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const onSortOptionClick = (enTitle) => {
@@ -122,8 +138,8 @@ const SortingSection = () => {
 	};
 
 	return (
-		<div className={"h-14 flex items-stretch bg-white border border-neutral6 rounded-xl"}>
-			<h6 className="self-center px-6">مرتب‌سازی بر اساس:</h6>
+		<div className={"max-md:hidden h-14 flex items-stretch bg-white border border-neutral6 rounded-xl"}>
+			<h6 className="self-center px-4 lg:px-6 text-sm lg:text-base">مرتب‌سازی بر اساس:</h6>
 			<SortingOption title="همه گیاهان" onClick={() => onSortOptionClick("all")} isActive={searchParams.get("sort") ? searchParams.get("sort") === "all" : true} />
 			<SortingOption title="ارزان‌ترین" onClick={() => onSortOptionClick("cheapest")} isActive={searchParams.get("sort") === "cheapest"} />
 			<SortingOption title="گران‌ترین" onClick={() => onSortOptionClick("most-expensive")} isActive={searchParams.get("sort") === "most-expensive"} />
