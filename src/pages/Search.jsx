@@ -6,7 +6,6 @@ import { useSearchParams } from "react-router-dom";
 import DualRangeSlider from "../components/DualRangeSlider.jsx";
 import { SearchContextProvider, SearchContext } from "../contexts/SearchContext.jsx";
 import CategoryItem from "../components/CategoryItem.jsx";
-import SortingOption from "../components/SortingOption.jsx";
 import ItemBox from "../components/ItemBox.jsx";
 import firstFlower from "../assets/temp/firstFlower.png";
 import secondFlower from "../assets/temp/secondFlower.png";
@@ -14,6 +13,7 @@ import thirdFlower from "../assets/temp/thirdFlower.png";
 import fourthFlower from "../assets/temp/firstFlower.png";
 import CustomButton from "../components/CustomButton.jsx";
 import useResponsiveSize from "../hooks/useResponsiveSize.js";
+import SortingBox from "../components/SortingBox.jsx";
 
 export default function Search() {
 	const [searchedItems, setSearchedItems] = useState([
@@ -44,15 +44,24 @@ export default function Search() {
 				<div className={"grid grid-cols-12 gap-x-6 mt-20"}>
 					<aside className={"col-span-12 lg:col-span-4 xl:col-span-3 lg:sticky top-5 h-max"}>
 						<SearchContextProvider>
-							<SearchForm categories={categories} setCategories={setCategories}/>
+							<SearchForm categories={categories} setCategories={setCategories} />
 						</SearchContextProvider>
 					</aside>
 					<div className={"col-span-12 lg:col-span-8 xl:col-span-9 mt-6 lg:mt-0 flex flex-col items-stretch"}>
 						<div>
-							<SortingSectionLg/>
-							<div className={'grid md:hidden grid-cols-2 gap-x-4 xs:gap-x-6'}>
-								<CustomButton size={40} title="فیلتر" onClick={() => true} isFilled isSquared/>
-								<CustomButton size={40} title="مرتب‌سازی" onClick={() => true} isOutline isSquared/>
+							<div className="max-md:hidden">
+								<SortingBox
+									options={[
+										{ title: "همه گیاهان", enTitle: "all" },
+										{ title: "ارزان‌ترین", enTitle: "cheapest" },
+										{ title: "گران‌ترین", enTitle: "most-expensive" },
+										{ title: "محبوب‌ترین", enTitle: "popular" },
+									]}
+								/>
+							</div>
+							<div className={"grid md:hidden grid-cols-2 gap-x-4 xs:gap-x-6"}>
+								<CustomButton size={40} title="فیلتر" onClick={() => true} isFilled isSquared />
+								<CustomButton size={40} title="مرتب‌سازی" onClick={() => true} isOutline isSquared />
 							</div>
 						</div>
 						<div className={"grid grid-cols-2 xl:grid-cols-3 gap-4 xs:gap-6 mt-6"}>
@@ -61,7 +70,7 @@ export default function Search() {
 							))}
 						</div>
 						<div className="flex items-center justify-center mt-8 *:w-56">
-							<CustomButton size={showMoreButtonSize} title="مشاهده بیشتر" onClick={() => true} isOutline isDashed isSquared/>
+							<CustomButton size={showMoreButtonSize} title="مشاهده بیشتر" onClick={() => true} isOutline isDashed isSquared />
 						</div>
 					</div>
 				</div>
@@ -71,7 +80,7 @@ export default function Search() {
 	);
 }
 
-const SearchForm = ({categories, setCategories}) => {
+const SearchForm = ({ categories, setCategories }) => {
 	const { register, handleSubmit, errors, getValues, searchHandler } = useContext(SearchContext);
 	const [searchParams, setSearchParams] = useSearchParams();
 
@@ -132,26 +141,5 @@ const SearchForm = ({categories, setCategories}) => {
 				</div>
 			</div>
 		</form>
-	);
-};
-
-const SortingSectionLg = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
-
-	const onSortOptionClick = (enTitle) => {
-		if (searchParams.get("sort") != enTitle) {
-			searchParams.set("sort", enTitle);
-		}
-		setSearchParams(searchParams);
-	};
-
-	return (
-		<div className={"max-md:hidden h-14 flex items-stretch bg-white border border-neutral6 rounded-xl"}>
-			<h6 className="self-center px-4 lg:px-6 text-sm lg:text-base">مرتب‌سازی بر اساس:</h6>
-			<SortingOption title="همه گیاهان" onClick={() => onSortOptionClick("all")} isActive={searchParams.get("sort") ? searchParams.get("sort") === "all" : true} />
-			<SortingOption title="ارزان‌ترین" onClick={() => onSortOptionClick("cheapest")} isActive={searchParams.get("sort") === "cheapest"} />
-			<SortingOption title="گران‌ترین" onClick={() => onSortOptionClick("most-expensive")} isActive={searchParams.get("sort") === "most-expensive"} />
-			<SortingOption title="محبوب‌ترین" onClick={() => onSortOptionClick("popular")} isActive={searchParams.get("sort") === "popular"} />
-		</div>
 	);
 };
