@@ -11,6 +11,8 @@ import Cart from "./pages/Cart.jsx";
 import Search from "./pages/Search.jsx";
 import SearchBlogs from "./pages/SearchBlogs.jsx";
 import Blog from "./pages/Blog.jsx";
+import { element } from "prop-types";
+import ContactUs from "./pages/ContactUs.jsx";
 
 const routes = [
 	{ path: "/", element: <Home /> },
@@ -37,6 +39,7 @@ const routes = [
 	{ path: "/search", element: <Search /> },
 	{ path: "/blogs", element: <SearchBlogs /> },
 	{ path: "/blog/*", element: <Blog /> },
+	{ path: "/contact-us", element: <ContactUs /> },
 	{ path: "*", element: <NotFound /> },
 ];
 
