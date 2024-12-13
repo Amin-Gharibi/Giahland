@@ -5,36 +5,39 @@ import { useForm } from "react-hook-form";
 import CustomInput from "../components/CustomInput.jsx";
 import SortingBoxLg from "../components/SortingBox.jsx";
 import useResponsiveSize from "../hooks/useResponsiveSize.js";
-import firstFlower from "../assets/temp/firstFlower.png";
-import secondFlower from "../assets/temp/secondFlower.png";
-import thirdFlower from "../assets/temp/thirdFlower.png";
-import fourthFlower from "../assets/temp/firstFlower.png";
+import firstBanner from "../assets/images/extraBgImage.png";
+import secondBanner from "../assets/images/firstBgImage.png";
 import { useSearchParams } from "react-router-dom";
 import CustomButton from "../components/CustomButton.jsx";
-import ItemBox from "../components/ItemBox.jsx";
+import BlogItemBox from "../components/BlogItemBox.jsx";
 
 export default function SearchBlogs() {
-    const [searchParams] = useSearchParams()
+	const [searchParams] = useSearchParams();
 	const [searchedItems, setSearchedItems] = useState([
-		{ image: firstFlower, title: "گیاه طبیعی بابا آدم", price: 857000, identifier: "1" },
-		{ image: secondFlower, title: "گیاه طبیعی یوکا", price: 560000, identifier: "2" },
-		{ image: thirdFlower, title: "گیاه طبیعی سانسوریا سبز", price: 250000, identifier: "3" },
-		{ image: fourthFlower, title: "گیاه طبیعی ساکولنت", price: 57000, identifier: "4" },
-		{ image: firstFlower, title: "گیاه طبیعی بابا آدم", price: 857000, identifier: "5" },
-		{ image: secondFlower, title: "گیاه طبیعی یوکا", price: 560000, identifier: "6" },
-		{ image: thirdFlower, title: "گیاه طبیعی سانسوریا سبز", price: 250000, identifier: "7" },
-		{ image: fourthFlower, title: "گیاه طبیعی ساکولنت", price: 57000, identifier: "8" },
+		{ banner: firstBanner, title: "گیاه طبیعی بابا آدم", description: "این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه", createdAt: "Fri Dec 13 2024 15:14:41 GMT+0330 (Iran Standard Time)", author: { firstName: "امین", lastName: "غریبی" }, identifier: "1" },
+		{ banner: secondBanner, title: "گیاه طبیعی یوکا", description: "این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که ", createdAt: "Fri Dec 13 2024 15:14:41 GMT+0330 (Iran Standard Time)", author: { firstName: "امین", lastName: "غریبی" }, identifier: "2" },
+		{ banner: firstBanner, title: "گیاه طبیعی سانسوریا سبز", description: "این متن تستی برای قرار دادن در متن توضیحات هست", createdAt: "Fri Dec 13 2024 15:14:41 GMT+0330 (Iran Standard Time)", author: { firstName: "امین", lastName: "غریبی" }, identifier: "3" },
+		{ banner: firstBanner, title: "گیاه طبیعی ساکولنت", description: "این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه", createdAt: "Fri Dec 13 2024 15:14:41 GMT+0330 (Iran Standard Time)", author: { firstName: "امین", lastName: "غریبی" }, identifier: "4" },
+		{ banner: firstBanner, title: "گیاه طبیعی بابا آدم", description: " تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه", createdAt: "Fri Dec 13 2024 15:14:41 GMT+0330 (Iran Standard Time)", author: { firstName: "امین", lastName: "غریبی" }, identifier: "5" },
+		{ banner: firstBanner, title: "گیاه طبیعی یوکا", description: "این  تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه", createdAt: "Fri Dec 13 2024 15:14:41 GMT+0330 (Iran Standard Time)", author: { firstName: "امین", lastName: "غریبی" }, identifier: "6" },
+		{ banner: firstBanner, title: "گیاه طبیعی سانسوریا سبز", description: "این متن تستی برای قرار دادن  این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه", createdAt: "Fri Dec 13 2024 15:14:41 GMT+0330 (Iran Standard Time)", author: { firstName: "امین", lastName: "غریبی" }, identifier: "7" },
+		{ banner: firstBanner, title: "گیاه طبیعی ساکولنت", description: "این متن تستی برای قرار دادن در متن توضیحات ه", createdAt: "Fri Dec 13 2024 15:14:41 GMT+0330 (Iran Standard Time)", author: { firstName: "امین", lastName: "غریبی" }, identifier: "8" },
 	]);
 
 	const responsiveSize = useResponsiveSize([
 		{ breakpoint: 0, value: 48 },
 		{ breakpoint: 1024, value: 56 },
 	]);
-    const {register, handleSubmit, formState: {errors}, getValues} = useForm()
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		getValues,
+	} = useForm();
 
-    const handleSearching = (data) => {
-        console.log(data);
-    }
+	const handleSearching = (data) => {
+		console.log(data);
+	};
 
 	return (
 		<>
@@ -62,16 +65,18 @@ export default function SearchBlogs() {
 					</aside>
 					<div className={"col-span-12 lg:col-span-8 xl:col-span-9 mt-6 lg:mt-0 flex flex-col items-stretch"}>
 						<div>
-							<SortingBoxLg options={[
-                                {title: 'عادی', enTitle: 'default'},
-                                {title: 'جدید ترین', enTitle: 'newest'},
-                                {title: 'قدیمی‌ترین', enTitle: 'oldest'},
-                                {title: 'پرنظر‌ها', enTitle: 'most-commented'},
-                            ]} />
+							<SortingBoxLg
+								options={[
+									{ title: "عادی", enTitle: "default" },
+									{ title: "جدید ترین", enTitle: "newest" },
+									{ title: "قدیمی‌ترین", enTitle: "oldest" },
+									{ title: "پرنظر‌ها", enTitle: "most-commented" },
+								]}
+							/>
 						</div>
-						<div className={"grid grid-cols-2 xl:grid-cols-3 gap-4 xs:gap-6 mt-6"}>
+						<div className={"grid sm:grid-cols-2 xl:grid-cols-3 gap-4 xs:gap-6 mt-6"}>
 							{searchedItems.map((item, index) => (
-								<ItemBox key={index} {...item} />
+								<BlogItemBox key={index} {...item} />
 							))}
 						</div>
 						<div className="flex items-center justify-center mt-8 *:w-56">
