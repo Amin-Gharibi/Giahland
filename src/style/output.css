@@ -1879,6 +1879,10 @@ input[type="range"]::-moz-range-thumb {
   text-align: start;
 }
 
+.font-modam {
+  font-family: modam;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
