@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.toastBody {
+	font-family: "Modam" !important;
+	font-weight: 300;
+	font-size: 0.875rem;
+}
+
 @layer base {
 	@font-face {
 		font-family: "Modam";

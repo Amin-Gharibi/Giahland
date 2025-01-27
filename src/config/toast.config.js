@@ -1,5 +1,4 @@
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 // Default configuration for all toasts
 const defaultConfig = {
@@ -9,7 +8,7 @@ const defaultConfig = {
 	pauseOnHover: true,
 	draggable: true,
 	progress: undefined,
-    className: "font-modam text-sm"
+    className: "toastBody"
 };
 
 // Toast utility functions

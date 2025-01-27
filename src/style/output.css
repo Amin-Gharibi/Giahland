@@ -1875,10 +1875,6 @@ input[type="range"]::-moz-range-thumb {
   text-align: start;
 }
 
-.font-modam {
-  font-family: modam;
-}
-
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -2055,6 +2051,12 @@ input[type="range"]::-moz-range-thumb {
 
 .rtl {
   direction: rtl;
+}
+
+.toastBody {
+  font-family: "Modam" !important;
+  font-weight: 300;
+  font-size: 0.875rem;
 }
 
 .\*\:\!h-full > * {
