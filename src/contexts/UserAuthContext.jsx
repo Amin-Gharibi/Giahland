@@ -77,6 +77,7 @@ export const UserAuthProvider = ({ children }) => {
 				login,
 				logout,
 				isAdmin: () => authState.user?.role === "admin",
+				isSeller: () => authState.user?.role === "seller",
 				refreshUser: fetchUserData, // method to refresh user data
 			}}>
 			{children}

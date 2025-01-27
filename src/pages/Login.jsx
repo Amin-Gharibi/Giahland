@@ -4,10 +4,11 @@ import CustomButton from "../components/CustomButton.jsx";
 import { useForm } from "react-hook-form";
 import useResponsiveSize from "../hooks/useResponsiveSize.js";
 import Header from "../components/Header.jsx";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthService } from "../services/auth.service.js";
 import { useUserAuth } from "../contexts/UserAuthContext.jsx";
 import { showToast } from "../config/toast.config.js";
+import { PuffLoader } from "react-spinners";
 
 function Login() {
 	const {
@@ -20,7 +21,7 @@ function Login() {
 			password: "",
 		},
 	});
-	const { login } = useUserAuth();
+	const { login, isAuthenticated, isLoading, isAdmin, isSeller } = useUserAuth();
 	const navigate = useNavigate()
 
 
@@ -59,6 +60,25 @@ function Login() {
 		{ breakpoint: 0, value: 48 },
 		{ breakpoint: 470, value: 56 },
 	]);
+
+	if (isLoading) {
+		return (
+			<div className="h-screen flex items-center justify-center">
+				<PuffLoader size={60} color="#000000" />
+			</div>
+		);
+	}
+
+	if (isAuthenticated) {
+		// if user is already logged in
+		if (isAdmin()) {
+			return <Navigate to={"/admin-dashboard"} />;
+		}
+		if (isSeller()) {
+			return <Navigate to={"/seller-dashboard"} />;
+		}
+		return <Navigate to={"/dashboard"} />;
+	}
 
 	return (
 		<>
