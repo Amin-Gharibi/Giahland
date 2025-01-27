@@ -2,7 +2,7 @@ import { AuthService } from "./auth.service";
 
 const TOKEN_KEY = "auth_tokens";
 
-const tokenService = {
+const TokenService = {
 	// Store tokens securely
 	setTokens(accessToken, refreshToken) {
 		try {
@@ -33,6 +33,7 @@ const tokenService = {
 			const {refreshToken} = this.getTokens()
 			const {access: newAccessToken, refresh: newRefreshToken} = await AuthService.refreshToken(refreshToken)
 			this.setTokens(newAccessToken, newRefreshToken)
+			return { newAccessToken, newRefreshToken };
 		} catch (error) {
 			throw error;
 		}
