@@ -4,17 +4,55 @@ import CustomButton from "../components/CustomButton.jsx";
 import { useForm } from "react-hook-form";
 import useResponsiveSize from "../hooks/useResponsiveSize.js";
 import Header from "../components/Header.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthService } from "../services/auth.service.js";
+import { useUserAuth } from "../contexts/UserAuthContext.jsx";
+import { showToast } from "../config/toast.config.js";
 
 function Login() {
-	const { control, handleSubmit } = useForm({
+	const {
+		control,
+		handleSubmit,
+		formState: { isSubmitting },
+	} = useForm({
 		defaultValues: {
 			email: "",
 			password: "",
 		},
 	});
+	const { login } = useUserAuth();
+	const navigate = useNavigate()
+
+
 	const onSubmit = async (data) => {
-		console.log(data);
+		try {
+			const res = await AuthService.login(data.email, data.password);
+			await login({ access: res.accessToken, refresh: res.refreshToken });
+
+			if (res.user?.role === "admin") {
+				navigate("/admin-dashboard");
+			} else if (req.user?.role === "seller") {
+				navigate("/seller-dashboard");
+			} else {
+				navigate("/dashboard");
+			}
+		} catch (error) {
+			if (error.response?.status === 422) {
+				// Handle validation errors from backend
+				Object.entries(error.response.data.errors).forEach(([field, message]) => {
+					setError(field, {
+						type: "manual",
+						message: message.toString(),
+					});
+				});
+			} else if (error.response?.status === 400) {
+				// if email or password was not correct
+				showToast.error("ایمیل یا رمزعبور وارد شده صحیح نیست!");
+			} else {
+				// Handle other errors
+				console.error("Registration failed:", error);
+			}
+		}
 	};
 
 	const inputSize = useResponsiveSize([
@@ -64,7 +102,7 @@ function Login() {
 						</div>
 						<button className={"text-sm text-primary border-none outline-none mt-4"}>بازیابی رمز عبور</button>
 						<div className={"w-full *:w-full mt-8"}>
-							<CustomButton type={"submit"} title={"ورود"} onClick={() => true} size={inputSize} isFilled={true} isSquared={true} />
+							<CustomButton type={"submit"} title={"ورود"} onClick={() => true} size={inputSize} isFilled={true} isSquared={true} loading={isSubmitting} disabled={isSubmitting} />
 						</div>
 						<div className={"mt-3 text-center leading-7 text-sm xs:text-base"}>
 							<span>حساب کاربری ندارید؟ </span>

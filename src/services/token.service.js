@@ -52,4 +52,4 @@ const TokenService = {
 	},
 };
 
-export default tokenService;
+export default TokenService;
