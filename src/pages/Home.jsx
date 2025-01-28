@@ -1,13 +1,13 @@
 import Header from "../components/Header.jsx";
 import CustomButton from "../components/CustomButton.jsx";
-import arrowLeftPrimary from "../assets/svg/arrowLeft-primary.svg"
-import landingBg from "../assets/svg/landingBg.svg"
-import landingBgSm from "../assets/svg/landingBgSm.svg"
-import cardPrimary from "../assets/svg/card-primary.svg"
-import checkBoxPrimary from "../assets/svg/checkbox-primary.svg"
-import truckPrimary from "../assets/svg/truck-primary.svg"
-import bannerBg1 from "../assets/svg/bannerBg1.svg"
-import bannerBg2 from "../assets/svg/bannerBg2.svg"
+import arrowLeftPrimary from "../assets/svg/arrowLeft-primary.svg";
+import landingBg from "../assets/svg/landingBg.svg";
+import landingBgSm from "../assets/svg/landingBgSm.svg";
+import cardPrimary from "../assets/svg/card-primary.svg";
+import checkBoxPrimary from "../assets/svg/checkbox-primary.svg";
+import truckPrimary from "../assets/svg/truck-primary.svg";
+import bannerBg1 from "../assets/svg/bannerBg1.svg";
+import bannerBg2 from "../assets/svg/bannerBg2.svg";
 import CountUp from "react-countup";
 import FeatureOption from "../components/FeatureOption.jsx";
 import SectionTitle from "../components/SectionTitle.jsx";
@@ -45,16 +45,27 @@ import sixteenthFlower from "../assets/temp/sixteenthFlower.png";
 import Footer from "../components/Footer.jsx";
 import useResponsiveSize from "../hooks/useResponsiveSize.js";
 import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../contexts/UserAuthContext.jsx";
+import { PuffLoader } from "react-spinners";
 
 function Home() {
-    const heroSectionButtonsSize = useResponsiveSize([
-        {breakpoint: 0, value: 40},
-        {breakpoint: 470, value: 48},
-        {breakpoint: 1024, value: 56}
-    ])
-    const navigate = useNavigate();
+	const heroSectionButtonsSize = useResponsiveSize([
+		{ breakpoint: 0, value: 40 },
+		{ breakpoint: 470, value: 48 },
+		{ breakpoint: 1024, value: 56 },
+	]);
+	const navigate = useNavigate();
+	const { isLoading } = useUserAuth();
 
-    return (
+	if (isLoading) {
+		return (
+			<div className="h-screen flex items-center justify-center">
+				<PuffLoader size={60} color="#417F56" />
+			</div>
+		);
+	}
+
+	return (
 		<>
 			<div className={"container"}>
 				<Header />

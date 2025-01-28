@@ -17,9 +17,9 @@ export const AuthService = {
 			throw error;
 		}
 	},
-	async refreshToken(token) {
+	async refreshToken(refreshToken) {
 		try {
-			const response = await apiClient.post("/auth/refresh-token", { token });
+			const response = await apiClient.post("/auth/refresh-token", { refreshToken });
 			return response.data;
 		} catch (error) {
 			throw error;

@@ -58,7 +58,7 @@ function Signup() {
 	if (isLoading) {
 		return (
 			<div className="h-screen flex items-center justify-center">
-				<PuffLoader size={60} color="#000000" />
+				<PuffLoader size={60} color="#417F56" />
 			</div>
 		);
 	}

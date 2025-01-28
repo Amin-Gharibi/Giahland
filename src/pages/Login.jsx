@@ -32,21 +32,13 @@ function Login() {
 
 			if (res.user?.role === "admin") {
 				navigate("/admin-dashboard");
-			} else if (req.user?.role === "seller") {
+			} else if (res.user?.role === "seller") {
 				navigate("/seller-dashboard");
 			} else {
 				navigate("/dashboard");
 			}
 		} catch (error) {
-			if (error.response?.status === 422) {
-				// Handle validation errors from backend
-				Object.entries(error.response.data.errors).forEach(([field, message]) => {
-					setError(field, {
-						type: "manual",
-						message: message.toString(),
-					});
-				});
-			} else if (error.response?.status === 400) {
+			if (error.response?.status === 400) {
 				// if email or password was not correct
 				showToast.error("ایمیل یا رمزعبور وارد شده صحیح نیست!");
 			} else {
@@ -64,7 +56,7 @@ function Login() {
 	if (isLoading) {
 		return (
 			<div className="h-screen flex items-center justify-center">
-				<PuffLoader size={60} color="#000000" />
+				<PuffLoader size={60} color="#417F56" />
 			</div>
 		);
 	}
