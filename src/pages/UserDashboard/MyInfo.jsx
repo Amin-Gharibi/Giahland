@@ -1,25 +1,44 @@
 import DashboardSectionTitle from "../../components/DashboardSectionTitle.jsx";
-import PropTypes from "prop-types";
 import CustomButton from "../../components/CustomButton.jsx";
 import { useForm } from "react-hook-form";
 import useResponsiveSize from "../../hooks/useResponsiveSize.js";
 import CustomInput from "../../components/CustomInput.jsx";
 import { useEffect } from "react";
+import { useUserAuth } from "../../contexts/UserAuthContext.jsx";
+import { PuffLoader } from "react-spinners";
+import { UserService } from "../../services/user.service.js";
+import { showToast } from "../../config/toast.config.js";
+import { useNavigate } from "react-router-dom";
+import tempProf from "../../assets/temp/ninthFlower.png";
 
-MyInfo.propTypes = {
-	userData: PropTypes.object,
-};
 
-function MyInfo({ userData }) {
+function MyInfo() {
+	const { user, isLoading, refreshUser, logout } = useUserAuth();
+	const navigate = useNavigate();
+
 	const {
 		control: control1,
 		handleSubmit: handleSubmit1,
 		reset: reset1,
 	} = useForm({
-		defaultValues: {},
+		defaultValues: {
+			firstName: "",
+			lastName: "",
+			phoneNumber: "",
+			email: "",
+			homeAddress: "",
+			homePhoneNumber: "",
+		},
 	});
-	const onSubmit = (data) => {
-		console.log(data);
+	const onSubmit = async (data) => {
+		try {
+			await UserService.updateProfile(data.firstName, data.lastName, data.phoneNumber, data.homeAddress, data.homePhoneNumber);
+			await refreshUser();
+			showToast.success("پروفایل با موفقیت آپدیت شد");
+		} catch (error) {
+			showToast.error("خطایی در آپدیت پروفایل رخ داد");
+			console.log(error);
+		}
 	};
 
 	const {
@@ -27,10 +46,26 @@ function MyInfo({ userData }) {
 		handleSubmit: handleSubmit2,
 		reset: reset2,
 	} = useForm({
-		defaultValues: {},
+		defaultValues: {
+			currentPassword: "",
+			newPassword: "",
+		},
 	});
-	const onPasswordFormSubmit = (data) => {
-		console.log(data);
+	const onPasswordFormSubmit = async (data) => {
+		try {
+			const response = await UserService.updatePassword(data.currentPassword, data.newPassword);
+			console.log(response);
+			showToast.success("رمز عبور با موفقیت آپدیت شد");
+			await logout();
+			navigate("/login");
+		} catch (error) {
+			if (error.response?.status === 400) {
+				showToast.error("رمز عبور کنونی شما صحیح نیست");
+			} else {
+				showToast.error("خطایی در آپدیت رمز عبور شما رخ داد");
+			}
+			console.log(error);
+		}
 	};
 
 	const inputSize = useResponsiveSize([
@@ -39,10 +74,25 @@ function MyInfo({ userData }) {
 	]);
 
 	useEffect(() => {
-		if (userData) {
-			reset1();
+		if (user) {
+			reset1({
+				firstName: user.first_name ?? "",
+				lastName: user.last_name ?? "",
+				phoneNumber: user.phone_number ?? "",
+				email: user.email ?? "",
+				homeAddress: user.home_address ?? "",
+				homePhoneNumber: user.home_phone_number ?? "",
+			});
 		}
-	}, [userData, reset1]);
+	}, [user, isLoading]);
+
+	if (isLoading) {
+		return (
+			<div className="h-screen flex items-center justify-center">
+				<PuffLoader size={60} color="#417F56" />
+			</div>
+		);
+	}
 
 	return (
 		<div className={"pt-6 md:pt-10 md:pr-6"}>
@@ -50,7 +100,7 @@ function MyInfo({ userData }) {
 				<DashboardSectionTitle title={"مشخصات حساب کاربری"} />
 				<div className={"flex flex-col sm:p-6 md:p-0 lg:p-6 sm:border md:border-0 lg:border border-neutral3 w-full rounded-2xl mt-4"}>
 					<div className={"flex flex-col sm:flex-row md:flex-col w-full lg:flex-row items-center gap-4"}>
-						<img src={userData?.prof} alt={userData?.firstName + " " + userData?.lastName} className={"object-cover w-20 h-20 rounded-full"} />
+						<img src={tempProf} alt={user.first_name + " " + user.last_name} className={"object-cover w-20 h-20 rounded-full"} />
 						<div className={"flex gap-x-4 w-full lg:w-max max-sm:*:flex-grow md:*:w-1/2 lg:*:w-max"}>
 							<CustomButton title={"ویرایش با تصویر جدید"} onClick={() => true} size={40} isFilled isSquared />
 							<CustomButton title={"حذف تصویر"} onClick={() => true} size={40} isOutline isSquared />
@@ -156,6 +206,7 @@ function MyInfo({ userData }) {
 				<div className={"flex flex-col sm:p-6 md:p-0 lg:p-6 sm:border md:border-0 lg:border border-neutral3 w-full rounded-2xl mt-4"}>
 					<div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6"}>
 						<CustomInput
+							type="password"
 							size={inputSize}
 							control={control2}
 							name="currentPassword"
@@ -177,6 +228,7 @@ function MyInfo({ userData }) {
 							)}
 						/>
 						<CustomInput
+							type="password"
 							size={inputSize}
 							control={control2}
 							name="newPassword"

@@ -51,7 +51,6 @@ apiClient.interceptors.response.use(
 			} catch (refreshError) {
 				// If refresh token is invalid, logout user
 				TokenService.clearTokens();
-				window.location.href = "/login";
 				return Promise.reject({
 					response: {
 						status: 401,
