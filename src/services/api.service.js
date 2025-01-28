@@ -34,6 +34,10 @@ apiClient.interceptors.response.use(
 			originalRequest._retry = true;
 
 			try {
+				if (!TokenService.getTokens()?.refreshToken) {
+					throw new Error("No refresh token available");
+				}
+				
 				const { newAccessToken } = await TokenService.refreshTokens();
 
 				// Retry the original request
@@ -47,6 +51,7 @@ apiClient.interceptors.response.use(
 			} catch (refreshError) {
 				// If refresh token is invalid, logout user
 				TokenService.clearTokens();
+				window.location.href = "/login";
 				return Promise.reject({
 					response: {
 						status: 401,
