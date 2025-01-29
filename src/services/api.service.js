@@ -29,28 +29,24 @@ apiClient.interceptors.response.use(
 	async (error) => {
 		const originalRequest = error.config;
 
-		// If error is 401 and we haven't tried to refresh token yet
-		if (error.response?.status === 401 && !originalRequest._retry) {
+		// If error is 401 and we haven't tried to refresh token yet and the request that has failed is not refreshing token
+		if (error.response?.status === 401 && !originalRequest._retry && originalRequest.url !== "/auth/refresh-token") {
 			originalRequest._retry = true;
 
 			try {
 				if (!TokenService.getTokens()?.refreshToken) {
 					throw new Error("No refresh token available");
 				}
-				
+
 				const { newAccessToken } = await TokenService.refreshTokens();
 
 				// Retry the original request
 				originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-				return axios({
-					...originalRequest,
-					headers: {
-						...originalRequest.headers,
-					},
-				});
+				return axios(originalRequest);
 			} catch (refreshError) {
 				// If refresh token is invalid, logout user
 				TokenService.clearTokens();
+				window.location.href = "/login?session_expire=true";
 				return Promise.reject({
 					response: {
 						status: 401,

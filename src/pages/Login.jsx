@@ -4,11 +4,12 @@ import CustomButton from "../components/CustomButton.jsx";
 import { useForm } from "react-hook-form";
 import useResponsiveSize from "../hooks/useResponsiveSize.js";
 import Header from "../components/Header.jsx";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { AuthService } from "../services/auth.service.js";
 import { useUserAuth } from "../contexts/UserAuthContext.jsx";
 import { showToast } from "../config/toast.config.js";
 import { PuffLoader } from "react-spinners";
+import { useEffect } from "react";
 
 function Login() {
 	const {
@@ -22,8 +23,19 @@ function Login() {
 		},
 	});
 	const { login, isAuthenticated, isLoading, isAdmin, isSeller } = useUserAuth();
-	const navigate = useNavigate()
+	const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
 
+	const inputSize = useResponsiveSize([
+		{ breakpoint: 0, value: 48 },
+		{ breakpoint: 470, value: 56 },
+	]);
+
+	useEffect(() => {
+		if (searchParams.has("session_expire", "true")) {
+			showToast.info("نشست شما پایان یافته است، لطفا دوباره وارد شوید");
+		}
+	}, [searchParams]);
 
 	const onSubmit = async (data) => {
 		try {
@@ -47,11 +59,6 @@ function Login() {
 			}
 		}
 	};
-
-	const inputSize = useResponsiveSize([
-		{ breakpoint: 0, value: 48 },
-		{ breakpoint: 470, value: 56 },
-	]);
 
 	if (isLoading) {
 		return (

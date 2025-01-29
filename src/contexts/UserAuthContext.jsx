@@ -41,8 +41,9 @@ export const UserAuthProvider = ({ children }) => {
 				setAuthState((prev) => ({ ...prev, isAuthenticated: true }));
 				await fetchUserData();
 			} else if (tokens && TokenService.isTokenExpired()) {
-				await TokenService.refreshTokens();
 				setAuthState((prev) => ({ ...prev, isAuthenticated: true }));
+				await TokenService.refreshTokens();
+				await fetchUserData();
 			} else {
 				setAuthState({
 					isAuthenticated: false,
