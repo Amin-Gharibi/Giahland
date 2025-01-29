@@ -25,9 +25,9 @@ export const UserService = {
 			throw error;
 		}
 	},
-	async addAddress(address, ciy, province, postalCode) {
+	async addAddress(address, city, province, postalCode) {
 		try {
-			const response = await apiClient.post("/users/addresses", { address, ciy, province, postalCode });
+			const response = await apiClient.post("/users/addresses", { address, city, province, postalCode });
 			return response.data;
 		} catch (error) {
 			throw error;
@@ -52,6 +52,14 @@ export const UserService = {
 	async deleteAddress(id) {
 		try {
 			const response = await apiClient.delete(`/users/addresses/${id}`);
+			return response.data;
+		} catch (error) {
+			throw error;
+		}
+	},
+	async getAddressByID(id) {
+		try {
+			const response = await apiClient.get(`/users/addresses/${id}`);
 			return response.data;
 		} catch (error) {
 			throw error;
