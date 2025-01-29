@@ -3,7 +3,7 @@ import { PuffLoader } from "react-spinners";
 
 CustomButton.propTypes = {
 	title: PropTypes.string.isRequired,
-	onClick: PropTypes.func.isRequired,
+	onClick: PropTypes.func,
 	size: PropTypes.oneOf([32, 40, 48, 56]).isRequired,
 	icon: PropTypes.string,
 	leftIcon: PropTypes.bool,
