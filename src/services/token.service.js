@@ -31,7 +31,7 @@ const TokenService = {
 	async refreshTokens() {
 		try {
 			const {refreshToken} = this.getTokens()
-			const {access: newAccessToken, refresh: newRefreshToken} = await AuthService.refreshToken(refreshToken)
+			const {accessToken: newAccessToken, refreshToken: newRefreshToken} = await AuthService.refreshToken(refreshToken)
 			this.setTokens(newAccessToken, newRefreshToken)
 			return { newAccessToken, newRefreshToken };
 		} catch (error) {

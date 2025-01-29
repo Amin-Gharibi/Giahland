@@ -34,10 +34,6 @@ apiClient.interceptors.response.use(
 			originalRequest._retry = true;
 
 			try {
-				if (!TokenService.getTokens()?.refreshToken) {
-					throw new Error("No refresh token available");
-				}
-
 				const { newAccessToken } = await TokenService.refreshTokens();
 
 				// Retry the original request
