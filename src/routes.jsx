@@ -10,6 +10,7 @@ import SearchBlogs from "./pages/SearchBlogs.jsx";
 import Blog from "./pages/Blog.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
 
 const routes = [
 	{ path: "/", element: <Home /> },
@@ -21,8 +22,9 @@ const routes = [
 			<PrivateRoute roles={["customer"]}>
 				<UserDashboard />
 			</PrivateRoute>
-		)
+		),
 	},
+	{ path: "/forgot-password/*", element: <ForgotPassword /> },
 	{ path: "/product/*", element: <Product /> },
 	{ path: "/cart", element: <Cart /> },
 	{ path: "/search", element: <Search /> },

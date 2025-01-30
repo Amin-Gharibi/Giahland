@@ -119,7 +119,7 @@ function Login() {
 								)}
 							/>
 						</div>
-						<button className={"text-sm text-primary border-none outline-none mt-4"}>بازیابی رمز عبور</button>
+						<Link to={'/forgot-password'} className={"inline-block text-sm text-primary border-none outline-none mt-4"}>بازیابی رمز عبور</Link>
 						<div className={"w-full *:w-full mt-8"}>
 							<CustomButton type={"submit"} title={"ورود"} onClick={() => true} size={inputSize} isFilled={true} isSquared={true} loading={isSubmitting} disabled={isSubmitting} />
 						</div>
