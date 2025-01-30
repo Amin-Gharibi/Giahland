@@ -254,7 +254,7 @@ function MyInfo() {
 							)}
 						/>
 					</div>
-					<div className={"self-end mt-6 w-full sm:w-40 md:w-full lg:w-40 *:w-full max-sm:mb-6"}>
+					<div className={"self-end mt-6 w-full sm:w-40 md:w-full lg:w-40 *:w-full max-sm:mb-6 md:mb-6 lg:mb-0"}>
 						<CustomButton type={"submit"} title={"ذخیره کردن"} onClick={() => true} size={48} isFilled isSquared />
 					</div>
 				</div>

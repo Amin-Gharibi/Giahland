@@ -37,7 +37,7 @@ function Signup() {
 			} else if (res.user?.role === "seller") {
 				navigate("/seller-dashboard");
 			} else {
-				navigate("/dashboard");
+				navigate("/dashboard/my-info");
 			}
 		} catch (error) {
 			if (error.response?.status === 400) {
@@ -71,7 +71,7 @@ function Signup() {
 		if (isSeller()) {
 			return <Navigate to={"/seller-dashboard"} />;
 		}
-		return <Navigate to={"/dashboard"} />;
+		return <Navigate to={"/dashboard/my-info"} />;
 	}
 
 	return (

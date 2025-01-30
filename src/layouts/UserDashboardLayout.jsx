@@ -11,7 +11,7 @@ import tempProf from "../assets/temp/ninthFlower.png";
 function UserDashboardLayout({ children }) {
 	const navigate = useNavigate();
 	const [showSideMenu, setShowSideMenu] = useState(false);
-	const { isLoading, isAuthenticated, user } = useUserAuth();
+	const { isLoading, isAuthenticated, user, logout } = useUserAuth();
 
 	// handle showing or not showing the sidebar menu
 	useEffect(() => {
@@ -31,6 +31,10 @@ function UserDashboardLayout({ children }) {
 			window.removeEventListener("resize", resizeHandler);
 		};
 	}, [navigate]);
+
+	const logoutHandler = () => {
+		logout()
+	}
 
 	if (isLoading) {
 		return (
@@ -95,7 +99,7 @@ function UserDashboardLayout({ children }) {
 						/>
 					</div>
 					<div className={"mt-auto w-full"}>
-						<button className={"w-full flex items-center gap-3 group active py-3 px-4 bg-bgError rounded-lg"}>
+						<button className={"w-full flex items-center gap-3 group active py-3 px-4 bg-bgError rounded-lg"} onClick={logoutHandler}>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M17 8L15.59 9.41L17.17 11H9V13H17.17L15.59 14.58L17 16L21 12L17 8ZM5 5H12V3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H12V19H5V5Z" fill="#ED2E2E" />
 							</svg>

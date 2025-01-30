@@ -5,7 +5,7 @@ import { useUserAuth } from "../../contexts/UserAuthContext";
 import { PuffLoader } from "react-spinners";
 
 function UserDashboard() {
-	const { isLoading, isAuthenticated } = useUserAuth();
+	const { isLoading, isAuthenticated, isAdmin, isSeller } = useUserAuth();
 
 	if (isLoading) {
 		return (
