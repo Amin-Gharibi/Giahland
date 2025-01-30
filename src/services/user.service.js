@@ -9,9 +9,9 @@ export const UserService = {
 			throw error;
 		}
 	},
-	async updateProfile(firstName, lastName, phoneNumber, homeAddress, homePhoneNumber) {
+	async updateProfile(firstName, lastName, phoneNumber, email, homeAddress, homePhoneNumber) {
 		try {
-			const response = await apiClient.put("/users/profile", { firstName, lastName, phoneNumber, homeAddress, homePhoneNumber });
+			const response = await apiClient.put("/users/profile", { firstName, lastName, phoneNumber, email, homeAddress, homePhoneNumber });
 			return response.data;
 		} catch (error) {
 			throw error;
