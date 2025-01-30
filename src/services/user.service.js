@@ -73,4 +73,26 @@ export const UserService = {
 			throw error;
 		}
 	},
+	async setProfilePhoto(photo) {
+		try {
+			const formData = new FormData();
+			formData.append("photo", photo);
+			const response = await apiClient.post("/users/profile-photo", formData, {
+				headers: {
+					"Content-Type": "multipart/formdata",
+				},
+			});
+			return response.data;
+		} catch (error) {
+			throw error;
+		}
+	},
+	async deleteProfilePhoto() {
+		try {
+			const response = await apiClient.delete("/users/profile-photo");
+			return response.data;
+		} catch (error) {
+			throw error;
+		}
+	},
 };

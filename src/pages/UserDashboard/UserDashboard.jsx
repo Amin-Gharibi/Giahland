@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import UserDashboardLayout from "../../layouts/UserDashboardLayout";
-import MyInfo from "./MyInfo";
 import ConsultationWithPlantPathologist from "./ConsultationWithPlantPathologist";
 import Messages from "./Messages";
 import Addresses from "./Addresses/Addresses";
 import AddOrUpdateAddress from "./Addresses/AddOrUpdateAddress";
+import MyInfo from "./MyInfo/MyInfo";
 
 function UserDashboard() {
 	return (

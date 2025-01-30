@@ -1183,6 +1183,10 @@ input[type="range"]::-moz-range-thumb {
   height: 100% !important;
 }
 
+.h-0 {
+  height: 0px;
+}
+
 .max-h-40 {
   max-height: 10rem;
 }
@@ -1287,6 +1291,10 @@ input[type="range"]::-moz-range-thumb {
 
 .w-24 {
   width: 6rem;
+}
+
+.w-0 {
+  width: 0px;
 }
 
 .min-w-14 {

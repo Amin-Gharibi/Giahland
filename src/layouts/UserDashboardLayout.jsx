@@ -5,13 +5,14 @@ import EnToFaNum from "../utils/EnToFaNum.js";
 import SideMenuItem from "../components/SideMenuItem.jsx";
 import { useUserAuth } from "../contexts/UserAuthContext.jsx";
 import { PuffLoader } from "react-spinners";
-import tempProf from "../assets/temp/ninthFlower.png";
+import API_CONFIG from "../config/api.config.js";
 
 
 function UserDashboardLayout({ children }) {
 	const navigate = useNavigate();
 	const [showSideMenu, setShowSideMenu] = useState(false);
 	const { isLoading, isAuthenticated, user, logout } = useUserAuth();
+	const previewUrl = new URL(API_CONFIG.BASE_URL).origin + user.profile_image_url;
 
 	// handle showing or not showing the sidebar menu
 	useEffect(() => {
@@ -54,7 +55,7 @@ function UserDashboardLayout({ children }) {
 			<div className={"grid grid-cols-12 grid-rows-1 flex-grow overflow-hidden"}>
 				<div className={`${showSideMenu ? "" : "hidden"} col-span-12 md:col-span-5 lg:col-span-4 xl:col-span-3 h-full flex flex-col md:border-l border-l-neutral3 p-6 pr-0`}>
 					<div className={"flex justify-start items-center gap-x-2"}>
-						<img src={tempProf} alt={user.first_name + " " + user.last_name} className={"object-cover w-[60px] h-[60px] rounded-full"} />
+						<img src={previewUrl} alt={user.first_name + " " + user.last_name} className={"object-cover w-[60px] h-[60px] rounded-full"} />
 						<div className={"flex flex-col gap-y-1"}>
 							<span className={"text-sm text-black"}>{user.first_name + " " + user.last_name}</span>
 							<span className={"text-sm text-neutral9"}>{EnToFaNum(user.phone_number ?? "")}</span>
