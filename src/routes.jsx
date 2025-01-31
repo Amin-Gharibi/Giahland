@@ -31,6 +31,7 @@ const routes = [
 	{ path: "/blogs", element: <SearchBlogs /> },
 	{ path: "/blog/*", element: <Blog /> },
 	{ path: "/contact-us", element: <ContactUs /> },
+	{ path: "/not-found", element: <NotFound /> },
 	{ path: "*", element: <NotFound /> },
 ];
 

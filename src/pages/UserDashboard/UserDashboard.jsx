@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import UserDashboardLayout from "../../layouts/UserDashboardLayout";
-import ConsultationWithPlantPathologist from "./ConsultationWithPlantPathologist";
-import Messages from "./Messages";
 import Addresses from "./Addresses/Addresses";
 import AddOrUpdateAddress from "./Addresses/AddOrUpdateAddress";
 import MyInfo from "./MyInfo/MyInfo";
+import MyOrders from "./MyOrders/MyOrders";
+import OrderDetails from "./MyOrders/OrderDetails";
 
 function UserDashboard() {
 	return (
@@ -15,9 +15,9 @@ function UserDashboard() {
 				<Route path="addresses" element={<Addresses />} />
 				<Route path="addresses/add" element={<AddOrUpdateAddress />} />
 				<Route path="addresses/:id" element={<AddOrUpdateAddress />} />
-				<Route path="consultation-with-plant-pathologist" element={<ConsultationWithPlantPathologist />} />
-				<Route path="messages" element={<Messages />} />
-				<Route path="messages/:chatId" element={<Messages />} />
+				<Route path="orders" element={<MyOrders />} />
+				<Route path="orders/:id" element={<OrderDetails />} />
+				<Route path="*" element={<Navigate to={"/not-found"} />} />
 			</Routes>
 		</UserDashboardLayout>
 	);
