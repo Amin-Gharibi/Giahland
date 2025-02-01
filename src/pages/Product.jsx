@@ -47,8 +47,12 @@ function Product() {
 	]);
 
 	useEffect(() => {
-		Promise.all([execute(), commentsExecute(), isProductInMyCartExecute()]);
-	}, []);
+		if (isAuthenticated) {
+			Promise.all([execute(), commentsExecute(), isProductInMyCartExecute()]);
+		} else {
+			Promise.all([execute(), commentsExecute()]);
+		}
+	}, [id]);
 
 	useEffect(() => {
 		if (data) {
@@ -74,9 +78,13 @@ function Product() {
 	};
 
 	const addToCartHandler = async () => {
+        if (!isAuthenticated) {
+			showToast.info("برای اضافه کردن محصول به سبد خرید ابتدا وارد شوید");
+			return;
+		}
 		try {
 			setCartLoading(true);
-            await CartService.addItemToCart(id, 1);
+			await CartService.addItemToCart(id, 1);
 			showToast.success("محصول با موفقیت به سبد خرید اضافه شد");
 		} catch (error) {
 			showToast.error("خطایی رخ داد هنگام اضافه کردن محصول به سبد خرید");
@@ -87,8 +95,12 @@ function Product() {
 		}
 	};
 
-    const deleteFromCartHandler = async () => {
-       try {
+	const deleteFromCartHandler = async () => {
+        if (!isAuthenticated) {
+			showToast.info("برای حذف کردن محصول از سبد خرید ابتدا وارد شوید");
+			return;
+		}
+		try {
 			setCartLoading(true);
 			await CartService.removeItem(isProductInMyCart?.cartItem?.id);
 			showToast.success("محصول با موفقیت از سبد خرید حذف شد");
@@ -99,25 +111,29 @@ function Product() {
 			isProductInMyCartExecute();
 			setCartLoading(false);
 		}
-    }
+	};
 
-    const updateQuantityHandler = async (type) => {
-        try {
-            setCartLoading(true)
-            const newQuantity = type === "add" ? isProductInMyCart?.cartItem?.quantity + 1 : isProductInMyCart?.cartItem?.quantity - 1;
-            if (newQuantity === 0) {
-                return await deleteFromCartHandler()
-            }
-            await CartService.updateQuantity(isProductInMyCart?.cartItem?.id, newQuantity);
-            showToast.success("تعداد کالا تغییر کرد")
-        } catch (error) {
-            showToast.error("خطایی هنگام تغییر تعداد کالاها رخ داد")
-            console.log("error while updating quantity", error)
-        } finally {
-            isProductInMyCartExecute()
-            setCartLoading(false)
-        }
-    }
+	const updateQuantityHandler = async (type) => {
+        if (!isAuthenticated) {
+			showToast.info("برای تغییر تعداد محصول ابتدا وارد شوید");
+			return;
+		}
+		try {
+			setCartLoading(true);
+			const newQuantity = type === "add" ? isProductInMyCart?.cartItem?.quantity + 1 : isProductInMyCart?.cartItem?.quantity - 1;
+			if (newQuantity === 0) {
+				return await deleteFromCartHandler();
+			}
+			await CartService.updateQuantity(isProductInMyCart?.cartItem?.id, newQuantity);
+			showToast.success("تعداد کالا تغییر کرد");
+		} catch (error) {
+			showToast.error("خطایی هنگام تغییر تعداد کالاها رخ داد");
+			console.log("error while updating quantity", error);
+		} finally {
+			isProductInMyCartExecute();
+			setCartLoading(false);
+		}
+	};
 
 	if (loading || similarProductsLoading || commentsLoading || isProductInMyCartLoading) {
 		return (
