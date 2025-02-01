@@ -1,7 +1,7 @@
 import API_CONFIG from "../config/api.config";
 import apiClient from "./api.service";
 
-export const ProdcutService = {
+export const ProductService = {
 	async createProduct(name, price, description, categories, stock, features) {
 		try {
 			const response = await apiClient.post("/products", { name, price, description, categories, stock, features });
@@ -18,7 +18,7 @@ export const ProdcutService = {
 			throw error;
 		}
 	},
-	async getMany(limit, offset, sortBy = null, order = null, category = null, minPrice = null, maxPrice = null) {
+	async getMany(limit, offset, sortBy = null, order = null, category = null, minPrice = null, maxPrice = null, q = "") {
 		try {
 			const url = new URL(API_CONFIG.BASE_URL + "/products");
 			url.searchParams.set("limit", limit);
@@ -28,6 +28,7 @@ export const ProdcutService = {
 			category && url.searchParams.set("category", category);
 			minPrice && url.searchParams.set("minPrice", minPrice);
 			maxPrice && url.searchParams.set("maxPrice", maxPrice);
+			q && url.searchParams.set("q", q);
 
 			const response = await apiClient.get(url.pathname + url.search);
 			return response.data;
