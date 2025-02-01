@@ -50,7 +50,7 @@ export default function VerifyEmailSection() {
 	return user.is_verified ? (
 		""
 	) : (
-		<form onSubmit={handleSubmit(verifyCodeHandler)} className="grid grid-cols-2 gap-x-6 gap-y-4">
+		<form onSubmit={handleSubmit(verifyCodeHandler)} className="grid grid-cols-[repeat(2,_auto)] sm:grid-cols-2 md:grid-cols-[repeat(2,_auto)] lg:grid-cols-2 gap-x-6 gap-y-4 mt-6">
 			<span className="text-error text-xs cursor-default">ایمیل شما تایید نشده است!</span>
 			<CustomInput
 				type="text"

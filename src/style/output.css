@@ -1392,6 +1392,30 @@ input[type="range"]::-moz-range-thumb {
   grid-template-columns: auto 1fr auto;
 }
 
+.grid-cols-\[\] {
+  grid-template-columns: ;
+}
+
+.grid-cols-\[repeat\(\)\] {
+  grid-template-columns: repeat();
+}
+
+.grid-cols-\[repeat\(2\2c _max-content\)\] {
+  grid-template-columns: repeat(2, max-content);
+}
+
+.grid-cols-\[repeat\(2\2c _1fr\)\] {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-cols-\[repeat\(2\2c auto\)\] {
+  grid-template-columns: repeat(2,auto);
+}
+
+.grid-cols-\[repeat\(2\2c _auto\)\] {
+  grid-template-columns: repeat(2, auto);
+}
+
 .grid-rows-1 {
   grid-template-rows: repeat(1, minmax(0, 1fr));
 }
@@ -2805,6 +2829,10 @@ input[type="range"]::-moz-range-thumb {
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-\[repeat\(2\2c _auto\)\] {
+    grid-template-columns: repeat(2, auto);
   }
 
   .md\:flex-row {
