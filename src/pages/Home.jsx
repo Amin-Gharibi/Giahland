@@ -52,9 +52,7 @@ function Home() {
 	const { data: giftFlowers, loading: giftFlowersLoading, error: giftFlowersError, execute: giftFlowersExecute } = useApi(() => ProductService.getByCategory("gift-flowers"));
 
 	useEffect(() => {
-		apartmentFlowersExecute();
-		decorativeFlowersExecute();
-		giftFlowersExecute();
+		Promise.all([apartmentFlowersExecute(), decorativeFlowersExecute(), giftFlowersExecute()]);
 	}, []);
 
 	if (isLoading || apartmentFlowersLoading || decorativeFlowersLoading || giftFlowersLoading) {
@@ -120,7 +118,7 @@ function Home() {
 				<section className={"mt-14 sm:mt-16"}>
 					<SectionTitle title={"گیاهان آپارتمانی"} />
 					<div className={"mt-6"}>
-						<SwipingSlider items={apartmentFlowers} slidesPerView={4.5} spaceBetween={24} />
+						<SwipingSlider items={apartmentFlowers?.products || [] } slidesPerView={4.5} spaceBetween={24} />
 					</div>
 				</section>
 				{/*linking banners section*/}
@@ -151,7 +149,7 @@ function Home() {
 				{/*decorative plants*/}
 				<section className={"mt-10 sm:mt-16 flex flex-col gap-y-6"}>
 					<SectionTitle title={"گیاهان تزئینی"} />
-					<SwipingSlider items={decorativeFlowers} spaceBetween={24} />
+					<SwipingSlider items={decorativeFlowers?.products || []} spaceBetween={24} />
 				</section>
 				{/*linking banners section*/}
 				<section className={"mt-11 sm:mt-16"}>
@@ -167,7 +165,7 @@ function Home() {
 				{/*cardamom flowers section*/}
 				<section className={"mt-10 sm:mt-16 flex flex-col gap-y-6"}>
 					<SectionTitle title={"گیاهان کادوئی"} />
-					<SwipingSlider items={giftFlowers} spaceBetween={24} />
+					<SwipingSlider items={giftFlowers?.products || []} spaceBetween={24} />
 				</section>
 			</div>
 			<Footer />

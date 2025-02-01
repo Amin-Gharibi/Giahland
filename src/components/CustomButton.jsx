@@ -21,7 +21,7 @@ CustomButton.propTypes = {
 
 function CustomButton({ title, onClick, size, icon, leftIcon, rightIcon, isCurved, isSquared, isDashed, isOutline, isFilled, type = "button", classNames = "", loading = false, disabled = false }) {
 	return (
-		<button type={type} onClick={onClick} disabled={disabled} style={{ height: size + "px" }} className={`flex items-center justify-center ${size === 32 ? "px-2 gap-x-1 text-sm" : size === 40 ? "px-2 gap-x-2 text-sm" : size === 48 || size === 56 ? "px-4 gap-x-2 sm:text-lg" : ""} ${isOutline ? "border border-primary sm:hover:bg-neutral2 text-primary" : isFilled ? "bg-primary text-white" : ""} ${isDashed ? "border-dashed" : ""} ${isCurved ? "rounded-full" : isSquared ? "rounded-lg" : ""} transition-colors ${classNames}`}>
+		<button type={type} onClick={onClick} disabled={disabled} style={{ height: size + "px" }} className={`flex items-center justify-center ${size === 32 ? "px-2 gap-x-1 text-sm" : size === 40 ? "px-2 gap-x-2 text-sm" : size === 48 || size === 56 ? "px-4 gap-x-2 sm:text-lg" : ""} ${isOutline ? "border border-primary sm:hover:bg-neutral2 text-primary" : isFilled ? "bg-primary text-white" : ""} ${isDashed ? "border-dashed" : ""} ${isCurved ? "rounded-full" : isSquared ? "rounded-lg" : ""} transition-colors disabled:opacity-50 ${classNames}`}>
 			{loading ? (
 				<PuffLoader color={isFilled ? "#FFFFFF" : "#417F56"} size={30} />
 			) : (

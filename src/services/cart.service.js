@@ -41,4 +41,12 @@ export const CartService = {
 			throw error;
 		}
 	},
+	async isProductInMyCart(productId) {
+		try {
+			const response = await apiClient.get(`/cart/check/${productId}`);
+			return response.data;
+		} catch (error) {
+			throw error;
+		}
+	},
 };

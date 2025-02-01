@@ -8,6 +8,10 @@
 	font-size: 0.875rem;
 }
 
+.product--image-slider .swiper-slide {
+	@apply sm:!w-auto sm:h-[100px];
+}
+
 @layer base {
 	@font-face {
 		font-family: "Modam";

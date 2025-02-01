@@ -25,7 +25,7 @@ const routes = [
 		),
 	},
 	{ path: "/forgot-password/*", element: <ForgotPassword /> },
-	{ path: "/product/*", element: <Product /> },
+	{ path: "/product/:id", element: <Product /> },
 	{ path: "/cart", element: <Cart /> },
 	{ path: "/search", element: <Search /> },
 	{ path: "/blogs", element: <SearchBlogs /> },
