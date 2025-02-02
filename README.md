@@ -14,7 +14,7 @@ Giahland is a Flower Selling project built using React and Vite, TailwindCSS.
 - [Contact](#contact)
 
 ## Overview
-This Project is a website that hosts different sellers from across the country and they can put the flowers they want to sell in the website. This Project is gonna have 3 panel, one for users, one for sellers and the last one for admins. This project's porpuse is to demonstrate my knowledge in front-end development.
+This Project is a website that hosts different sellers from across the country and they can put the flowers they want to sell in the website. This Project is gonna have 3 panels, one for users, one for sellers and the last one for admins. This project's purpose is to demonstrate my knowledge in front-end development.
 
 ## Preview
 ### Home Page
