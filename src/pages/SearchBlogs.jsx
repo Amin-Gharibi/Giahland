@@ -7,12 +7,12 @@ import SortingBoxLg from "../components/SortingBox.jsx";
 import useResponsiveSize from "../hooks/useResponsiveSize.js";
 import firstBanner from "../assets/images/extraBgImage.png";
 import secondBanner from "../assets/images/firstBgImage.png";
-import { useSearchParams } from "react-router-dom";
 import CustomButton from "../components/CustomButton.jsx";
 import BlogItemBox from "../components/BlogItemBox.jsx";
+import { useSearchParams } from "react-router-dom";
 
 export default function SearchBlogs() {
-	const [searchParams] = useSearchParams();
+	const [searchParams, setSearchParams] = useSearchParams();
 	const [searchedItems, setSearchedItems] = useState([
 		{ banner: firstBanner, title: "گیاه طبیعی بابا آدم", description: "این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه", createdAt: "Fri Dec 13 2024 15:14:41 GMT+0330 (Iran Standard Time)", author: { firstName: "امین", lastName: "غریبی" }, identifier: "1" },
 		{ banner: secondBanner, title: "گیاه طبیعی یوکا", description: "این متن تستی برای قرار دادن در متن توضیحات هست که تکرار میشه، این متن تستی برای قرار دادن در متن توضیحات هست که ", createdAt: "Fri Dec 13 2024 15:14:41 GMT+0330 (Iran Standard Time)", author: { firstName: "امین", lastName: "غریبی" }, identifier: "2" },
@@ -28,12 +28,11 @@ export default function SearchBlogs() {
 		{ breakpoint: 0, value: 48 },
 		{ breakpoint: 1024, value: 56 },
 	]);
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		getValues,
-	} = useForm();
+	const { control, handleSubmit } = useForm({
+		defaultValues: {
+			searchText: searchParams.get("q"),
+		},
+	});
 
 	const handleSearching = (data) => {
 		console.log(data);
@@ -47,6 +46,8 @@ export default function SearchBlogs() {
 					<aside className={"col-span-12 lg:col-span-4 xl:col-span-3 lg:sticky top-5 h-max"}>
 						<form onSubmit={handleSubmit(handleSearching)}>
 							<CustomInput
+								control={control}
+								name="searchText"
 								size={responsiveSize}
 								placeholder="جستجو"
 								LeftIcon={(props) => (
@@ -54,12 +55,7 @@ export default function SearchBlogs() {
 										<path d="M13.1292 11.8792H12.4709L12.2375 11.6542C13.0542 10.7042 13.5459 9.47086 13.5459 8.12919C13.5459 5.13752 11.1209 2.71252 8.12919 2.71252C5.13752 2.71252 2.71252 5.13752 2.71252 8.12919C2.71252 11.1209 5.13752 13.5459 8.12919 13.5459C9.47086 13.5459 10.7042 13.0542 11.6542 12.2375L11.8792 12.4709V13.1292L16.0459 17.2875L17.2875 16.0459L13.1292 11.8792ZM8.12919 11.8792C6.05419 11.8792 4.37919 10.2042 4.37919 8.12919C4.37919 6.05419 6.05419 4.37919 8.12919 4.37919C10.2042 4.37919 11.8792 6.05419 11.8792 8.12919C11.8792 10.2042 10.2042 11.8792 8.12919 11.8792Z" fill="#417F56" />
 									</svg>
 								)}
-								defaultValue={searchParams.get("q")}
-								{...register("searchText", { value: searchParams.get("q") })}
 								onLeftIconClick={handleSubmit(handleSearching)}
-								errors={errors.searchText ? [errors.searchText] : []}
-								getValues={getValues}
-								hasDefaultValue={!!searchParams.get("q")}
 							/>
 						</form>
 					</aside>

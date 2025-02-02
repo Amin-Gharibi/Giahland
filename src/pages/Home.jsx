@@ -1,21 +1,17 @@
 import Header from "../components/Header.jsx";
 import CustomButton from "../components/CustomButton.jsx";
-import arrowLeftPrimary from "../assets/svg/arrowLeft-primary.svg"
-import landingBg from "../assets/svg/landingBg.svg"
-import landingBgSm from "../assets/svg/landingBgSm.svg"
-import cardPrimary from "../assets/svg/card-primary.svg"
-import checkBoxPrimary from "../assets/svg/checkbox-primary.svg"
-import truckPrimary from "../assets/svg/truck-primary.svg"
-import bannerBg1 from "../assets/svg/bannerBg1.svg"
-import bannerBg2 from "../assets/svg/bannerBg2.svg"
+import arrowLeftPrimary from "../assets/svg/arrowLeft-primary.svg";
+import landingBg from "../assets/svg/landingBg.svg";
+import landingBgSm from "../assets/svg/landingBgSm.svg";
+import cardPrimary from "../assets/svg/card-primary.svg";
+import checkBoxPrimary from "../assets/svg/checkbox-primary.svg";
+import truckPrimary from "../assets/svg/truck-primary.svg";
+import bannerBg1 from "../assets/svg/bannerBg1.svg";
+import bannerBg2 from "../assets/svg/bannerBg2.svg";
 import CountUp from "react-countup";
 import FeatureOption from "../components/FeatureOption.jsx";
 import SectionTitle from "../components/SectionTitle.jsx";
 import SwipingSlider from "../components/SwipingSlider.jsx";
-import firstFlower from "../assets/temp/firstFlower.png";
-import secondFlower from "../assets/temp/secondFlower.png";
-import thirdFlower from "../assets/temp/thirdFlower.png";
-import fourthFlower from "../assets/temp/firstFlower.png";
 import firstBgImage from "../assets/images/firstBgImage.png";
 import secondBgImage from "../assets/images/secondBgImage.png";
 import thirdBgImage from "../assets/images/thirdBgImage.png";
@@ -30,31 +26,44 @@ import flower6Primary from "../assets/svg/flower6-primary.svg";
 import flower7Primary from "../assets/svg/flower7-primary.svg";
 import flower8Primary from "../assets/svg/flower8-primary.svg";
 import ServiceItem from "../components/ServiceItem.jsx";
-import fifthFlower from "../assets/temp/fifthFlower.png";
-import sixthFlower from "../assets/temp/sixthFlower.png";
-import seventhFlower from "../assets/temp/seventhFlower.png";
-import eighthFlower from "../assets/temp/eighthFlower.png";
 import ninthFlower from "../assets/temp/ninthFlower.png";
 import tenthFlower from "../assets/temp/tenthFlower.png";
 import eleventhFlower from "../assets/temp/eleventhFlower.png";
 import twelfthFlower from "../assets/temp/twelfthFlower.png";
-import thirteenthFlower from "../assets/temp/thirteenthFlower.png";
-import fourteenthFlower from "../assets/temp/fourteenthFlower.png";
-import fifteenthFlower from "../assets/temp/fifteenthFlower.png";
-import sixteenthFlower from "../assets/temp/sixteenthFlower.png";
 import Footer from "../components/Footer.jsx";
 import useResponsiveSize from "../hooks/useResponsiveSize.js";
 import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../contexts/UserAuthContext.jsx";
+import { PuffLoader } from "react-spinners";
+import useApi from "../hooks/useApi.js";
+import { ProductService } from "../services/product.service.js";
+import { useEffect } from "react";
 
 function Home() {
-    const heroSectionButtonsSize = useResponsiveSize([
-        {breakpoint: 0, value: 40},
-        {breakpoint: 470, value: 48},
-        {breakpoint: 1024, value: 56}
-    ])
-    const navigate = useNavigate();
+	const heroSectionButtonsSize = useResponsiveSize([
+		{ breakpoint: 0, value: 40 },
+		{ breakpoint: 470, value: 48 },
+		{ breakpoint: 1024, value: 56 },
+	]);
+	const navigate = useNavigate();
+	const { isLoading } = useUserAuth();
+	const { data: apartmentFlowers, loading: apartmentFlowersLoading, error: apartmentFlowersError, execute: apartmentFlowersExecute } = useApi(() => ProductService.getByCategory("apartment-flowers"));
+	const { data: decorativeFlowers, loading: decorativeFlowersLoading, error: decorativeFlowersError, execute: decorativeFlowersExecute } = useApi(() => ProductService.getByCategory("decorative-flowers"));
+	const { data: giftFlowers, loading: giftFlowersLoading, error: giftFlowersError, execute: giftFlowersExecute } = useApi(() => ProductService.getByCategory("gift-flowers"));
 
-    return (
+	useEffect(() => {
+		Promise.all([apartmentFlowersExecute(), decorativeFlowersExecute(), giftFlowersExecute()]);
+	}, []);
+
+	if (isLoading || apartmentFlowersLoading || decorativeFlowersLoading || giftFlowersLoading) {
+		return (
+			<div className="h-screen flex items-center justify-center">
+				<PuffLoader size={60} color="#417F56" />
+			</div>
+		);
+	}
+
+	return (
 		<>
 			<div className={"container"}>
 				<Header />
@@ -109,30 +118,17 @@ function Home() {
 				<section className={"mt-14 sm:mt-16"}>
 					<SectionTitle title={"گیاهان آپارتمانی"} />
 					<div className={"mt-6"}>
-						<SwipingSlider
-							items={[
-								{ image: firstFlower, title: "گیاه طبیعی بابا آدم", price: 857000, identifier: "1" },
-								{ image: secondFlower, title: "گیاه طبیعی یوکا", price: 560000, identifier: "2" },
-								{ image: thirdFlower, title: "گیاه طبیعی سانسوریا سبز", price: 250000, identifier: "3" },
-								{ image: fourthFlower, title: "گیاه طبیعی ساکولنت", price: 57000, identifier: "4" },
-								{ image: firstFlower, title: "گیاه طبیعی بابا آدم", price: 857000, identifier: "5" },
-								{ image: secondFlower, title: "گیاه طبیعی یوکا", price: 560000, identifier: "6" },
-								{ image: thirdFlower, title: "گیاه طبیعی سانسوریا سبز", price: 250000, identifier: "7" },
-								{ image: fourthFlower, title: "گیاه طبیعی ساکولنت", price: 57000, identifier: "8" },
-							]}
-							slidesPerView={4.5}
-							spaceBetween={24}
-						/>
+						<SwipingSlider items={apartmentFlowers?.products || [] } slidesPerView={4.5} spaceBetween={24} />
 					</div>
 				</section>
 				{/*linking banners section*/}
 				<section className={"mt-11 sm:mt-16"}>
 					<LinkingBannersGroup
 						items={[
-							{ image: firstBgImage, title: "گیاه بونسای", href: "/" },
-							{ image: secondBgImage, title: "گیاه سانسوریا", href: "/" },
-							{ image: thirdBgImage, title: "گیاه پتوس", href: "/" },
-							{ image: fourthBgImage, title: "گیاه پاچیرا", href: "/" },
+							{ image: firstBgImage, title: "گیاه بونسای", href: "/product/9ae7b2a8-a0a9-47e0-8527-17b1a7c0a85c" },
+							{ image: secondBgImage, title: "گیاه سانسوریا", href: "/product/485aedb9-a736-4a9d-86b4-11bbe9436a9d" },
+							{ image: thirdBgImage, title: "گیاه پتوس", href: "/product/b1c2fb05-0afb-41b5-9184-fad0d2453e54" },
+							{ image: fourthBgImage, title: "گیاه پاچیرا", href: "/product/6b546106-d55e-496c-887b-fddd81ef4e3e" },
 						]}
 					/>
 				</section>
@@ -153,47 +149,23 @@ function Home() {
 				{/*decorative plants*/}
 				<section className={"mt-10 sm:mt-16 flex flex-col gap-y-6"}>
 					<SectionTitle title={"گیاهان تزئینی"} />
-					<SwipingSlider
-						items={[
-							{ identifier: "1", image: fifthFlower, title: "گیاه طبیعی کراسولا", price: 90000 },
-							{ identifier: "2", image: sixthFlower, title: "گیاه طبیعی یشم", price: 1500000 },
-							{ identifier: "3", image: seventhFlower, title: "گیاه طبیعی بونسای پاچیرا", price: 880000 },
-							{ identifier: "4", image: eighthFlower, title: "گیاه طبیعی کراسولا خرفه ای", price: 169000 },
-							{ identifier: "5", image: fifthFlower, title: "گیاه طبیعی کراسولا", price: 90000 },
-							{ identifier: "6", image: sixthFlower, title: "گیاه طبیعی یشم", price: 1500000 },
-							{ identifier: "7", image: seventhFlower, title: "گیاه طبیعی بونسای پاچیرا", price: 880000 },
-							{ identifier: "8", image: eighthFlower, title: "گیاه طبیعی کراسولا خرفه ای", price: 169000 },
-						]}
-						spaceBetween={24}
-					/>
+					<SwipingSlider items={decorativeFlowers?.products || []} spaceBetween={24} />
 				</section>
 				{/*linking banners section*/}
 				<section className={"mt-11 sm:mt-16"}>
 					<LinkingBannersGroup
 						items={[
-							{ image: ninthFlower, title: "گیاه رزماری", href: "/" },
-							{ image: tenthFlower, title: "گیاه آدنیوم", href: "/" },
-							{ image: eleventhFlower, title: "گیاه آشیانتوس", href: "/" },
-							{ image: twelfthFlower, title: "گیاه آناناسی", href: "/" },
+							{ image: ninthFlower, title: "گیاه رزماری", href: "/product/88d6fbac-1321-4591-af82-932424f725b9" },
+							{ image: tenthFlower, title: "گیاه آدنیوم", href: "/product/c54e7218-92e5-493c-803d-08c555a76a03" },
+							{ image: eleventhFlower, title: "گیاه آشیانتوس", href: "/product/0d6c4833-b877-4656-8cd3-7a4032f8b478" },
+							{ image: twelfthFlower, title: "گیاه آناناسی", href: "/product/41eb3373-0d84-42d5-ab15-ee0b44d4e686" },
 						]}
 					/>
 				</section>
 				{/*cardamom flowers section*/}
 				<section className={"mt-10 sm:mt-16 flex flex-col gap-y-6"}>
 					<SectionTitle title={"گیاهان کادوئی"} />
-					<SwipingSlider
-						items={[
-							{ identifier: "1", image: thirteenthFlower, title: "گیاه طبیعی بنت قنسول گلیتال", price: 176000 },
-							{ identifier: "2", image: fourteenthFlower, title: "گیاه طبیعی آنتوریوم", price: 459000 },
-							{ identifier: "3", image: fifteenthFlower, title: "گیاه طبیعی بونسای پاچیرا", price: 880000 },
-							{ identifier: "4", image: sixteenthFlower, title: "گیاه طبیعی آنتوریوم", price: 498000 },
-							{ identifier: "5", image: thirteenthFlower, title: "گیاه طبیعی بنت قنسول گلیتال", price: 176000 },
-							{ identifier: "6", image: fourteenthFlower, title: "گیاه طبیعی آنتوریوم", price: 459000 },
-							{ identifier: "7", image: fifteenthFlower, title: "گیاه طبیعی بونسای پاچیرا", price: 880000 },
-							{ identifier: "8", image: sixteenthFlower, title: "گیاه طبیعی آنتوریوم", price: 498000 },
-						]}
-						spaceBetween={24}
-					/>
+					<SwipingSlider items={giftFlowers?.products || []} spaceBetween={24} />
 				</section>
 			</div>
 			<Footer />

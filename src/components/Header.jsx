@@ -9,34 +9,39 @@ import CustomButton from "./CustomButton.jsx";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useUserAuth } from "../contexts/UserAuthContext.jsx";
+import useResponsiveSize from "../hooks/useResponsiveSize.js";
 
 Header.propTypes = {
 	onlyMobileSize: PropTypes.bool,
 };
 
 function Header({ onlyMobileSize = false }) {
-	const {
-		register: searchRegister,
-		handleSubmit: searchHandleSubmit
-	} = useForm();
+	const { register: searchRegister, handleSubmit: searchHandleSubmit } = useForm();
 	const location = useLocation();
-    const navigate = useNavigate();
+	const navigate = useNavigate();
+	const { isAuthenticated, isAdmin, isSeller } = useUserAuth();
 
-    const [showSearchInput, setShowSearchInput] = useState(false)
+	const [showSearchInput, setShowSearchInput] = useState(false);
 
 	const handleSearchingLg = (data) => {
-		const dt = {searchText: data.searchTextLg}
-        handleSearching(dt)
+		const dt = { searchText: data.searchTextLg };
+		handleSearching(dt);
 	};
 
-    const handleSearchingSm = (data) => {
-        const dt = {searchText: data.searchTextSm}
-        handleSearching(dt)
-    };
+	const handleSearchingSm = (data) => {
+		const dt = { searchText: data.searchTextSm };
+		handleSearching(dt);
+	};
 
-    const handleSearching = (data) => {
-        navigate(`/search?q=${data.searchText}`)
-    };
+	const handleSearching = (data) => {
+		navigate(`/search?q=${data.searchText}`);
+	};
+
+	const buttonSizes = useResponsiveSize([
+		{ breakpoint: 0, value: 32 },
+		{ breakpoint: 640, value: 48 },
+	]);
 
 	return (
 		<div className={`flex flex-col items-stretch mt-6 pb-6 border-b border-b-neutral5 ${onlyMobileSize ? "md:hidden" : ""}`}>
@@ -81,18 +86,18 @@ function Header({ onlyMobileSize = false }) {
 							<CustomIconButton onClick={() => setShowSearchInput(true)} size={48} icon={searchPrimary} isOutline={true} isSquared={true} />
 						)}
 					</div>
-					<div className={"max-sm:hidden"}>
-						<CustomIconButton onClick={() => navigate('/cart')} size={48} icon={shoppingCartPrimary} isOutline={true} isSquared={true} />
-					</div>
-					<div className={"sm:hidden"}>
-						<CustomIconButton onClick={() => navigate('/cart')} size={32} icon={shoppingCartPrimary} isOutline={true} isSquared={true} />
-					</div>
-					<div className={"max-sm:hidden"}>
-						<CustomButton title={"ورود | ثبت نام"} onClick={() => navigate('/login')} size={48} icon={loginPrimary} leftIcon={true} isOutline={true} isSquared={true} />
-					</div>
-					<div className={"sm:hidden"}>
-						<CustomIconButton onClick={() => navigate('/login')} size={32} icon={login2Primary} isOutline={true} isSquared={true} />
-					</div>
+					{isAuthenticated ? (
+						<>
+							<CustomIconButton onClick={() => navigate("/cart")} size={buttonSizes} icon={shoppingCartPrimary} isOutline={true} isSquared={true} />
+							<CustomButton title={"داشبورد"} onClick={() => (isAdmin() ? navigate("/admin-dashboard") : isSeller() ? navigate("/seller-dashboard") : navigate("/dashboard"))} size={48} icon={loginPrimary} leftIcon={true} isOutline={true} isSquared={true} classNames="max-sm:hidden" />
+							<CustomIconButton onClick={() => (isAdmin() ? navigate("/admin-dashboard") : isSeller() ? navigate("/seller-dashboard") : navigate("/dashboard"))} size={32} icon={login2Primary} isOutline={true} isSquared={true} classNames="sm:hidden" />
+						</>
+					) : (
+						<>
+							<CustomButton title={"ورود | ثبت نام"} onClick={() => navigate("/login")} size={48} icon={loginPrimary} leftIcon={true} isOutline={true} isSquared={true} classNames="max-sm:hidden" />
+							<CustomIconButton onClick={() => navigate("/login")} size={32} icon={login2Primary} isOutline={true} isSquared={true} classNames="sm:hidden" />
+						</>
+					)}
 				</div>
 			</div>
 			<form onSubmit={searchHandleSubmit(handleSearchingSm)} className={"sm:hidden mt-4"}>

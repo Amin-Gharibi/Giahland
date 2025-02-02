@@ -81,7 +81,7 @@ export default function Search() {
 }
 
 const SearchForm = ({ categories, setCategories }) => {
-	const { register, handleSubmit, errors, getValues, searchHandler } = useContext(SearchContext);
+	const { control, handleSubmit, searchHandler } = useContext(SearchContext);
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
@@ -122,15 +122,12 @@ const SearchForm = ({ categories, setCategories }) => {
 						<path d="M13.1292 11.8792H12.4709L12.2375 11.6542C13.0542 10.7042 13.5459 9.47086 13.5459 8.12919C13.5459 5.13752 11.1209 2.71252 8.12919 2.71252C5.13752 2.71252 2.71252 5.13752 2.71252 8.12919C2.71252 11.1209 5.13752 13.5459 8.12919 13.5459C9.47086 13.5459 10.7042 13.0542 11.6542 12.2375L11.8792 12.4709V13.1292L16.0459 17.2875L17.2875 16.0459L13.1292 11.8792ZM8.12919 11.8792C6.05419 11.8792 4.37919 10.2042 4.37919 8.12919C4.37919 6.05419 6.05419 4.37919 8.12919 4.37919C10.2042 4.37919 11.8792 6.05419 11.8792 8.12919C11.8792 10.2042 10.2042 11.8792 8.12919 11.8792Z" fill="#417F56" />
 					</svg>
 				)}
-				defaultValue={searchParams.get("q")}
-				{...register("searchText", { value: searchParams.get("q") })}
+				control={control}
+				name="searchText"
 				onLeftIconClick={handleSubmit(searchHandler)}
-				errors={errors.searchText ? [errors.searchText] : []}
-				getValues={getValues}
-				hasDefaultValue={!!searchParams.get("q")}
 			/>
 			<div className="max-md:hidden">
-				<DualRangeSlider initialMinPrice={0} initialMaxPrice={10_000_000} minValue={+searchParams.get("min") || 0} maxValue={+searchParams.get("max") || 10_000_000} minimumGap={100_000} />
+				<DualRangeSlider control={control} minName="minPrice" maxName="maxPrice" minimumGap={100_000} />
 			</div>
 			<div className={"max-md:hidden relative flex flex-col items-stretch border border-neutral6 px-3.5 py-5 rounded-xl"}>
 				<h6 className={"absolute right-3 text-neutral9 bg-white px-1 -top-3 lg:-top-4 text-xs leading-5 lg:text-base lg:leading-7"}>دسته‌بندی</h6>

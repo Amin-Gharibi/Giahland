@@ -3,16 +3,14 @@ import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import UserDashboard from "./pages/UserDashboard/UserDashboard.jsx";
 import NotFound from "./pages/NotFound.jsx";
-import MyInfo from "./pages/UserDashboard/MyInfo.jsx";
-import ConsultationWithPlantPathologist from "./pages/UserDashboard/ConsultationWithPlantPathologist.jsx";
-import Messages from "./pages/UserDashboard/Messages.jsx";
 import Product from "./pages/Product.jsx";
 import Cart from "./pages/Cart.jsx";
 import Search from "./pages/Search.jsx";
 import SearchBlogs from "./pages/SearchBlogs.jsx";
 import Blog from "./pages/Blog.jsx";
-import { element } from "prop-types";
 import ContactUs from "./pages/ContactUs.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
 
 const routes = [
 	{ path: "/", element: <Home /> },
@@ -20,26 +18,20 @@ const routes = [
 	{ path: "/signup", element: <Signup /> },
 	{
 		path: "/dashboard/*",
-		children: [
-			{ path: "", element: <UserDashboard /> },
-			{ path: "my-info", element: <UserDashboard DynamicParts={(props) => <MyInfo {...props} />} /> },
-			{ path: "consultation-with-plant-pathologist", element: <UserDashboard DynamicParts={(props) => <ConsultationWithPlantPathologist {...props} />} /> },
-			{
-				path: "messages",
-				children: [
-					{ path: "", element: <UserDashboard DynamicParts={(props) => <Messages {...props} />} /> },
-					{ path: ":chatId", element: <UserDashboard /> },
-				],
-			},
-			{ path: "*", element: <NotFound /> },
-		],
+		element: (
+			<PrivateRoute roles={["customer"]}>
+				<UserDashboard />
+			</PrivateRoute>
+		),
 	},
-	{ path: "/product/*", element: <Product /> },
+	{ path: "/forgot-password/*", element: <ForgotPassword /> },
+	{ path: "/product/:id", element: <Product /> },
 	{ path: "/cart", element: <Cart /> },
 	{ path: "/search", element: <Search /> },
 	{ path: "/blogs", element: <SearchBlogs /> },
 	{ path: "/blog/*", element: <Blog /> },
 	{ path: "/contact-us", element: <ContactUs /> },
+	{ path: "/not-found", element: <NotFound /> },
 	{ path: "*", element: <NotFound /> },
 ];
 

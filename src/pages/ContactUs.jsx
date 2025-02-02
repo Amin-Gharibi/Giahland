@@ -2,16 +2,18 @@ import React from "react";
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import CustomInput from "../components/CustomInput.jsx";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import CustomButton from "../components/CustomButton.jsx";
 
 export default function ContactUs() {
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		getValues,
-	} = useForm();
+	const { control, handleSubmit } = useForm({
+		defaultValues: {
+			fullName: "",
+			email: "",
+			subject: "",
+			text: ""
+		}
+	});
 
 	const submitFormHandler = (data) => {
 		console.log(data);
@@ -60,18 +62,23 @@ export default function ContactUs() {
 						<h2 className="text-xl font-semibold m-2">فرم ارتباط با ما</h2>
 						<form onSubmit={handleSubmit(submitFormHandler)} className="flex flex-col lg:flex-row gap-6 mt-6">
 							<div className="flex flex-col gap-y-6">
-								<CustomInput size={56} placeholder={"نام و نام خانوادگی"} {...register("fullName", { required: "وارد کردن نام و نام خانوادگی الزامی است" })} errors={errors?.fullName ? [errors.fullName] : []} getValues={getValues} />
-								<CustomInput size={56} placeholder={"ایمیل"} {...register("email", { required: "وارد کردن ایمیل الزامی است" })} errors={errors?.email ? [errors.email] : []} getValues={getValues} />
-								<CustomInput size={56} placeholder={"موضوع"} {...register("subject", { required: "وارد کردن موضوع الزامی است" })} errors={errors?.subject ? [errors.subject] : []} getValues={getValues} />
+								<CustomInput control={control} name={"fullName"} size={56} placeholder={"نام و نام خانوادگی"} rules={{ required: "وارد کردن نام و نام خانوادگی الزامی است" }} />
+								<CustomInput control={control} name={"email"} size={56} placeholder={"ایمیل"} rules={{ required: "وارد کردن ایمیل الزامی است" }} />
+								<CustomInput control={control} name={"subject"} size={56} placeholder={"موضوع"} rules={{ required: "وارد کردن موضوع الزامی است" }} />
 							</div>
 							<div className="*:w-full">
 								<div className="mb-3">
-									<textarea className={"w-full bg-neutral2 border border-neutral6 rounded outline-0 resize-y py-4 px-3"} rows={8} cols={41} placeholder={"پیام خود را وارد کنید..."} {...register("text", { required: "وارد کردن متن پیام الزامی است" })}></textarea>
-									{(errors?.text ? [errors.text] : []).map((error, index) => (
-										<div key={index} className={"cursor-default"}>
-											<span className={"text-error text-xs"}>{error?.message}</span>
-										</div>
-									))}
+									<Controller
+										control={control}
+										name="text"
+										rules={{ required: "وارد کردن متن پیام الزامی است" }}
+										render={({ fieldState }) => (
+											<>
+												<textarea name={"text"} control={control} className={"w-full bg-neutral2 border border-neutral6 rounded outline-0 resize-y py-4 px-3"} rows={8} cols={41} placeholder={"پیام خود را وارد کنید..."}></textarea>
+												{fieldState?.error && <span className="text-error text-xs cursor-default">{fieldState.error.message}</span>}
+											</>
+										)}
+									/>
 								</div>
 								<CustomButton type="submit" title="ارسال پیام" size={48} onClick={() => true} isFilled isSquared />
 							</div>
