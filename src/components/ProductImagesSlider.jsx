@@ -23,9 +23,9 @@ function ProductImagesSlider({ images }) {
                 }}>
 					{images.length &&
 						images?.map((image, index) => (
-							<SwiperSlide key={index} className="flex-shrink-0">
+							<SwiperSlide key={index} className="flex-shrink-0 mx-auto">
 								<button className={`hidden sm:block relative w-[100px] h-[100px] border border-neutral6 rounded-lg overflow-hidden transition-all ${index === activeIndex ? "" : "p-2.5"}`} onClick={() => setActiveIndex(index)}>
-									<img src={getImageURL(image.image_url)} className={`${index === activeIndex ? "w-full h-full" : "w-20 h-20"} select-none m-auto rounded object-cover transition-all ${index === activeIndex ? "blur-[3px]" : ""}`} />
+									<img src={getImageURL(image.image_url)} className={`${index === activeIndex ? "w-full h-full" : "w-20 h-20"} select-none m-auto rounded object-cover transition-all ${index === activeIndex ? "blur-[3px]" : ""}`} loading="lazy" />
 									{index === activeIndex && <span className={"absolute inset-0 z-[10] block w-max h-max leading-[100px] m-auto text-black text-xl"}>...</span>}
 									{index === activeIndex && <div className={"absolute inset-0 bg-white/50 z-[5]"} />}
 								</button>
