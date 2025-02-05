@@ -18,17 +18,18 @@ export const ProductService = {
 			throw error;
 		}
 	},
-	async getMany(limit, offset, sortBy = null, order = null, category = null, minPrice = null, maxPrice = null, q = "") {
+	async getMany(limit, offset, sortBy = null, order = null, categories = null, minPrice = null, maxPrice = null, q = "") {
 		try {
 			const url = new URL(API_CONFIG.BASE_URL + "/products");
 			url.searchParams.set("limit", limit);
 			url.searchParams.set("offset", offset);
 			sortBy && url.searchParams.set("sortBy", sortBy);
 			order && url.searchParams.set("order", order);
-			category && url.searchParams.set("category", category);
+			categories && url.searchParams.set("categories", categories);
 			minPrice && url.searchParams.set("minPrice", minPrice);
 			maxPrice && url.searchParams.set("maxPrice", maxPrice);
 			q && url.searchParams.set("q", q);
+			url.pathname = url.pathname.replace("/api", "");
 
 			const response = await apiClient.get(url.pathname + url.search);
 			return response.data;

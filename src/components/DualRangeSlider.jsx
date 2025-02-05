@@ -4,12 +4,12 @@ import EnToFaNum from "../utils/EnToFaNum";
 import { useSearchParams } from "react-router-dom";
 import { useController } from "react-hook-form";
 
-function DualRangeSlider({ minName, maxName, control, minValue, maxValue, minimumGap }) {
+function DualRangeSlider({ minName, maxName, control, minValue, maxValue, minimumGap, changeUrl = false }) {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	// Initialize values from URL params or defaults
-	const initialMin = parseInt(searchParams.get("min")) || minValue;
-	const initialMax = parseInt(searchParams.get("max")) || maxValue;
+	const initialMin = parseInt(searchParams.get(minName)) || minValue;
+	const initialMax = parseInt(searchParams.get(maxName)) || maxValue;
 
 	const [minVal, setMinVal] = useState(initialMin);
 	const [maxVal, setMaxVal] = useState(initialMax);
@@ -34,8 +34,10 @@ function DualRangeSlider({ minName, maxName, control, minValue, maxValue, minimu
 		if (value >= minValue && maxVal - value >= minimumGap) {
 			setMinVal(value);
 			setMinInput(value);
-			searchParams.set("min", value.toString());
-			setSearchParams(searchParams);
+			if (changeUrl) {
+				searchParams.set(minName, value.toString());
+				setSearchParams(searchParams);
+			}
 			minField.onChange(value);
 		}
 	};
@@ -45,8 +47,10 @@ function DualRangeSlider({ minName, maxName, control, minValue, maxValue, minimu
 		if (value <= maxValue && value - minVal >= minimumGap) {
 			setMaxVal(value);
 			setMaxInput(value);
-			searchParams.set("max", value.toString());
-			setSearchParams(searchParams);
+			if (changeUrl) {
+				searchParams.set(maxName, value.toString());
+				setSearchParams(searchParams);
+			}
 			maxField.onChange(value);
 		}
 	};
@@ -57,7 +61,7 @@ function DualRangeSlider({ minName, maxName, control, minValue, maxValue, minimu
 			const minPercent = ((minVal - minValue) / (maxValue - minValue)) * 100;
 			const maxPercent = ((maxVal - minValue) / (maxValue - minValue)) * 100;
 			range.style.left = `${minPercent}%`;
-			range.style.right = `${100 - maxPercent}%`;
+			range.style.width = `${maxPercent - minPercent}%`;
 		}
 	};
 
@@ -73,9 +77,9 @@ function DualRangeSlider({ minName, maxName, control, minValue, maxValue, minimu
 				<span className="rtl">{EnToFaNum(maxInput, true)} تومان</span>
 			</div>
 			<div className="range-slider mt-4 relative h-2">
-				<div className="slider-track absolute h-0.5 bg-blue-500 rounded" style={{ top: "50%", transform: "translateY(-50%)" }}></div>
-				<input type="range" min={minValue} max={maxValue} step={100000} value={minVal} onChange={slideMin} className="min-val absolute w-full pointer-events-none appearance-none bg-transparent" style={{ height: "0", zIndex: 2 }} />
-				<input type="range" min={minValue} max={maxValue} step={100000} value={maxVal} onChange={slideMax} className="max-val absolute w-full pointer-events-none appearance-none bg-transparent" style={{ height: "0", zIndex: 2 }} />
+				<div className="slider-track absolute h-2 bg-primary rounded"></div>
+				<input type="range" min={minValue} max={maxValue} step={100000} value={minVal} onChange={slideMin} className="min-val absolute w-full pointer-events-none appearance-none bg-transparent" style={{ height: "5px", zIndex: 2 }} />
+				<input type="range" min={minValue} max={maxValue} step={100000} value={maxVal} onChange={slideMax} className="max-val absolute w-full pointer-events-none appearance-none bg-transparent" style={{ height: "5px", zIndex: 2 }} />
 			</div>
 		</div>
 	);
@@ -88,6 +92,7 @@ DualRangeSlider.propTypes = {
 	minValue: PropTypes.number.isRequired,
 	maxValue: PropTypes.number.isRequired,
 	minimumGap: PropTypes.number.isRequired,
+	changeUrl: PropTypes.bool,
 };
 
 export default DualRangeSlider;

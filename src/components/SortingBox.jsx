@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
 import SortingOption from "./SortingOption";
 
-function SortingBoxLg({ options }) {
+function SortingBoxLg({ options, searchParamTitle, onOptionChange = () => true }) {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const onSortOptionClick = (enTitle) => {
-		if (searchParams.get("sort") != enTitle) {
-			searchParams.set("sort", enTitle);
+		if (searchParams.get(searchParamTitle) != enTitle) {
+			searchParams.set(searchParamTitle, enTitle);
 		}
 		setSearchParams(searchParams);
+		onOptionChange(enTitle);
 	};
 
 	return (
@@ -18,7 +19,7 @@ function SortingBoxLg({ options }) {
 			<h6 className="self-center max-sm:py-4 px-4 lg:px-6 text-sm lg:text-base">مرتب‌سازی بر اساس:</h6>
 			<div className="flex items-stretch max-sm:justify-evenly max-sm:mb-4">
 				{options.map((option, index) => (
-					<SortingOption key={index} title={option.title} onClick={() => onSortOptionClick(option.enTitle)} isActive={searchParams.get("sort") ? searchParams.get("sort") === option.enTitle : index === 0 ? true : false} />
+					<SortingOption key={index} title={option.title} onClick={() => onSortOptionClick(option.enTitle)} isActive={searchParams.get(searchParamTitle) ? searchParams.get(searchParamTitle) === option.enTitle : index === 0 ? true : false} />
 				))}
 			</div>
 		</div>
@@ -27,6 +28,8 @@ function SortingBoxLg({ options }) {
 
 SortingBoxLg.propTypes = {
 	options: PropTypes.arrayOf(PropTypes.shape({ title: PropTypes.string.isRequired, enTitle: PropTypes.string.isRequired })),
+	searchParamTitle: PropTypes.string.isRequired,
+	onOptionChange: PropTypes.func,
 };
 
 export default SortingBoxLg;

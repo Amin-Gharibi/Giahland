@@ -1,41 +1,119 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import CustomInput from "../components/CustomInput.jsx";
 import { useSearchParams } from "react-router-dom";
 import DualRangeSlider from "../components/DualRangeSlider.jsx";
-import { SearchContextProvider, SearchContext } from "../contexts/SearchContext.jsx";
 import CategoryItem from "../components/CategoryItem.jsx";
 import ItemBox from "../components/ItemBox.jsx";
-import firstFlower from "../assets/temp/firstFlower.png";
-import secondFlower from "../assets/temp/secondFlower.png";
-import thirdFlower from "../assets/temp/thirdFlower.png";
-import fourthFlower from "../assets/temp/firstFlower.png";
 import CustomButton from "../components/CustomButton.jsx";
 import useResponsiveSize from "../hooks/useResponsiveSize.js";
 import SortingBox from "../components/SortingBox.jsx";
+import useApi from "../hooks/useApi.js";
+import { ProductService } from "../services/product.service.js";
+import { CategoryService } from "../services/category.service.js";
+import { useForm } from "react-hook-form";
+import { PuffLoader } from "react-spinners";
+import { showToast } from "../config/toast.config.js";
 
 export default function Search() {
-	const [searchedItems, setSearchedItems] = useState([
-		{ image: firstFlower, title: "گیاه طبیعی بابا آدم", price: 857000, identifier: "1" },
-		{ image: secondFlower, title: "گیاه طبیعی یوکا", price: 560000, identifier: "2" },
-		{ image: thirdFlower, title: "گیاه طبیعی سانسوریا سبز", price: 250000, identifier: "3" },
-		{ image: fourthFlower, title: "گیاه طبیعی ساکولنت", price: 57000, identifier: "4" },
-		{ image: firstFlower, title: "گیاه طبیعی بابا آدم", price: 857000, identifier: "5" },
-		{ image: secondFlower, title: "گیاه طبیعی یوکا", price: 560000, identifier: "6" },
-		{ image: thirdFlower, title: "گیاه طبیعی سانسوریا سبز", price: 250000, identifier: "7" },
-		{ image: fourthFlower, title: "گیاه طبیعی ساکولنت", price: 57000, identifier: "8" },
-	]);
+	const [searchParams] = useSearchParams();
+	const [limit, setLimit] = useState(12);
+	const [sortBy, setSortBy] = useState(null);
+	const [order, setOrder] = useState(null);
+	const [searchCategories, setSearchCategories] = useState([]);
+	const [minPrice, setMinPrice] = useState(searchParams.get("minPrice") || 0);
+	const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice") || 5_000_000);
+	const [searchText, setSearchText] = useState(searchParams.get("q") || "");
+	const { data: productsResult, loading: productsLoading, error: productsError, execute: productsExecute } = useApi(() => ProductService.getMany(limit, 0, sortBy, order, searchCategories.map((item) => item.id).join(","), minPrice, maxPrice, searchText));
+	const { data: categoriesResult, error: categoriesError, execute: categoriesExecute } = useApi(() => CategoryService.getAll());
 
-	const [categories, setCategories] = useState([
-		{ title: "گل طبیعی", enTitle: "natural-plants", isActive: false },
-		{ title: "گل مصنوعی", enTitle: "artificial-plants", isActive: false },
-	]);
+	const [isLoading, setIsLoading] = useState(true);
+
+	const {
+		control,
+		handleSubmit,
+	} = useForm({
+		defaultValues: {
+			searchText: searchText,
+			minPrice: minPrice,
+			maxPrice: maxPrice,
+		},
+	});
 
 	const showMoreButtonSize = useResponsiveSize([
 		{ breakpoint: 0, value: 48 },
 		{ breakpoint: 1024, value: 56 },
 	]);
+
+	useEffect(() => {
+		categoriesExecute();
+		if (searchParams.get("sortBy")) {
+			translateSortOptions(searchParams.get("sortBy"));
+		}
+	}, []);
+
+	useEffect(() => {
+		if (categoriesResult) {
+			const params = [];
+			searchParams.forEach((value, key) => {
+				if (value.toLowerCase() === "yes") {
+					params.push(key);
+				}
+			});
+
+			const searhcedCategories = [];
+			categoriesResult.forEach((item) => {
+				if (params.includes(item.en_name)) {
+					searhcedCategories.push(item);
+					item.isActive = true;
+				} else {
+					item.isActive = false;
+				}
+			});
+
+			setSearchCategories(searhcedCategories);
+		}
+	}, [categoriesResult]);
+
+	useEffect(() => {
+		productsExecute();
+	}, [searchCategories, searchText, minPrice, maxPrice, sortBy, order, limit]);
+
+	useEffect(() => {
+		if (productsResult !== null) {
+			setIsLoading(false);
+		}
+	}, [productsResult]);
+
+	const translateSortOptions = (title) => {
+		if (title === "all") {
+			setOrder(null);
+			setSortBy(null);
+		} else if (title === "cheapest") {
+			setOrder("ASC");
+			setSortBy("price");
+		} else if (title === "most-expensive") {
+			setOrder("DESC");
+			setSortBy("price");
+		}
+	};
+
+	if (isLoading) {
+		return (
+			<div className="h-screen flex items-center justify-center">
+				<PuffLoader size={60} color="#417F56" />
+			</div>
+		);
+	}
+
+	if (productsError) {
+		showToast.error("خطایی در بارگذاری اطلاعات محصولات رخ داد")
+	}
+
+	if (categoriesError) {
+		showToast.error("خطایی در بارگذاری اطلاعات دسته بندی ها رخ داد")
+	}
 
 	return (
 		<div>
@@ -43,9 +121,7 @@ export default function Search() {
 				<Header />
 				<div className={"grid grid-cols-12 gap-x-6 mt-20"}>
 					<aside className={"col-span-12 lg:col-span-4 xl:col-span-3 lg:sticky top-5 h-max"}>
-						<SearchContextProvider>
-							<SearchForm categories={categories} setCategories={setCategories} />
-						</SearchContextProvider>
+						<SearchForm control={control} handleSubmit={handleSubmit} setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setSearchText={setSearchText} categories={categoriesResult} setCategories={setSearchCategories} />
 					</aside>
 					<div className={"col-span-12 lg:col-span-8 xl:col-span-9 mt-6 lg:mt-0 flex flex-col items-stretch"}>
 						<div>
@@ -55,8 +131,9 @@ export default function Search() {
 										{ title: "همه گیاهان", enTitle: "all" },
 										{ title: "ارزان‌ترین", enTitle: "cheapest" },
 										{ title: "گران‌ترین", enTitle: "most-expensive" },
-										{ title: "محبوب‌ترین", enTitle: "popular" },
 									]}
+									searchParamTitle={"sortBy"}
+									onOptionChange={translateSortOptions}
 								/>
 							</div>
 							<div className={"grid md:hidden grid-cols-2 gap-x-4 xs:gap-x-6"}>
@@ -65,13 +142,30 @@ export default function Search() {
 							</div>
 						</div>
 						<div className={"grid grid-cols-2 xl:grid-cols-3 gap-4 xs:gap-6 mt-6"}>
-							{searchedItems.map((item, index) => (
-								<ItemBox key={index} {...item} />
+							{productsResult?.products?.map((item) => (
+								<ItemBox key={item.id} id={item.id} name={item.name} price={item.price} image={item.images.find((item) => item.is_main).image_url} />
 							))}
+							{productsLoading ? (
+								<div className="col-span-2 xl:col-span-3 w-full h-[250px] flex items-center justify-center">
+									<PuffLoader size={50} color="#417F56" />
+								</div>
+							) : productsResult?.products?.length ? (
+								""
+							) : (
+								<>
+									<div className="col-span-2 xl:col-span-3 w-full h-[250px] flex items-center justify-center">
+										<span className="text-gray-600">محصولی یافت نشد</span>
+									</div>
+								</>
+							)}
 						</div>
-						<div className="flex items-center justify-center mt-8 *:w-56">
-							<CustomButton size={showMoreButtonSize} title="مشاهده بیشتر" onClick={() => true} isOutline isDashed isSquared />
-						</div>
+						{productsResult?.pagination?.total > productsResult?.pagination?.limit ? (
+							<div className={"mx-auto mt-6 w-40 *:w-full"}>
+								<CustomButton title={"مشاهده بیشتر"} onClick={() => setLimit((prev) => prev + 12)} size={showMoreButtonSize} isOutline isSquared />
+							</div>
+						) : (
+							""
+						)}
 					</div>
 				</div>
 			</div>
@@ -80,31 +174,32 @@ export default function Search() {
 	);
 }
 
-const SearchForm = ({ categories, setCategories }) => {
-	const { control, handleSubmit, searchHandler } = useContext(SearchContext);
+const SearchForm = ({ control, handleSubmit, setMinPrice, setMaxPrice, setSearchText, categories, setCategories }) => {
 	const [searchParams, setSearchParams] = useSearchParams();
+	const onCategoryItemClick = (cat) => {
+		setCategories((prev) => {
+			let newCats = [];
+			if (cat.isActive) {
+				newCats = prev.filter((item) => item.id !== cat.id);
+				searchParams.delete(cat.en_name);
+			} else {
+				newCats = [...prev, cat];
+				searchParams.set(cat.en_name, "yes");
+			}
+			setSearchParams(searchParams);
+			cat.isActive = !cat.isActive;
+			return newCats;
+		});
+	};
 
-	useEffect(() => {
-		const updatedCategories = categories.map((cat) => ({
-			...cat,
-			isActive: searchParams.get(`${cat.enTitle}`) === "yes",
-		}));
-		setCategories(updatedCategories);
-	}, [searchParams]);
-
-	const onCategoryItemClick = (enTitle) => {
-		const template = `${enTitle}`;
-		if (searchParams.get(template)) {
-			searchParams.delete(template);
-		} else {
-			searchParams.set(template, "yes");
-		}
+	const searchHandler = (data) => {
+		setSearchText(data.searchText);
+		setMinPrice(data.minPrice);
+		setMaxPrice(data.maxPrice);
+		searchParams.set("q", data.searchText);
+		searchParams.set("minPrice", data.minPrice);
+		searchParams.set("maxPrice", data.maxPrice);
 		setSearchParams(searchParams);
-		const updatedCategories = categories.map((cat) => ({
-			...cat,
-			isActive: searchParams.get(`${cat.enTitle}`) === "yes",
-		}));
-		setCategories(updatedCategories);
 	};
 
 	const searchInputSize = useResponsiveSize([
@@ -127,13 +222,13 @@ const SearchForm = ({ categories, setCategories }) => {
 				onLeftIconClick={handleSubmit(searchHandler)}
 			/>
 			<div className="max-md:hidden">
-				<DualRangeSlider control={control} minName="minPrice" maxName="maxPrice" minimumGap={100_000} />
+				<DualRangeSlider control={control} minValue={0} maxValue={5_000_000} minName="minPrice" maxName="maxPrice" minimumGap={100_000} />
 			</div>
 			<div className={"max-md:hidden relative flex flex-col items-stretch border border-neutral6 px-3.5 py-5 rounded-xl"}>
 				<h6 className={"absolute right-3 text-neutral9 bg-white px-1 -top-3 lg:-top-4 text-xs leading-5 lg:text-base lg:leading-7"}>دسته‌بندی</h6>
 				<div className={"flex flex-col items-stretch gap-y-2 mt-2"}>
-					{categories.map((cat, index) => (
-						<CategoryItem key={index} title={cat.title} onClick={() => onCategoryItemClick(cat.enTitle)} isActive={cat.isActive} />
+					{categories?.map((cat) => (
+						<CategoryItem key={cat.id} title={cat.fa_name} onClick={() => onCategoryItemClick(cat)} isActive={cat.isActive} />
 					))}
 				</div>
 			</div>
