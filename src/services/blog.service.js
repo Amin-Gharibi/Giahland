@@ -15,14 +15,15 @@ export const BlogService = {
 			throw error;
 		}
 	},
-	async getMany(limit, offset, sortBy = null, order = null, category = null) {
+	async getMany(limit, offset, sortBy = null, order = null, q = null) {
 		try {
 			const url = new URL(API_CONFIG.BASE_URL + "/blogs");
 			url.searchParams.set("limit", limit);
 			url.searchParams.set("offset", offset);
 			sortBy && url.searchParams.set("sortBy", sortBy);
 			order && url.searchParams.set("order", order);
-			category && url.searchParams.set("category", category);
+			q && url.searchParams.set("q", q);
+			url.pathname = url.pathname.replace('/api', "")
 
 			const response = await apiClient.get(url.pathname + url.search);
 			return response.data;

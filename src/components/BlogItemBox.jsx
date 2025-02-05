@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import EnToFaNum from "../utils/EnToFaNum";
 import CustomButton from "./CustomButton";
+import API_CONFIG from "../config/api.config";
+import { useNavigate } from "react-router-dom";
 
 BlogItemBox.propTypes = {
 	identifier: PropTypes.string,
@@ -14,12 +16,14 @@ BlogItemBox.propTypes = {
 
 function BlogItemBox({ identifier, banner, title, description, createdAt, author }) {
 	const date = new Date(createdAt);
+	const navigate = useNavigate();
+	const imagePath = new URL(API_CONFIG.BASE_URL).origin + banner;
 	return (
-		<div>
-			<div className={"h-full flex flex-col border border-neutral5 rounded-xl p-4"}>
-				<img className={"w-full max-h-40 h-full self-center object-contain max-sm:mt-1"} src={banner} alt={title} />
-				<span className={"text-base sm:text-lg leading-8 text-start text-black cursor-default block mt-4"}>{title}</span>
-				<p className={"w-full text-start leading-5 text-sm text-neutral10 flex-grow mt-2 text-ellipsis line-clamp-3"}>{description}</p>
+		<div className="h-full flex flex-col border border-neutral5 rounded-xl p-4">
+			<img className={"w-full max-h-40 h-full self-center object-contain max-sm:mt-1"} src={imagePath} alt={identifier} />
+			<div className={"flex flex-col flex-grow mt-4"}>
+				<span className={"text-base sm:text-lg leading-8 text-start text-black cursor-default"}>{title}</span>
+				<p className={"text-start leading-5 text-sm text-neutral10 mt-2 line-clamp-3 overflow-hidden"}>{description}</p>
 				<div className={"flex justify-between items-center w-full mt-3 mb-2.5 px-2"}>
 					<div className={"flex items-center gap-x-1"}>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#717171" className="size-4">
@@ -34,7 +38,7 @@ function BlogItemBox({ identifier, banner, title, description, createdAt, author
 						<span className={"text-sm leading-7 text-neutral9"}>{EnToFaNum(`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`)}</span>
 					</div>
 				</div>
-				<CustomButton title={"ادامه مطلب"} onClick={() => identifier} size={40} isFilled isSquared />
+				<CustomButton title={"ادامه مطلب"} onClick={() => navigate("/blog/" + identifier)} size={40} isFilled isSquared />
 			</div>
 		</div>
 	);
