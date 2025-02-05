@@ -53,6 +53,9 @@ apiClient.interceptors.response.use(
 					},
 				});
 			}
+		} else if (error.response?.status === 401 && originalRequest.url === "/auth/refresh-token") {
+			TokenService.clearTokens();
+			window.location.href = "/login?session_expire=true";
 		}
 		return Promise.reject(error);
 	}
